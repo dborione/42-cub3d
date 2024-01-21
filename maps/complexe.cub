@@ -1,7 +1,7 @@
-NO ./textures/NORTH
-SO ./textures/SOUTH
-WE ./textures/WEST
-EA ./textures/EAST
+NO ./maps/complexe/textures/NORTH
+SO ./maps/complexe/textures/SOUTH
+WE ./maps/complexe/textures/WEST
+EA ./maps/complexe/textures/EAST
 
 F 220,100,0
 C 225,30,0

@@ -1,0 +1,13 @@
+NO ./maps/textures/NORTH
+SO ./maps/textures/SOUTH
+WE ./maps/textures/WEST
+EA ./maps/textures/EAST
+
+F 220,100,0
+C 255,30,0
+
+111111
+100101
+101001
+1100N1
+111111
