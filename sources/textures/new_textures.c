@@ -6,11 +6,12 @@
 /*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 11:23:18 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/01/21 11:27:19 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/01/22 14:19:59 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d_textures.h"
+#include <stdlib.h>
 
 t_cub3d_textures	*ft_new_textures(void)
 {

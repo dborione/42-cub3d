@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 10:26:19 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/01/21 11:26:02 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/01/22 14:23:14 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@
 # define CUB3D_SPAWN_SOUTH 83
 # define CUB3D_SPAWN_WEST 87
 # define CUB3D_SPAWN_EAST 69
+
+/* Taille de murs */
+
+# define WALL_HEIGHT 480 // voire pour les tailles les plus opti
+# define WALL_WIDTH 720 // ici j'ai mis une basse résolution en 16:9
 
 /* Type RGB pour définir les couleurs */
 
