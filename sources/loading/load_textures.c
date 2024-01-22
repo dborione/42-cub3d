@@ -3,18 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   load_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
+/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 10:51:20 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/01/22 14:19:41 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/01/22 14:48:13 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d_loading.h"
+#include "../../includes/cub3d_textures.h"
+#include <stdlib.h>
 #include <fcntl.h>
 
 static
-int		ft_load_textures_and_map(t_game *game, char *map_path)
+int					ft_load_textures(t_game *game, char *map_path)
 {
 	int		fd;
 	char	*line;
@@ -36,17 +38,36 @@ int		ft_load_textures_and_map(t_game *game, char *map_path)
 	return (1);
 }
 
-int		ft_load_game(t_game *game, char *map_path)
+static
+t_cub3d_textures	*ft_new_textures(void)
+{
+	t_cub3d_textures	*textures;
+
+	textures = malloc(sizeof(t_cub3d_textures));
+	if (!textures)
+		return (NULL);
+	textures->ceiling = NULL;
+	textures->floor = NULL;
+	textures->north_texture = NULL;
+	textures->south_texture = NULL;
+	textures->west_texture = NULL;
+	textures->east_texture = NULL;
+	textures->map = NULL;
+	return (textures);
+}
+
+int					ft_load_game(t_game *game, char *map_path)
 {
 	if (!ft_endswith(map_path, ".cub"))
 		return (0);
 	game->textures = ft_new_textures();
 	if (!game->textures)
 		return (0);
-	if (!ft_load_textures_and_map(game, map_path))
+	if (!ft_load_textures(game, map_path))
 	{
-		free(game->textures);
+		ft_unload_textures(game);
 		return (0);
 	}
+	/* Charger les premieres images du jeu ici */
 	return (1);
 }

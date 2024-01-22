@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
+/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 10:57:07 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/01/21 11:23:39 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/01/22 14:57:34 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct	s_game {
 // }
 
 // Init
-int	ft_quit_window(t_game *g);
-int	ft_init_game(t_game *g, t_data *img);
+int	ft_quit_window(t_game *game);
+int	ft_init_game(t_game **game, t_data *img);
 
 #endif
