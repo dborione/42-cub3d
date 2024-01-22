@@ -1,7 +1,7 @@
-NO ./maps/textures/NORTH
-SO ./maps/textures/SOUTH
-WE ./maps/textures/WEST
-EA ./maps/textures/EAST
+NO ./maps/textures/north.xpm
+SO ./maps/textures/south.xpm
+WE ./maps/textures/west.xpm
+EA ./maps/textures/east.xpm
 
 F 220,100,0
 C 255,30,0
