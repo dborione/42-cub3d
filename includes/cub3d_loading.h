@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_loading.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
+/*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 10:05:10 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/01/22 14:55:27 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/01/22 23:17:33 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 int		ft_load_game(t_game *game, char *map_path);
 int 	ft_load_elements(t_game *game, char *line);
+int		ft_load_color(t_game *game, char *line, char target);
 void	ft_unload_textures(t_game *game);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
+/*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 10:51:20 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/01/22 14:48:13 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/01/22 23:08:18 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int					ft_load_textures(t_game *game, char *map_path)
 	line = get_next_line(fd);
 	while (line)
 	{
+		ft_printf("Read line : %s", line);
 		if (!ft_load_elements(game, line))
 		{
 			free(line);
@@ -63,6 +64,7 @@ int					ft_load_game(t_game *game, char *map_path)
 	game->textures = ft_new_textures();
 	if (!game->textures)
 		return (0);
+	ft_printf("Textures initialized\n");
 	if (!ft_load_textures(game, map_path))
 	{
 		ft_unload_textures(game);
