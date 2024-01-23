@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 10:11:14 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/01/22 22:59:43 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/01/23 11:10:09 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int		ft_texture_loaded(t_game *game, char target[3])
 static
 void	ft_set_texture(t_game *game, char target[3], void *texture)
 {
-	ft_printf("%s added\n", target);
 	if (ft_isequal(target, "NO"))
 		game->textures->north_texture = texture;
 	else if (ft_isequal(target, "SO"))
@@ -83,11 +82,11 @@ int		ft_load_texture(
 		return (0);
 	}
 	ft_set_texture(game, target, tmp);
-	ft_printf("%s done\n", target);
+	ft_printf("%s added\n", target);
 	return (1);
 }
 
-int ft_load_elements(t_game *game, char *line)
+int ft_load_element(t_game *game, char *line)
 {
 	if (ft_startswith(line, "NO")) {
 		if (!ft_load_texture(game, line, "NO"))

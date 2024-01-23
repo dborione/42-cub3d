@@ -6,12 +6,68 @@
 /*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 11:30:11 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/01/22 23:18:07 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/01/23 11:23:06 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 #include "../../includes/cub3d_loading.h"
+
+static
+void	ft_printf_map(char **map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
+	{
+		ft_putendl_fd(map[i], 1);
+		i++;
+	}
+}
+
+static
+void	ft_checking_game(t_game *game)
+{
+	ft_putendl_fd("", 1);
+	if (!game->textures)
+	{
+		ft_printf("[!] Textures has not been loaded\n");
+		return;
+	}
+
+	if (game->textures->ceiling)
+		ft_printf("\x1b[32m[ok]\x1b[0m Ceiling color loaded\n");
+	else
+		ft_printf("\x1b[31m[!]\x1b[0m Ceiling color not loaded\n");
+	if (game->textures->floor)
+		ft_printf("\x1b[32m[ok]\x1b[0m Floor color loaded\n");
+	else
+		ft_printf("\x1b[31m[!]\x1b[0m Floor color not loaded\n");
+	if (game->textures->north_texture)
+		ft_printf("\x1b[32m[ok]\x1b[0m North textures loaded\n");
+	else
+		ft_printf("\x1b[31m[!]\x1b[0m North textures not loaded\n");
+	if (game->textures->south_texture)
+		ft_printf("\x1b[32m[ok]\x1b[0m South textures loaded\n");
+	else
+		ft_printf("\x1b[31m[!]\x1b[0m South textures not loaded\n");
+	if (game->textures->east_texture)
+		ft_printf("\x1b[32m[ok]\x1b[0m East textures loaded\n");
+	else
+		ft_printf("\x1b[31m[!]\x1b[0m East textures not loaded\n");
+	if (game->textures->west_texture)
+		ft_printf("\x1b[32m[ok]\x1b[0m West textures loaded\n");
+	else
+		ft_printf("\x1b[31m[!]\x1b[0m West textures not loaded\n");
+	if (game->textures->map)
+	{
+		ft_printf("\x1b[32m[ok]\x1b[0m West textures loaded\n");
+		ft_printf_map(game->textures->map);
+	}
+	else
+		ft_printf("\x1b[31m[!]\x1b[0m Map schema not loaded\n");
+}
 
 int	main(int argc, char *argv[])
 {
@@ -35,12 +91,19 @@ int	main(int argc, char *argv[])
 		ft_putendl_fd("Error.", 2);
 		return (2);
 	}
-	ft_printf("\nGame is started !\n");
+
+	ft_checking_game(game);
+	ft_printf("Game started !\n");
 	//my_mlx_pixel_put(&img, 5, 5, 0x00FF0000);
-	mlx_put_image_to_window(game->mlx, game->mlx_win, img.img, 0, 0);
-	mlx_hook(game->mlx_win, 17, 0, ft_quit_window, &game);
-	mlx_loop(game->mlx);
-	//ft_unload_textures(game);
+
+	// mlx_put_image_to_window(game->mlx, game->mlx_win, img.img, 0, 0);
+	// mlx_hook(game->mlx_win, 17, 0, ft_quit_window, &game);
+	// mlx_loop(game->mlx);
+
+	ft_unload_textures(game);
+	mlx_destroy_window(game->mlx, game->mlx_win);
+	free(game);
+	system("leaks cub3D");
 	return (0);
 }
 

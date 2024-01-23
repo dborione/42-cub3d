@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 10:51:20 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/01/22 23:08:18 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/01/23 10:58:17 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,26 @@
 #include "../../includes/cub3d_textures.h"
 #include <stdlib.h>
 #include <fcntl.h>
+
+static
+int					ft_elements_loaded(t_game *game)
+{
+	if (!game->textures)
+		return (0);
+	if (!game->textures->ceiling)
+		return (0);
+	if (!game->textures->floor)
+		return (0);
+	if (!game->textures->north_texture)
+		return (0);
+	if (!game->textures->south_texture)
+		return (0);
+	if (!game->textures->east_texture)
+		return (0);
+	if (!game->textures->west_texture)
+		return (0);
+	return (1);
+}
 
 static
 int					ft_load_textures(t_game *game, char *map_path)
@@ -28,12 +48,18 @@ int					ft_load_textures(t_game *game, char *map_path)
 	while (line)
 	{
 		ft_printf("Read line : %s", line);
-		if (!ft_load_elements(game, line))
+		if (!ft_load_element(game, line))
 		{
 			free(line);
 			return (0);
 		}
 		free(line);
+		if (ft_elements_loaded(game))
+		{
+		ft_printf("Lets load map schema\n");
+			ft_load_map_schema(game, fd);
+			break ;
+		}
 		line = get_next_line(fd);
 	}
 	return (1);
