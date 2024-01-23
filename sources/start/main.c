@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 11:30:11 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/01/23 11:23:06 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/01/23 12:22:58 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	main(int argc, char *argv[])
 	}
 	if (!ft_load_game(game, argv[1]))
 	{
-		// free(game); gerer les mlx init plus tot
+		ft_unload_game(game);
 		ft_putendl_fd("Error.", 2);
 		return (2);
 	}
@@ -96,14 +96,14 @@ int	main(int argc, char *argv[])
 	ft_printf("Game started !\n");
 	//my_mlx_pixel_put(&img, 5, 5, 0x00FF0000);
 
-	// mlx_put_image_to_window(game->mlx, game->mlx_win, img.img, 0, 0);
-	// mlx_hook(game->mlx_win, 17, 0, ft_quit_window, &game);
-	// mlx_loop(game->mlx);
+	mlx_put_image_to_window(game->mlx, game->mlx_win, img.img, 0, 0);
+	mlx_hook(game->mlx_win, 17, 0, ft_quit_window, &game);
+	mlx_loop(game->mlx);
 
-	ft_unload_textures(game);
-	mlx_destroy_window(game->mlx, game->mlx_win);
-	free(game);
-	system("leaks cub3D");
+	//ft_unload_game(game);
+	//mlx_destroy_window(game->mlx, game->mlx_win);
+	//free(game);
+	//system("leaks cub3D");
 	return (0);
 }
 

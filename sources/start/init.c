@@ -18,5 +18,6 @@ int ft_init_game(t_game **game, t_data *img)
 				&img->endian);
 	}
 	(*game)->textures = NULL;
+	(*game)->start = NULL;
     return (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
+/*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 10:57:07 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/01/22 14:57:34 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/01/23 11:33:46 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,14 @@ typedef struct	s_data {
 	int		endian;
 }				t_data;
 
+typedef struct s_location
+{
+	float	x;
+	float	y;
+	float	pitch;
+	float	yaw;
+}			t_location;
+
 /* 
 	Cette structure est utilisée tout le long du jeu 
 	elle enregistre les éléments important tel que 
@@ -35,6 +43,7 @@ typedef struct	s_game {
 	void				*mlx;
 	void				*mlx_win;
 	t_cub3d_textures	*textures;
+	t_location			*start;
 }						t_game;
 
 /*
