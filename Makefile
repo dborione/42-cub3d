@@ -23,7 +23,7 @@ DEPENDS	:= $(OBJS:.o=.d)
 
 ${OBJ_DIR}%.o:	${FTS_DIR}%.c
 		@mkdir -p ${@D}
-		@${CC} ${CFLAGS} -MMD -MP -Imlx -c $< -o $@
+		@${CC} ${CFLAGS} -MMD -MP -c $< -o $@
 
 # Rules
 
@@ -32,7 +32,7 @@ ${NAME}:	${OBJS}
 		@make -C ./libft/
 		@echo "${BLUE} [Make] ${GREEN} Done. ${DEFAULT}"
 		@echo "${BLUE} [Make] ${YELLOW} Building ${DEFAULT}CUB3D${YELLOW} !${DEFAULT}"
-		$(CC) ${CFLAGS} -Lmlx -lmlx -framework OpenGL -framework AppKit -o $@ $^ -Llibft -lft -lreadline -L ~/homebrew/opt/readline/lib
+		$(CC) ${CFLAGS} -lmlx -framework OpenGL -framework AppKit -o $@ $^ -Llibft -lft -lreadline -L ~/homebrew/opt/readline/lib
 		@echo "${BLUE} [Make] ${GREEN} Done. ${DEFAULT}"
 
 all:	${NAME}
