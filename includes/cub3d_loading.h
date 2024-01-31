@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 10:05:10 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/01/23 12:16:51 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/01/31 19:31:34 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,7 @@ int		ft_load_color(t_game *game, char *line, char target);
 void	ft_load_map_schema(t_game *game, int fd);
 int		ft_load_player_location(t_game *game);
 void	ft_unload_game(t_game *game);
+void	ft_load_ceiling(t_game *game);
+void	ft_load_floor(t_game *game);
 
 #endif

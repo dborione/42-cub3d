@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 10:51:20 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/01/23 12:29:01 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/01/31 19:29:45 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int					ft_elements_loaded(t_game *game)
 {
 	if (!game->textures)
 		return (0);
-	if (!game->textures->ceiling)
+	if (game->textures->ceiling == -1)
 		return (0);
-	if (!game->textures->floor)
+	if (game->textures->floor == -1)
 		return (0);
 	if (!game->textures->north_texture)
 		return (0);
@@ -56,7 +56,7 @@ int					ft_load_textures(t_game *game, char *map_path)
 		free(line);
 		if (ft_elements_loaded(game))
 		{
-		ft_printf("Lets load map schema\n");
+			ft_printf("Lets load map schema\n");
 			ft_load_map_schema(game, fd);
 			break ;
 		}
@@ -73,8 +73,8 @@ t_cub3d_textures	*ft_new_textures(void)
 	textures = malloc(sizeof(t_cub3d_textures));
 	if (!textures)
 		return (NULL);
-	textures->ceiling = NULL;
-	textures->floor = NULL;
+	textures->ceiling = -1; // à améliorer !
+	textures->floor = -1;
 	textures->north_texture = NULL;
 	textures->south_texture = NULL;
 	textures->west_texture = NULL;

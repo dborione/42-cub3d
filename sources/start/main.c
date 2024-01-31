@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
+/*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 11:30:11 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/01/29 15:21:33 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/01/31 19:32:58 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,13 @@ int	main(int argc, char *argv[])
 		ft_putendl_fd("Error.", 2);
 		return (2);
 	}
-
 	ft_checking_game(game);
 	ft_printf("Game started !\n");
 	//my_mlx_pixel_put(&img, 5, 5, 0x00FF0000);
 
 	mlx_put_image_to_window(game->mlx, game->mlx_win, img.img, 0, 0);
+	ft_load_ceiling(game);
+	ft_load_floor(game);
 	mlx_hook(game->mlx_win, 17, 0, ft_quit_window, &game);
 	mlx_key_hook(game->mlx_win, ft_key_hook, game);
 	mlx_loop(game->mlx);

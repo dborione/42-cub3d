@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 10:26:19 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/01/22 14:23:14 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/01/31 18:55:09 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ typedef struct	s_cub3d_textures
 	void	*south_texture;
 	void	*west_texture;
 	void	*east_texture;
-	t_rgb	*floor;
-	t_rgb	*ceiling;
+	int		floor;
+	int		ceiling;
 	char	**map;
 }				t_cub3d_textures;
 

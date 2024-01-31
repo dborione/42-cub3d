@@ -50,6 +50,7 @@ FTS		= ./utils/src/ft_isalpha.c \
 		./utils/src/ft_endswith.c \
 		./utils/src/ft_isequal.c \
 		./utils/src/ft_isspace.c \
+		./utils/src/ft_int_to_hex.c \
 		./printf/ft_printf.c \
 		./printf/src/ft_args_infos.c \
 		./printf/src/ft_hexadecimal.c \
