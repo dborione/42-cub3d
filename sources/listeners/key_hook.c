@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   key_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
+/*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:14:06 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/01/29 15:24:59 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/02/05 15:38:52 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+#include "../includes/cub3d_render.h"
 
 int	ft_key_hook(int keycode, t_game *game)
 {
@@ -37,6 +38,6 @@ int	ft_key_hook(int keycode, t_game *game)
 		}
 		y++;
 	}
-
+	//ft_render_wall(game, 4, 0);
 	return (0);
 }

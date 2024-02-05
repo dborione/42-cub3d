@@ -1,0 +1,17 @@
+What da, car What that f*ck bro vu la complexité de ma réflexion ici même.
+
+
+1. Problème de l'effet "d'éloignement" des murs
+
+joueur : x, y -> position du joueur
+mur : x, y -> position du milieu de l'arrête du bas du mur
+
+le mur a un nombre h de pixels en hauteur et w de bloques en longueur
+
+distance d mur <-> joueur : sqrt((x^2-x^2)+(y^2-y^2))
+
+diviser h et w par d
+
+chaque mur fait 720px de long, par conséquent chaque "case" (0, 1, etc) mesure 1 720x720
+en case mur "encadre" sa case
+

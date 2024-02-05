@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   load_floor_and_ceiling.c                           :+:      :+:    :+:   */
+/*   render_floor_and_ceiling.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 19:00:21 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/01/31 19:35:06 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/02/02 12:07:01 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	ft_load_ceiling(t_game *game)
+void	ft_render_ceiling(t_game *game)
 {
 	int	x;
 	int	y;
@@ -30,7 +30,7 @@ void	ft_load_ceiling(t_game *game)
 	}
 }
 
-void	ft_load_floor(t_game *game)
+void	ft_render_floor(t_game *game)
 {
 	int	x;
 	int	y;

@@ -6,13 +6,14 @@
 /*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 11:30:11 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/01/31 19:32:58 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/02/05 15:42:09 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 #include "../../includes/cub3d_loading.h"
 #include "../../includes/cub3d_listeners.h"
+#include "../../includes/cub3d_render.h"
 
 static
 void	ft_printf_map(char **map)
@@ -73,7 +74,6 @@ void	ft_checking_game(t_game *game)
 int	main(int argc, char *argv[])
 {
 	t_game	*game;
-	t_data	img;
 
 	if (argc != 2)
 	{
@@ -81,7 +81,7 @@ int	main(int argc, char *argv[])
 		return (1);
 	}
 	// init raycasting
-	if (!ft_init_game(&game, &img))
+	if (!ft_init_game(&game))
 	{
 		ft_putendl_fd("Error.", 2);
 		return (127);
@@ -94,11 +94,10 @@ int	main(int argc, char *argv[])
 	}
 	ft_checking_game(game);
 	ft_printf("Game started !\n");
-	//my_mlx_pixel_put(&img, 5, 5, 0x00FF0000);
 
-	mlx_put_image_to_window(game->mlx, game->mlx_win, img.img, 0, 0);
-	ft_load_ceiling(game);
-	ft_load_floor(game);
+	ft_render_ceiling(game);
+	ft_render_floor(game);
+	ft_render_wall(game, 4, 0);
 	mlx_hook(game->mlx_win, 17, 0, ft_quit_window, &game);
 	mlx_key_hook(game->mlx_win, ft_key_hook, game);
 	mlx_loop(game->mlx);

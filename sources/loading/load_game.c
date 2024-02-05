@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 10:51:20 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/01/31 19:29:45 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/02/03 13:45:27 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ t_cub3d_textures	*ft_new_textures(void)
 	textures = malloc(sizeof(t_cub3d_textures));
 	if (!textures)
 		return (NULL);
-	textures->ceiling = -1; // à améliorer !
+	textures->ceiling = -1;
 	textures->floor = -1;
 	textures->north_texture = NULL;
 	textures->south_texture = NULL;
