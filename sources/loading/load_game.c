@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 10:51:20 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/02/03 13:45:27 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/02/05 19:27:00 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int					ft_load_textures(t_game *game, char *map_path)
 		if (!ft_load_element(game, line))
 		{
 			free(line);
+			close(fd);
 			return (0);
 		}
 		free(line);
@@ -62,6 +63,7 @@ int					ft_load_textures(t_game *game, char *map_path)
 		}
 		line = get_next_line(fd);
 	}
+	close(fd);
 	return (1);
 }
 

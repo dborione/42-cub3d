@@ -9,7 +9,7 @@ int ft_init_game(t_game **game)
     // if !(g->mlx)
         // quit free and exit
 
-	(*game)->mlx_win = mlx_new_window((*game)->mlx, 1920, 1080, "Cub3d");
+	(*game)->mlx_win = mlx_new_window((*game)->mlx, WIDTH, WIDTH, "Cub3d");
 	(*game)->textures = NULL;
 	(*game)->start = NULL;
     return (1);

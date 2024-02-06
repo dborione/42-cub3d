@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 11:30:11 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/02/05 15:42:09 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/02/05 19:35:37 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	ft_checking_game(t_game *game)
 		ft_printf("[!] Textures has not been loaded\n");
 		return;
 	}
-
 	if (game->textures->ceiling)
 		ft_printf("\x1b[32m[ok]\x1b[0m Ceiling color loaded\n");
 	else
@@ -98,14 +97,14 @@ int	main(int argc, char *argv[])
 	ft_render_ceiling(game);
 	ft_render_floor(game);
 	ft_render_wall(game, 4, 0);
-	mlx_hook(game->mlx_win, 17, 0, ft_quit_window, &game);
+	mlx_hook(game->mlx_win, 17, 1L << 2, ft_quit_window, game);
 	mlx_key_hook(game->mlx_win, ft_key_hook, game);
 	mlx_loop(game->mlx);
 
-	//ft_unload_game(game);
-	//mlx_destroy_window(game->mlx, game->mlx_win);
-	//free(game);
-	//system("leaks cub3D");
+	ft_unload_game(game);
+	// mlx_destroy_window(game->mlx, game->mlx_win);
+	free(game);
+	system("leaks cub3D");
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 10:11:14 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/01/23 11:10:09 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/02/05 19:35:00 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,6 @@ int		ft_load_texture(
 	tmp = NULL;
 	width = WALL_WIDTH;
 	height = WALL_HEIGHT;
-	/* if (ft_endswith(&line[i], "png"))
-	tmp = mlx_png_file_to_image(game->mlx, &line[i], &width, &height) else */
 	file = ft_strtrim(&line[i], "\n");
 	if (!file)
 		return (0);
@@ -82,7 +80,6 @@ int		ft_load_texture(
 		return (0);
 	}
 	ft_set_texture(game, target, tmp);
-	ft_printf("%s added\n", target);
 	return (1);
 }
 
