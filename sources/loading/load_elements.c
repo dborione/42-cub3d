@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_elements.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
+/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 10:11:14 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/02/05 19:35:00 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/02/06 10:57:43 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int		ft_load_texture(
 		ft_printf("%s loading file : '%s'\n", target, file);
 		tmp = mlx_xpm_file_to_image(game->mlx, file, &width, &height);
 	}
+	free(file);
 	if (!tmp)
 	{
 		ft_printf("%s xpm to image failed\n", target);
