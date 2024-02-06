@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 10:51:20 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/02/06 11:17:17 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/02/06 14:00:26 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int					ft_elements_loaded(t_game *game)
 {
 	if (!game->textures)
 		return (0);
-	if (game->textures->ceiling == -1)
+	if (game->textures->ceiling == NULL)
 		return (0);
-	if (game->textures->floor == -1)
+	if (game->textures->floor == NULL)
 		return (0);
 	if (!game->textures->north_texture)
 		return (0);
@@ -75,8 +75,8 @@ t_cub3d_textures	*ft_new_textures(void)
 	textures = malloc(sizeof(t_cub3d_textures));
 	if (!textures)
 		return (NULL);
-	textures->ceiling = -1;
-	textures->floor = -1;
+	textures->ceiling = NULL;
+	textures->floor = NULL;
 	textures->north_texture = NULL;
 	textures->south_texture = NULL;
 	textures->west_texture = NULL;
@@ -95,6 +95,7 @@ int					ft_load_game(t_game *game, char *map_path)
 	int width = WIDTH;
 	int	height = HEIGHT;
 	game->textures->test = mlx_xpm_file_to_image(game->mlx, "./maps/textures/wolf.xpm", &width, &height);
+	game->textures->frame = mlx_new_image(game->mlx, width, height);
 	if (!game->textures->test)
 		ft_printf("wolf error \n");
 	ft_printf("h: %d, w: %d\n", height, width);

@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 11:30:11 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/02/06 10:59:26 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/02/06 15:25:07 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,7 @@ int	main(int argc, char *argv[])
 	ft_checking_game(game);
 	ft_printf("Game started !\n");
 
-	ft_render_ceiling(game);
-	ft_render_floor(game);
-	ft_render_wall(game, 4, 0);
+	ft_render_frame(game);
 	mlx_hook(game->mlx_win, 17, 1L << 2, ft_quit_window, game);
 	mlx_key_hook(game->mlx_win, ft_key_hook, game);
 	mlx_loop(game->mlx);

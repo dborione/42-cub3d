@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:14:06 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/02/06 11:45:47 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/02/06 15:39:50 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ int	ft_key_hook(int keycode, t_game *game)
 		mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->south_texture, x + 720, y + 480);
 		mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->south_texture, x + 1440, y + 480);
 	}
+	else if (keycode == 53)
+		ft_quit_window(game);
 	else
 		ft_draw_frame(game);
 	return (0);

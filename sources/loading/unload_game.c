@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unload_game.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
+/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 14:38:48 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/01/31 19:09:39 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/02/06 13:56:43 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ void	ft_unload_game(t_game *game)
 		mlx_destroy_image(game->mlx, game->textures->west_texture);
 	if (game->textures->east_texture)
 		mlx_destroy_image(game->mlx, game->textures->east_texture);
+	if (game->textures->test)
+		mlx_destroy_image(game->mlx, game->textures->test);
+	if (game->textures->frame)
+		mlx_destroy_image(game->mlx, game->textures->frame);
 	if (game->start)
 		free(game->start);
 	free(game->textures);
