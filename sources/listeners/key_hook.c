@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
+/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:14:06 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/02/05 20:15:52 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/02/06 11:45:47 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,12 @@ int	ft_key_hook(int keycode, t_game *game)
 
 	x = 0;
 	y = 0;
-	if (keycode == 15)
+	
+	if (keycode == 17)
+	{
+		mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->test, x, y);
+	}
+	else if (keycode == 13)
 	{
 		mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->north_texture, x, y);
 		mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->north_texture, x + 720, y);
@@ -58,7 +63,7 @@ int	ft_key_hook(int keycode, t_game *game)
 		mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->north_texture, x + 720, y + 480);
 		mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->north_texture, x + 1440, y + 480);
 	}
-	else if (keycode == 5)
+	else if (keycode == 0)
 	{
 		mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->west_texture, x, y);
 		mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->west_texture, x + 720, y);
@@ -67,7 +72,7 @@ int	ft_key_hook(int keycode, t_game *game)
 		mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->west_texture, x + 720, y + 480);
 		mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->west_texture, x + 1440, y + 480);
 	}
-	else if (keycode == 11)
+	else if (keycode == 2)
 	{
 		mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->east_texture, x, y);
 		mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->east_texture, x + 720, y);
@@ -77,7 +82,7 @@ int	ft_key_hook(int keycode, t_game *game)
 		mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->east_texture, x + 720, y + 480);
 		mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->east_texture, x + 1440, y + 480);
 	}
-	else
+	else if (keycode == 1)
 	{
 		mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->south_texture, x, y);
 		mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->south_texture, x + 720, y);
@@ -87,6 +92,7 @@ int	ft_key_hook(int keycode, t_game *game)
 		mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->south_texture, x + 720, y + 480);
 		mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->south_texture, x + 1440, y + 480);
 	}
-	//ft_render_wall(game, 4, 0);
+	else
+		ft_draw_frame(game);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_walls.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
+/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 23:37:43 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/02/06 08:58:27 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/02/06 12:16:07 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,32 +53,32 @@ void	ft_render_wall(t_game *game, float base_x, float base_y)
 		&wall.bits_per_pixel, &wall.size_line, &wall.endian);
 
 	// changer game->start par le joueur plus tard 
-	printf("start : x %f, y %f\n", game->start->x, game->start->y);
-	printf("base : x %f, y %f\n", base_x, base_y);
-	printf("wall data : bpp %d, size_line %d, enfian %d\n",
-		wall.bits_per_pixel, wall.size_line, wall.endian);
+	// printf("start : x %f, y %f\n", game->start->x, game->start->y);
+	// printf("base : x %f, y %f\n", base_x, base_y);
+	// printf("wall data : bpp %d, size_line %d, enfian %d\n",
+	// 	wall.bits_per_pixel, wall.size_line, wall.endian);
 	distance = sqrt(pow(base_x - game->start->x, 2)
 		+ pow(base_y - game->start->y, 2));
 
-	printf("Distance : %f\n", distance);
-	printf("Line : %d\n", wall.size_line / 4);
+	// printf("Distance : %f\n", distance);
+	// printf("Line : %d\n", wall.size_line / 4);
 	pen_location.y = 0; // faire des verifs si paire / impaire, 240
 	i = 0;
-	while (wall.data[i] && pen_location.y < 1080)
+	while (wall.data[i])
 	{
 		pen_location.x = 0;
 		while (pen_location.x < wall.size_line / 4)
 		{
 			int rgb_color = ft_get_pixel(wall, i);
 			//printf("rgb color: %d\n", rgb_color);
-			printf("x loop coo: x %d, y %d\n", (int)pen_location.x, (int)pen_location.y);
+			//printf("x loop coo: x %d, y %d\n", (int)pen_location.x, (int)pen_location.y);
 			mlx_pixel_put(game->mlx, game->mlx_win, (int)pen_location.x, (int)pen_location.y, rgb_color);
 			pen_location.x++;
-			i += (4 * (int)distance); //distance;
+			i += 4;//(4 * (int)distance); //distance;
 		}
 		pen_location.y++;// =distance;
 		//i += distance * 4;
-		printf("y loop coo: x %d, y %d\n", (int)pen_location.x, (int)pen_location.y);
+		//printf("y loop coo: x %d, y %d\n", (int)pen_location.x, (int)pen_location.y);
 	}
 }
 

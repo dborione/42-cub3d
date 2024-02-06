@@ -16,3 +16,12 @@ chaque mur fait 720px de long, par conséquent chaque "case" (0, 1, etc) mesure 
 en case mur "encadre" sa case
 
 FOV (field of view) par défaut 70%
+
+Chaque ligne dans une image de la MLX fait 4 x nombre_de_pixels, par exemple
+pour une image de 720px de longueur notre ligne fera 4x720 = 2880
+
+Le nombre de ligne c'est la hauteur de l'image, si l'image fait 480px de hauteur
+alors il y aura 480 lignes !
+
+Mais pas besoin de savoir le nombre de lignes ! Il suffit de descendre d'une ligne quand on atteint
+la fin de size_line et tant que data[i] != \0;

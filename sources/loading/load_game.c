@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
+/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 10:51:20 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/02/05 19:27:00 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/02/06 11:17:17 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,12 @@ int					ft_load_game(t_game *game, char *map_path)
 	game->textures = ft_new_textures();
 	if (!game->textures)
 		return (0);
+	int width = WIDTH;
+	int	height = HEIGHT;
+	game->textures->test = mlx_xpm_file_to_image(game->mlx, "./maps/textures/wolf.xpm", &width, &height);
+	if (!game->textures->test)
+		ft_printf("wolf error \n");
+	ft_printf("h: %d, w: %d\n", height, width);
 	ft_printf("Textures initialized\n");
 	if (!ft_load_textures(game, map_path))
 	{
