@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 10:26:19 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/01/31 18:55:09 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/02/05 15:46:01 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,28 @@
 
 /* Taille de murs */
 
-# define WALL_HEIGHT 480 // voire pour les tailles les plus opti
+# define WALL_HEIGHT 480 // voir pour les tailles les plus opti
 # define WALL_WIDTH 720 // ici j'ai mis une basse résolution en 16:9
 
 /* Type RGB pour définir les couleurs */
 
 typedef struct s_rgb
 {
+	int	alpha;
 	int	red;
 	int green;
 	int blue;
 }				t_rgb;
 
 /* Enregistre toutes les textures nécessaire */
+
+typedef struct	s_cub3d_images
+{
+	int		bits_per_pixel;
+	int		size_line;
+	int		endian;
+	char	*data;
+}				t_cub3d_images;
 
 typedef struct	s_cub3d_textures
 {

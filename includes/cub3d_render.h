@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d_loading.h                                    :+:      :+:    :+:   */
+/*   cub3d_render.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/22 10:05:10 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/02/05 14:27:23 by rbarbiot         ###   ########.fr       */
+/*   Created: 2024/02/02 12:05:25 by rbarbiot          #+#    #+#             */
+/*   Updated: 2024/02/02 12:07:21 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_LOADING
-# define CUB3D_LOADING
+#ifndef CUB3D_RENDER
+# define CUB3D_RENDER
 # include "cub3d.h"
-# include "../libft/libft.h"
 
-int		ft_load_game(t_game *game, char *map_path);
-int 	ft_load_element(t_game *game, char *line);
-int		ft_load_color(t_game *game, char *line, char target);
-void	ft_load_map_schema(t_game *game, int fd);
-int		ft_load_player_location(t_game *game);
-void	ft_unload_game(t_game *game);
-int		ft_get_int_rgb(t_rgb *rgb);
+void	ft_render_ceiling(t_game *game);
+void	ft_render_floor(t_game *game);
+void	ft_render_wall(t_game *game, float base_x, float base_y);
 
 #endif

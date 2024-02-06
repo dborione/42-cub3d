@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 10:57:07 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/01/23 11:33:46 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/02/06 09:23:22 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,8 @@
 # include <stdlib.h>
 # include "cub3d_textures.h"
 
-typedef struct	s_data {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}				t_data;
+# define WIDTH 1920
+# define HEIGHT 1080
 
 typedef struct s_location
 {
@@ -59,6 +54,6 @@ typedef struct	s_game {
 
 // Init
 int	ft_quit_window(t_game *game);
-int	ft_init_game(t_game **game, t_data *img);
+int	ft_init_game(t_game **game);
 
 #endif
