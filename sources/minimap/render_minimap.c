@@ -51,6 +51,7 @@ void    ft_draw_borders(t_game *game, int i, int j, int color)
     }
 }
 
+
 int	ft_render_minimap(t_game *game)
 {
     int i;
@@ -60,18 +61,17 @@ int	ft_render_minimap(t_game *game)
     i = -1;
     j = -1;
 	game->minimap = mlx_put_image_to_window(game->mlx, game->mlx_win, game->minimap_img_ptr, 100, 100);
-    // mlx_pixel_put(game->mlx, game->mlx_win, 1, 1, 0xFFFFFF);
     while (game->textures->map[++i])
     {
         while (game->textures->map[i][++j])
         {
             if (game->textures->map[i][j] == '1')
                 ft_draw_borders(game, i, j, BLUE);
-            else if (game->textures->map[i][j] == 'N')
-                ft_draw_borders(game, i, j, WHITE);
         }
         j = -1;
     }
     // regler la position de la minimap plus tard
+    ft_draw_borders(game, game->start->y, game->start->x, WHITE);
     return (1);
+
 }

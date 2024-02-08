@@ -16,6 +16,7 @@
 # include <mlx.h>
 # include <stdlib.h>
 # include "cub3d_textures.h"
+#include <stdio.h>
 
 # define TILE_SIZE 32
 # define WIDTH 1920

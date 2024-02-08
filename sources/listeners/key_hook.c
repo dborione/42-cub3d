@@ -13,7 +13,6 @@
 #include "../includes/cub3d.h"
 #include "../includes/cub3d_render.h"
 #include "../includes/cub3d_listeners.h"
-#include <stdio.h>
 
 int	ft_key_hook_disable(int keycode, t_game *game)
 {
@@ -58,7 +57,6 @@ int	ft_key_hook(int keycode, t_game *game)
 	}
 	else if (keycode == M_KEY)
 	{
-		printf("%d\n", game->minimap);
 		if (game->minimap != 0) // minimap is already on screen
 		{
 			printf("destroying minimap\n");
