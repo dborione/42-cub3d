@@ -12,7 +12,6 @@
 
 #include "../../includes/cub3d.h"
 #include "../../libft/libft.h"
-#include <stdio.h>
 
 void	ft_draw_ceiling(t_game *game, t_cub3d_images *frame)
 {
@@ -62,40 +61,4 @@ void	ft_draw_floor(t_game *game, t_cub3d_images *frame)
 		}
 		y++;
 	}
-
-
-
-		/* Je fais jute des tests ici*/
-
-	// int *buffer = (int *)mlx_get_data_addr(frame->data, &frame->bits_per_pixel, &frame->size_line, &frame->endian);
-	// frame->size_line /= 4;
-
-	// int color = 0xABCDEF;
-
-	// // for(int y = 0; y < 1080; ++y)
-	// // for(int x = 0; x < frame->size_line; ++x)
-	// // {
-	// // 	buffer[(y * frame->size_line) + x] = color;
-	// // }
-
-	// int	x;
-	// int	y;
-
-	// y = 0;
-	// while (y < WIDTH)
-	// {
-	// 	x = 0;
-	// 	while (x < HEIGHT)
-	// 	{
-	// 		// printf("%p\n", &buffer[0]);
-	// 		buffer[y * WIDTH + x] = color;
-	// 		// printf("jfkdl\n");
-	// 		x++;
-	// 	}
-	// 	y++;
-	// }
-	// //mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->canvas.img, 0, 0);
-	// if (game) {};
-	// if (buffer) {};
-	// if (color) {};
 }
