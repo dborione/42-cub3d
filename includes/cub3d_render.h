@@ -19,5 +19,6 @@ void	ft_draw_ceiling(t_game *game, t_cub3d_images *frame);
 void	ft_draw_floor(t_game *game, t_cub3d_images *frame);
 void	ft_render_wall(t_game *game, float base_x, float base_y);
 void	ft_render_frame(t_game *game);
+int     ft_render_minimap(t_game *game);
 
 #endif

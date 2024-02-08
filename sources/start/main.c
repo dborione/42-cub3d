@@ -94,7 +94,13 @@ int	main(int argc, char *argv[])
 	ft_checking_game(game);
 	ft_printf("Game started !\n");
 
+
 	ft_render_frame(game);
+
+	// test pour la minimap
+	game->minimap = 0;
+
+
 	mlx_hook(game->mlx_win, 17, 1L << 2, ft_quit_window, game);
 	mlx_key_hook(game->mlx_win, ft_key_hook, game);
 	mlx_loop(game->mlx);

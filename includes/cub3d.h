@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include "cub3d_textures.h"
 
+# define TILE_SIZE 32
 # define WIDTH 1920
 # define HEIGHT 1080
 
@@ -39,6 +40,8 @@ typedef struct	s_game {
 	void				*mlx_win;
 	t_cub3d_textures	*textures;
 	t_location			*start;
+	void				*minimap_img_ptr;
+	int					minimap;
 }						t_game;
 
 /*
