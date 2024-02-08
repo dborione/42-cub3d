@@ -12,6 +12,7 @@
 
 #include "../includes/cub3d.h"
 #include "../includes/cub3d_render.h"
+#include "../includes/cub3d_listeners.h"
 
 int	ft_key_hook_disable(int keycode, t_game *game)
 {
@@ -19,11 +20,11 @@ int	ft_key_hook_disable(int keycode, t_game *game)
 	int	y;
 	int	color;
 
-	if (keycode == 15)
+	if (keycode == R_KEY)
 		color = 0x00FF0000;
-	else if (keycode == 5)
+	else if (keycode == G_KEY)
 		color = 0x0000FF00;
-	else if (keycode == 11)
+	else if (keycode == B_KEY)
 		color = 0x000000FF;
 	else
 		color = 0x00FFFFFF;
@@ -50,11 +51,11 @@ int	ft_key_hook(int keycode, t_game *game)
 	x = 0;
 	y = 0;
 	
-	if (keycode == 17)
+	if (keycode == T_KEY)
 	{
 		mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->test, x, y);
 	}
-	else if (keycode == 13)
+	else if (keycode == W_KEY || keycode == UP_ARROW_KEY)
 	{
 		mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->north_texture, x, y);
 		mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->north_texture, x + 720, y);
@@ -63,7 +64,7 @@ int	ft_key_hook(int keycode, t_game *game)
 		mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->north_texture, x + 720, y + 480);
 		mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->north_texture, x + 1440, y + 480);
 	}
-	else if (keycode == 0)
+	else if (keycode == A_KEY || keycode == LEFT_ARROW_KEY)
 	{
 		mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->west_texture, x, y);
 		mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->west_texture, x + 720, y);
@@ -72,7 +73,7 @@ int	ft_key_hook(int keycode, t_game *game)
 		mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->west_texture, x + 720, y + 480);
 		mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->west_texture, x + 1440, y + 480);
 	}
-	else if (keycode == 2)
+	else if (keycode == D_KEY || keycode == RIGHT_ARROW_KEY)
 	{
 		mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->east_texture, x, y);
 		mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->east_texture, x + 720, y);
@@ -82,7 +83,7 @@ int	ft_key_hook(int keycode, t_game *game)
 		mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->east_texture, x + 720, y + 480);
 		mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->east_texture, x + 1440, y + 480);
 	}
-	else if (keycode == 1)
+	else if (keycode == S_KEY || keycode == DOWN_ARROW_KEY)
 	{
 		mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->south_texture, x, y);
 		mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->south_texture, x + 720, y);
@@ -92,7 +93,7 @@ int	ft_key_hook(int keycode, t_game *game)
 		mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->south_texture, x + 720, y + 480);
 		mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->south_texture, x + 1440, y + 480);
 	}
-	else if (keycode == 53)
+	else if (keycode == ESC_KEY)
 		ft_quit_window(game);
 	else
 		ft_draw_frame(game);
