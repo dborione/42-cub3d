@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_textures.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
+/*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 10:26:19 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/02/06 13:27:45 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/02/10 11:45:32 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_TEXTURES_H
 # define CUB3D_TEXTURES_H
 
-/* Défini des codes pour les zones sur la map */
+/* Les codes pour les zones sur la map */
 
 # define CUB3D_OUTSIDE 32
 # define CUB3D_EMPTY 48
@@ -23,7 +23,7 @@
 # define CUB3D_SPAWN_WEST 87
 # define CUB3D_SPAWN_EAST 69
 
-/* Taille de murs */
+/* Taille des murs */
 
 # define WALL_HEIGHT 480 // voir pour les tailles les plus opti
 # define WALL_WIDTH 720 // ici j'ai mis une basse résolution en 16:9
