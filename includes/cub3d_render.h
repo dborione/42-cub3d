@@ -14,6 +14,11 @@
 # define CUB3D_RENDER
 # include "cub3d.h"
 
+# define WHITE 0xFFFFFF
+# define BLUE 0x000000FF
+# define RED 0x00FF0000
+# define GREEN 0x0000FF00
+
 void	ft_draw_frame(t_game *game);
 void	ft_draw_ceiling(t_game *game, t_cub3d_images *frame);
 void	ft_draw_floor(t_game *game, t_cub3d_images *frame);
