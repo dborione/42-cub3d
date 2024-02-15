@@ -96,7 +96,6 @@ int	ft_render_minimap(t_game *game)
                     mlx_pixel_put(game->mlx, game->mlx_win, 100 + (game->start->x * TILE_SIZE)
                         + (TILE_SIZE/2), 100 + ((game->start->y - 1)* TILE_SIZE) + x, GREEN);
             }
-
         }
         j = -1;
     }

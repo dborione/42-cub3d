@@ -36,6 +36,4 @@ int ft_move_player_fov(t_game *game)
        // 0.0333 = dividing our player angle 64 by window's witdh 1920, with it we ensure to cast every pixel in our angle
         game->start->yaw += 0.0333;
     }
-
-
 }

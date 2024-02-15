@@ -55,20 +55,20 @@ int	ft_key_hook(int keycode, t_game *game)
 	{
 		mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->test, x, y);
 	}
-	else if (keycode == M_KEY)
-	{
-		if (game->minimap != 0) // minimap is already on screen
-		{
-			printf("destroying minimap\n");
-			mlx_destroy_image(game->mlx, game->minimap_img_ptr);
-			// a changer plus tard car reset la window
-			mlx_clear_window(game->mlx, game->mlx_win);
-			ft_render_frame(game);
-			game->minimap = 0;
-		}
-		else
-			ft_render_minimap(game);
-	}
+	// else if (keycode == M_KEY)
+	// {
+	// 	if (game->minimap != 0) // minimap is already on screen
+	// 	{
+	// 		printf("destroying minimap\n");
+	// 		mlx_destroy_image(game->mlx, game->minimap_img_ptr);
+	// 		// a changer plus tard car reset la window
+	// 		mlx_clear_window(game->mlx, game->mlx_win);
+	// 		ft_render_frame(game);
+	// 		game->minimap = 0;
+	// 	}
+	// 	else
+	// 		ft_render_minimap(game);
+	// }
 	else if (keycode == W_KEY || keycode == UP_ARROW_KEY)
 	{
 		mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->north_texture, x, y);
