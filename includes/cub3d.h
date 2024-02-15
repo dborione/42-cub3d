@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
+/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 10:57:07 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/02/06 09:23:22 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/02/15 11:12:55 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,12 @@
 #include <stdio.h>
 
 # define TILE_SIZE 32
-# define WIDTH 1920
-# define HEIGHT 1080
+# ifndef WIDTH
+#  define WIDTH 1920
+# endif
+# ifndef HEIGHT
+#  define HEIGHT 1080
+# endif
 
 typedef struct s_location
 {
