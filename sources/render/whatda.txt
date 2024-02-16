@@ -1,5 +1,3 @@
-What da, car What that f*ck bro vu la complexité de ma réflexion ici même.
-
 
 1. Problème de l'effet "d'éloignement" des murs
 
@@ -12,16 +10,26 @@ distance d mur <-> joueur : sqrt((x^2-x^2)+(y^2-y^2))
 
 diviser h et w par d
 
-chaque mur fait 720px de long, par conséquent chaque "case" (0, 1, etc) mesure 1 720x720
-en case mur "encadre" sa case
+chaque mur fait 720px de long, par conséquent chaque "sol" (0, 1, etc) mesure 1 720x720
+en case mur "encadre" son sol
 
 FOV (field of view) par défaut 70%
+
+2. Utilisation de la mlx
 
 Chaque ligne dans une image de la MLX fait 4 x nombre_de_pixels, par exemple
 pour une image de 720px de longueur notre ligne fera 4x720 = 2880
 
-Le nombre de ligne c'est la hauteur de l'image, si l'image fait 480px de hauteur
+Le nombre de lignes c'est la hauteur de l'image, si l'image fait 480px de hauteur
 alors il y aura 480 lignes !
 
-Mais pas besoin de savoir le nombre de lignes ! Il suffit de descendre d'une ligne quand on atteint
-la fin de size_line et tant que data[i] != \0;
+3. L'environement par rapport au joueur
+
+Le joueur fait 320 px de haut (car la hauter 480 = 1,5joueur)
+
+Pour gerer plus facilement la position du joueur, on ne va pas calculer en PX sinon on atteindrait trop vite le intmax
+
+On va utiliser des float, un "sol" fait 720 x 720 en général un pas fait plus ou moins 1/4 de notre taille
+on fait donc : 320 / 4 (1/4) = 80px on peut ainsi convenir que : 1 case (de position) = 720 / 80 = 1/9 sol
+
+De cette maniere on a 1 case = 1,0 (float)
