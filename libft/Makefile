@@ -26,6 +26,7 @@ FTS		= ./utils/src/ft_isalpha.c \
 		./utils/src/ft_substr.c \
 		./utils/src/ft_strjoin.c \
 		./utils/src/ft_strtrim.c \
+		./utils/src/ft_strtrim_end.c \
 		./utils/src/ft_split.c \
 		./utils/src/ft_itoa.c \
 		./utils/src/ft_strmapi.c \
