@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 10:57:07 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/02/15 11:12:55 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/02/19 14:29:01 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct	s_game {
 	void				*mlx;
 	void				*mlx_win;
 	t_cub3d_textures	*textures;
-	t_location			*start;
+	t_location			*player;
 	void				*minimap_img_ptr;
 	int					minimap;
 }						t_game;

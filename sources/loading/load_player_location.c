@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_player_location.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
+/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 11:26:18 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/01/23 12:29:19 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/02/19 14:30:31 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,15 @@ int	ft_load_player_location(t_game *game)
 		{
 			if (ft_is_start_location(game->textures->map[y][x]))
 			{
-				if (game->start)
+				if (game->player)
 					return (0);
-				// game->textures->map[y][x] = '0';
-				// ça facilitera le travail pour plus tard dans le code
-				game->start = ft_get_location(game->textures->map[y][x], x, y);
-				if (!game->start)
+				game->textures->map[y][x] = '0'; 
+				/*
+					pour ne plus devoir verifier si c'est un mur
+					ça facilitera le travail pour plus tard dans le code
+				*/
+				game->player = ft_get_location(game->textures->map[y][x], x, y);
+				if (!game->player)
 					return (0);
 			}
 			x++;

@@ -11,6 +11,6 @@ int ft_init_game(t_game **game)
 
 	(*game)->mlx_win = mlx_new_window((*game)->mlx, WIDTH, HEIGHT, "Cub3d");
 	(*game)->textures = NULL;
-	(*game)->start = NULL;
+	(*game)->player = NULL;
     return (1);
 }

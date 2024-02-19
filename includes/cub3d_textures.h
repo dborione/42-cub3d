@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_textures.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
+/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 10:26:19 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/02/10 11:45:32 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/02/19 14:31:59 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ typedef struct	s_cub3d_textures
 	t_rgb	*floor;
 	t_rgb	*ceiling;
 	char	**map;
+	size_t	map_height;
+	size_t	map_width;
 }				t_cub3d_textures;
 
 #endif

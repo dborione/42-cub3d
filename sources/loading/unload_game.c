@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 14:38:48 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/02/06 13:56:43 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/02/19 14:32:40 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_unload_game(t_game *game)
 		mlx_destroy_image(game->mlx, game->textures->test);
 	if (game->textures->frame)
 		mlx_destroy_image(game->mlx, game->textures->frame);
-	if (game->start)
-		free(game->start);
+	if (game->player)
+		free(game->player);
 	free(game->textures);
 }
