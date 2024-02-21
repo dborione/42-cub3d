@@ -13,7 +13,7 @@ diviser h et w par d
 chaque mur fait 720px de long, par conséquent chaque "sol" (0, 1, etc) mesure 1 720x720
 en case mur "encadre" son sol
 
-FOV (field of view) par défaut 70%
+FOV (field of view) par défaut 70˚
 
 2. Utilisation de la mlx
 
@@ -34,6 +34,29 @@ on fait donc : 320 / 4 (1/4) = 80px on peut ainsi convenir que : 1 case (de posi
 
 De cette maniere on a 1 case = 1,0 (float)
 
-4. Calculer les distances
+4. Affichage
 
-On calcule les distances grace à sqrt((x^2-x^2)+(y^2-y^2)); mais le problème c'est que notre  
+On doit d'abord calculer la distance avec le mur ce qui donnait : distance mur <-> joueur = sqrt((x^2-x^2)+(y^2-y^2))
+on a un angle de 70˚
+
+La trigo va ENFIN ME SERVIR À QUELQUE CHOSE
+
+Le mur fait 720px sauf qu'on va créer un triangle avec angle droit en découpant la vue du joueur 
+on sait que le champ de vision est de 70˚ donc on a :
+720 / 2 = 360 
+70˚ / 2 = 35˚
+
+pour faciliter les calcules on dira que le coté adjançant AB vaut 36,
+l'hypotènus AC a une taille inconnue et le coté opposé BC a une taille inconnue
+
+On cherche BC pour connaitre la distance exacte qui permettrait d'afficher la totalité du mur sur l'ecran
+
+SOH CAH TOA
+
+on utilise TOA : 
+
+tan(35) = BC (oppisé) / 36
+
+1 / BC = tan(35) / 36 = 1/76 
+
+BC = 76
