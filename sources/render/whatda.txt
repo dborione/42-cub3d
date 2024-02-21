@@ -55,8 +55,10 @@ SOH CAH TOA
 
 on utilise TOA : 
 
-tan(35) = BC (oppisé) / 36
+tan(35) = 36 / BC
 
-1 / BC = tan(35) / 36 = 1/76 
+BC = 36 / tan(35)
 
-BC = 76
+BC = 51,4
+
+soit 514px donc 6,7625 pas (541 / 80)
