@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 10:51:20 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/02/06 14:00:26 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/02/21 14:55:03 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,26 @@
 #include "../../includes/cub3d_textures.h"
 #include <stdlib.h>
 #include <fcntl.h>
+
+static
+t_cub3d_textures	*ft_new_textures(void)
+{
+	t_cub3d_textures	*textures;
+
+	textures = malloc(sizeof(t_cub3d_textures));
+	if (!textures)
+		return (NULL);
+	textures->ceiling = NULL;
+	textures->floor = NULL;
+	textures->north_texture = NULL;
+	textures->south_texture = NULL;
+	textures->west_texture = NULL;
+	textures->east_texture = NULL;
+	textures->map = NULL;
+	textures->map_width = 0;
+	textures->map_height = 0;
+	return (textures);
+}
 
 static
 int					ft_elements_loaded(t_game *game)
@@ -47,7 +67,6 @@ int					ft_load_textures(t_game *game, char *map_path)
 	line = get_next_line(fd);
 	while (line)
 	{
-		ft_printf("Read line : %s", line);
 		if (!ft_load_element(game, line))
 		{
 			free(line);
@@ -57,7 +76,6 @@ int					ft_load_textures(t_game *game, char *map_path)
 		free(line);
 		if (ft_elements_loaded(game))
 		{
-			ft_printf("Lets load map schema\n");
 			ft_load_map_schema(game, fd);
 			break ;
 		}
@@ -65,24 +83,6 @@ int					ft_load_textures(t_game *game, char *map_path)
 	}
 	close(fd);
 	return (1);
-}
-
-static
-t_cub3d_textures	*ft_new_textures(void)
-{
-	t_cub3d_textures	*textures;
-
-	textures = malloc(sizeof(t_cub3d_textures));
-	if (!textures)
-		return (NULL);
-	textures->ceiling = NULL;
-	textures->floor = NULL;
-	textures->north_texture = NULL;
-	textures->south_texture = NULL;
-	textures->west_texture = NULL;
-	textures->east_texture = NULL;
-	textures->map = NULL;
-	return (textures);
 }
 
 int					ft_load_game(t_game *game, char *map_path)
@@ -98,15 +98,17 @@ int					ft_load_game(t_game *game, char *map_path)
 	game->textures->frame = mlx_new_image(game->mlx, width, height);
 	if (!game->textures->test)
 		ft_printf("wolf error \n");
-	ft_printf("h: %d, w: %d\n", height, width);
 	ft_printf("Textures initialized\n");
 	if (!ft_load_textures(game, map_path))
 	{
 		ft_unload_game(game);
 		return (0);
 	}
-	if (!ft_load_player_location(game))
+	ft_printf("Textures loaded\n");
+	if (!ft_parse_map(game))
+	{
+		ft_unload_game(game);
 		return (0);
-	/* Charger les premieres images du jeu ici */
+	}
 	return (1);
 }

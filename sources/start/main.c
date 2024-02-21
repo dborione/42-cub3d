@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 11:30:11 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/02/06 15:25:07 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/02/21 15:06:38 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,16 +83,20 @@ int	main(int argc, char *argv[])
 	if (!ft_init_game(&game))
 	{
 		ft_putendl_fd("Error.", 2);
+		system("leaks cub3D");
 		return (127);
 	}
 	if (!ft_load_game(game, argv[1]))
 	{
-		ft_unload_game(game);
 		ft_putendl_fd("Error.", 2);
+		system("leaks cub3D");
 		return (2);
 	}
 	ft_checking_game(game);
 	ft_printf("Game started !\n");
+	ft_printf("Height: %d\nWidth: %d\n", game->textures->map_height, game->textures->map_width);
+	printf("Player location : x %f, y %f, pitch %f, yaw %f",
+		game->player->x, game->player->y, game->player->pitch, game->player->yaw);
 
 	ft_render_frame(game);
 

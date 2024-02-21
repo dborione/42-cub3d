@@ -33,3 +33,7 @@ On va utiliser des float, un "sol" fait 720 x 720 en général un pas fait plus 
 on fait donc : 320 / 4 (1/4) = 80px on peut ainsi convenir que : 1 case (de position) = 720 / 80 = 1/9 sol
 
 De cette maniere on a 1 case = 1,0 (float)
+
+4. Calculer les distances
+
+On calcule les distances grace à sqrt((x^2-x^2)+(y^2-y^2)); mais le problème c'est que notre  

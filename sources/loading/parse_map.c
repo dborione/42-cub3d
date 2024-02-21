@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   load_player_location.c                             :+:      :+:    :+:   */
+/*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 11:26:18 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/02/19 14:30:31 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/02/21 15:04:05 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+#include "../../includes/cub3d_loading.h"
 
 static
-int	ft_is_start_location(char c)
+int			ft_is_start_location(char c)
 {
 	return (c == 'N' || c == 'S' || c == 'W' || c == 'E');
 }
@@ -36,8 +37,8 @@ t_location	*ft_get_location(char direction, size_t x, size_t y)
 	location = malloc(sizeof(t_location));
 	if (!location)
 		return (NULL);
-	location->x = x;
-	location->y = y;
+	location->x = x * 3 - 1; /* *3 car on divise les sols en 9 cases */
+	location->y = y * 3 - 1; /* -1 pour etre au milieu*/
 	location->pitch = 0.0f;
 	if (direction == 'N')
 		location->yaw = 0.0f;
@@ -50,7 +51,25 @@ t_location	*ft_get_location(char direction, size_t x, size_t y)
 	return (location);
 }
 
-int	ft_load_player_location(t_game *game)
+static
+int			ft_add_player_location(t_game *game, size_t x, size_t y)
+{
+	if (game->player)
+		return (0);
+	game->player = ft_get_location(game->textures->map[y][x], x, y);
+	game->textures->map[y][x] = '0';
+	if (!game->player)
+		return (0);
+	return (1);
+}
+
+static
+int			ft_valid_map_element(char c)
+{
+	return (c == '0' || c == '0' || c == '1' || ft_is_start_location(c));
+}
+
+int			ft_parse_map(t_game *game)
 {
 	size_t	x;
 	size_t	y;
@@ -61,24 +80,28 @@ int	ft_load_player_location(t_game *game)
 	while (game->textures->map[y])
 	{
 		x = 0;
+		if (!ft_has_west_wall(game->textures->map[y]) || !ft_has_east_wall(game->textures->map[y]))
+		{
+				ft_printf("Crack in the walls : '%s'\n", game->textures->map[y]);
+				return (0);
+		}
 		while (game->textures->map[y][x])
 		{
+			if (!ft_valid_map_element(game->textures->map[y][x]))
+			{
+				ft_printf("Invalide map element\n");
+				return (0);
+			}
 			if (ft_is_start_location(game->textures->map[y][x]))
 			{
-				if (game->player)
-					return (0);
-				game->textures->map[y][x] = '0'; 
-				/*
-					pour ne plus devoir verifier si c'est un mur
-					ça facilitera le travail pour plus tard dans le code
-				*/
-				game->player = ft_get_location(game->textures->map[y][x], x, y);
-				if (!game->player)
+				if (!ft_add_player_location(game, x, y))
 					return (0);
 			}
 			x++;
 		}
 		y++;
 	}
+	if (!game->player)
+		return (0);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 10:33:07 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/02/19 15:47:12 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/02/21 15:09:32 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,29 @@ char	*ft_skip_empty_lines(int fd)
 }
 
 static
-int		ft_add_line(char **lines, char *line)
+size_t	ft_line_size(char *line)
+{
+	size_t	i;
+
+	i = 0;
+	while (line[i] && line[i] != '\n')
+		i++;
+	return (i);
+}
+
+static
+int		ft_add_line(t_game *game, char **lines, char *line)
 {
 	char	*trimed_line;
+	size_t	line_size;
 
 	trimed_line = ft_strtrim_end(line, " \t\r\v");
-	//ft_printf("Trimed line : '%s'\n", trimed_line);
 	free(line);
 	if (!trimed_line)
 		return (0);
+	line_size = ft_line_size(trimed_line);
+	if (line_size > game->textures->map_width)
+		game->textures->map_width = line_size;
 	*lines = ft_cleanjoin(*lines, trimed_line);
 	free(trimed_line);
 	return (1);
@@ -63,11 +77,12 @@ void	ft_load_map_schema(t_game *game, int fd)
 {
 	char	*line;
 	char	*lines;
-	
+
 	lines = NULL;
 	line = ft_skip_empty_lines(fd);
 	while (line)
 	{
+		game->textures->map_height++;
 		if (ft_empty_line(line))
 		{
 			free(line);
@@ -75,11 +90,10 @@ void	ft_load_map_schema(t_game *game, int fd)
 			ft_printf("Error empty line in map\n");
 			return ;
 		}
-		if (!ft_add_line(&lines, line))
+		if (!ft_add_line(game, &lines, line))
 			return ;
 		line = get_next_line(fd);
 	}
-	//ft_printf("lets split :\n%s\n", lines);
 	game->textures->map = ft_split(lines, '\n');
 	free(lines);
 }
