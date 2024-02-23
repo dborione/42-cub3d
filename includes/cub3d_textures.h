@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_textures.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
+/*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 10:26:19 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/02/19 14:31:59 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/02/23 13:28:19 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 
 /* Taille des murs */
 
-# define WALL_HEIGHT 480 // voir pour les tailles les plus opti
-# define WALL_WIDTH 720 // ici j'ai mis une basse résolution en 16:9
+# define WALL_HEIGHT 11 // voir pour les tailles les plus opti
+# define WALL_WIDTH 16 // ici j'ai mis une basse résolution en 16:9
 
 /* Type RGB pour définir les couleurs */
 
@@ -45,22 +45,23 @@ typedef struct	s_cub3d_images
 	int		bits_per_pixel;
 	int		size_line;
 	int		endian;
+	void	*pointer;
 	char	*data;
 }				t_cub3d_images;
 
 typedef struct	s_cub3d_textures
 {
-	void	*north_texture;
-	void	*south_texture;
-	void	*west_texture;
-	void	*east_texture;
-	void	*test;
-	void	*frame;
-	t_rgb	*floor;
-	t_rgb	*ceiling;
-	char	**map;
-	size_t	map_height;
-	size_t	map_width;
+	void			*north_texture;
+	void			*south_texture;
+	void			*west_texture;
+	void			*east_texture;
+	void			*test;
+	t_cub3d_images	*frame;
+	t_rgb			*floor;
+	t_rgb			*ceiling;
+	char			**map;
+	size_t			map_height;
+	size_t			map_width;
 }				t_cub3d_textures;
 
 #endif
