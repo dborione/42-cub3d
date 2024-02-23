@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 11:52:46 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/02/23 15:46:56 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/02/23 18:37:39 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_draw_line(t_game *game, t_cub3d_images texture, int frame_i, int line)
 
 	wall_i = texture.size_line * line;
 	count = 0;
-	while (wall_i < texture.size_line)
+	while (wall_i < texture.size_line * (line + 1))
 	{
 		while (count < WIDTH / WALL_WIDTH)
 		{
