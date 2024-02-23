@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 10:11:14 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/02/06 10:57:43 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/02/23 18:28:23 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int		ft_load_texture(
 		ft_printf("Texture %s already loaded\n", target);
 		return (0);
 	}
-
 	if (!line[2])
 		return (0);
 	i = 2;

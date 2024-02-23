@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unload_game.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
+/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 14:38:48 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/02/23 12:08:08 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/02/23 18:23:06 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 void	ft_unload_game(t_game *game)
 {
+	mlx_destroy_window(game->mlx, game->mlx_win);
 	if (!game->textures)
 		return ;
 	if (game->textures->map)
@@ -38,4 +39,5 @@ void	ft_unload_game(t_game *game)
 	if (game->player)
 		free(game->player);
 	free(game->textures);
+	free(game);
 }
