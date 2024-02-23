@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_frame.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
+/*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 13:12:36 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/02/06 15:25:38 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/02/23 12:08:56 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,13 @@
 
 void	ft_render_frame(t_game *game)
 {
-	t_cub3d_images	frame;
 
-	frame.data = mlx_get_data_addr(game->textures->frame,
-		&frame.bits_per_pixel, &frame.size_line, &frame.endian);
-	ft_draw_ceiling(game, &frame);
-	ft_draw_floor(game, &frame);
-	mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->frame, 0, 0);
+	game->textures->frame->data = mlx_get_data_addr(game->textures->frame->pointer,
+		&(game->textures->frame)->bits_per_pixel, &(game->textures->frame)->size_line, &(game->textures->frame)->endian);
+	if (!game->textures->frame->data)
+		return ; // erreur de récupération de l'image
+	ft_draw_ceiling(game);
+	ft_draw_floor(game);
+	ft_draw_wall(game);
+	mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->frame->pointer, 0, 0);
 }

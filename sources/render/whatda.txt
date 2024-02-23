@@ -61,4 +61,9 @@ BC = 36 / tan(35)
 
 BC = 51,4
 
-soit 514px donc 6,7625 pas (541 / 80)
+soit 514px donc 6,7625 pas (514 / 80)
+
+le problème est que l'écran fait 2,7 fois la taille de l'image
+on doit afficher
+
+transformer cette valeur en forme fractionnaire 

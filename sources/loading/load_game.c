@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
+/*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 10:51:20 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/02/21 14:55:03 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/02/23 12:00:10 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ t_cub3d_textures	*ft_new_textures(void)
 	textures->map = NULL;
 	textures->map_width = 0;
 	textures->map_height = 0;
+	textures->frame = malloc(sizeof(t_cub3d_images));
+	if (!textures->frame)
+	{
+		free(textures);
+		return (NULL);
+	}
 	return (textures);
 }
 
@@ -95,7 +101,7 @@ int					ft_load_game(t_game *game, char *map_path)
 	int width = WIDTH;
 	int	height = HEIGHT;
 	game->textures->test = mlx_xpm_file_to_image(game->mlx, "./maps/textures/wolf.xpm", &width, &height);
-	game->textures->frame = mlx_new_image(game->mlx, width, height);
+	game->textures->frame->pointer = mlx_new_image(game->mlx, width, height);
 	if (!game->textures->test)
 		ft_printf("wolf error \n");
 	ft_printf("Textures initialized\n");
