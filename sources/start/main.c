@@ -88,6 +88,7 @@ int	main(int argc, char *argv[])
 	}
 	if (!ft_load_game(game, argv[1]))
 	{
+		// free game
 		ft_putendl_fd("Error.", 2);
 		system("leaks cub3D");
 		return (2);
