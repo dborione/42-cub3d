@@ -22,6 +22,7 @@ int ft_init_ray(t_raycaster *raycaster)
     raycaster->ray->side = 0;
     raycaster->ray->step_x = 0;
     raycaster->ray->step_y = 0;
+    raycaster->ray->ray_to_wall_dist = 0;
     return (1);
 }
 

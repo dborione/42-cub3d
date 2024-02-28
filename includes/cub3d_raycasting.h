@@ -20,6 +20,7 @@ typedef struct s_ray
     int     side; // mur NS ou EW 
     int     step_x;
     int     step_y;
+    float   ray_to_wall_dist;
 }   t_ray;
 
 typedef struct s_raycaster
