@@ -18,6 +18,10 @@ int ft_init_ray(t_raycaster *raycaster)
     raycaster->ray->tile_dist_y = 0;
     raycaster->ray->delta_dist_x = 0;
     raycaster->ray->delta_dist_y = 0;
+    raycaster->ray->hit = 0;
+    raycaster->ray->side = 0;
+    raycaster->ray->step_x = 0;
+    raycaster->ray->step_y = 0;
     return (1);
 }
 
