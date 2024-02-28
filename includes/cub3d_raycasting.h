@@ -5,10 +5,18 @@
 
 # define FOV 0.70;
 
+typedef struct s_line
+{
+    int height;
+    int bottom;
+    int top;
+
+}   t_line;
+
 typedef struct s_ray
 {
     float   camera_pos_x; // la position du ray sur la plane de caméra
-    float   dir_x; // les vecteurs de direction x et y du ray:
+    float   dir_x; // les vecteurs de direction x et y du ray
     float   dir_y;
     int     map_pos_x; // les positions x et y de la case de la map où le vecteur est situé
     int     map_pos_y;
@@ -27,15 +35,17 @@ typedef struct s_raycaster
 {
     float   player_pos_x;
     float   player_pos_y;
-    float   player_dir_x;
-    float   player_dir_y;
-    float   camera_plane_x;
-    float   camera_plane_y;
+    float   player_dir_x; // -1 pour N, 1 pour S, 0 pour E/W
+    float   player_dir_y; // -1 pour W, 1 pour E, 0 pour S/N
+    float   camera_plane_x; // 0.66 pour E, -0.66 pour W, 0 pour S/N
+    float   camera_plane_y; // 0.66 pour N, -0.66 pour S, 0 pour E/W
     t_ray   *ray;
+    t_line  *line;
 }   t_raycaster;
 
 
-int ft_init_raycasting(t_game *game, t_raycaster *raycaster);
+
 int ft_dda_loop(t_game *game, t_raycaster *raycaster);
+t_raycaster   *ft_init_raycaster(t_game *game, t_raycaster *raycaster);
 
 #endif
