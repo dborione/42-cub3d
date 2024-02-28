@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
+/*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 10:57:07 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/02/19 14:29:01 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/02/28 14:58:47 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@
 # endif
 # ifndef HEIGHT
 #  define HEIGHT 1080
+# endif
+# ifndef DISTANCE_FOR_FULL_WALL
+#  define DISTANCE_FOR_FULL_WALL 6.7625
 # endif
 
 typedef struct s_location
@@ -45,6 +48,7 @@ typedef struct	s_game {
 	void				*mlx_win;
 	t_cub3d_textures	*textures;
 	t_location			*player;
+	float				distance;
 	void				*minimap_img_ptr;
 	int					minimap;
 }						t_game;
