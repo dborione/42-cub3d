@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
+/*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 11:26:18 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/02/21 15:04:05 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/02/28 17:01:41 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int			ft_add_player_location(t_game *game, size_t x, size_t y)
 static
 int			ft_valid_map_element(char c)
 {
-	return (c == '0' || c == '0' || c == '1' || ft_is_start_location(c));
+	return (c == '0' || c == '0' || c == '1' || c == ' ' || ft_is_start_location(c));
 }
 
 int			ft_parse_map(t_game *game)

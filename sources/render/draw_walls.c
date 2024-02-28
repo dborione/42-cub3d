@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 11:52:46 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/02/28 15:21:49 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/02/28 17:03:09 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,6 @@ void	ft_draw_wall(t_game *game)
 
 	texture.data = mlx_get_data_addr(game->textures->north_texture,
 		&texture.bits_per_pixel, &texture.size_line, &texture.endian);
-	game->distance = 6,7625;
+	game->distance = 6.7625;
 	ft_draw_lines(game, texture);
 }
