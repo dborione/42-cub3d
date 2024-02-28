@@ -3,13 +3,27 @@
 #include "../../includes/cub3d_raycasting.h"
 
 static
+t_line  *ft_init_line(void)
+{
+    t_line  *line;
+
+    line = malloc(sizeof(t_line));
+    if (!line)
+        return (NULL);
+    line->bottom = 0;
+    line->top = 0;
+    line->height = 0;
+    return (line);
+}
+
+static
 t_ray   *ft_init_ray(void)
 {
     t_ray   *ray;
 
     ray = malloc(sizeof(t_ray));
     if (!ray)
-        return (0);
+        return (NULL);
     ray->dir_x = 0;
     ray->dir_y = 0;
     ray->camera_pos_x = 0;
@@ -42,6 +56,13 @@ t_raycaster   *ft_init_raycaster(t_game *game, t_raycaster *raycaster)
     raycaster->ray = ft_init_ray();
     if (!raycaster->ray)
     {
+        free (raycaster);
+        return (NULL);
+    }
+    raycaster->line = ft_init_line();
+    if (!raycaster->line)
+    {
+        free(raycaster->ray);
         free (raycaster);
         return (NULL);
     }
