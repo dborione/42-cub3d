@@ -33,8 +33,8 @@ t_raycaster   *ft_init_raycaster(t_game *game, t_raycaster *raycaster)
     raycaster = malloc(sizeof(t_raycaster));
     if (!raycaster)
         return (NULL);
-    raycaster->player_pos_x = game->player->x;
-    raycaster->player_pos_y = game->player->y;
+    raycaster->player_pos_x = game->player->x / 3;
+    raycaster->player_pos_y = game->player->y / 3;
     raycaster->player_dir_x = -1; // voir en fonction N/S/E/W
     raycaster->player_dir_y = 0;
     raycaster->camera_plane_x = 0;

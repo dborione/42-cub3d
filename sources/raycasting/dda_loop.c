@@ -1,14 +1,12 @@
 #include "../../includes/cub3d.h"
 #include "../../libft/libft.h"
 #include "../../includes/cub3d_raycasting.h"
-#include <math.h>
 
 static
 void    ft_init_dda(t_raycaster *raycaster)
 {
     raycaster->ray->map_pos_x = raycaster->player_pos_x;
     raycaster->ray->map_pos_y = raycaster->player_pos_y;
-
     if (raycaster->ray->dir_x < 0)
     {
         raycaster->ray->step_x = -1;
