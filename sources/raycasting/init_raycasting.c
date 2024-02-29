@@ -41,6 +41,30 @@ t_ray   *ft_init_ray(void)
     return (ray);
 }
 
+static
+float    ft_set_player_dir_x(t_game *game, t_raycaster *raycaster)
+{
+    if (game->player->yaw == 0.0f) //NORTH
+        raycaster->player_dir_x = -1;
+    else if (game->player->yaw == 180.0f) //SOUTH
+        raycaster->player_dir_x = 1;
+    else if (game->player->yaw == -90.0f || game->player->yaw == 90.0f) //WEST/EAST
+        raycaster->player_dir_x = 0;
+    return (raycaster->player_dir_x);
+}
+
+static
+float    ft_set_player_dir_y(t_game *game, t_raycaster *raycaster)
+{
+    if (game->player->yaw == -90.0f) //WEST
+        raycaster->player_dir_y = -1;
+    else if (game->player->yaw == 90.0f) //EAST
+        raycaster->player_dir_y = 1;
+    else if (game->player->yaw == 0.0f || game->player->yaw == 180.0f) //NORTH/SOUTH
+        raycaster->player_dir_y = 0;
+    return (raycaster->player_dir_y);
+}
+
 // FOV = ratio between the length of the direction vector, and the length of the plane.
 t_raycaster   *ft_init_raycaster(t_game *game, t_raycaster *raycaster)
 {
@@ -49,8 +73,8 @@ t_raycaster   *ft_init_raycaster(t_game *game, t_raycaster *raycaster)
         return (NULL);
     raycaster->player_pos_x = game->player->x / 3;
     raycaster->player_pos_y = game->player->y / 3;
-    raycaster->player_dir_x = -1; // voir en fonction N/S/E/W
-    raycaster->player_dir_y = 0;
+    raycaster->player_dir_x = ft_set_player_dir_x(game, raycaster);
+    raycaster->player_dir_y = ft_set_player_dir_y(game, raycaster);
     raycaster->camera_plane_x = 0;
     raycaster->camera_plane_y = FOV; // voir en fonction N/S/E/W
     raycaster->ray = ft_init_ray();
