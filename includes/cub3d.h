@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 10:57:07 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/02/28 16:12:18 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/02/28 14:58:47 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,6 @@ typedef struct	s_game {
 // Init
 int	ft_quit_window(t_game *game);
 int	ft_init_game(t_game **game);
+int ft_raycasting(t_game *game);
 
 #endif

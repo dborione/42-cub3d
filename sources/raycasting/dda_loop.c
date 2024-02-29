@@ -50,7 +50,7 @@ int ft_do_dda(t_game *game, t_raycaster *raycaster)
             raycaster->ray->map_pos_y += raycaster->ray->step_y;
             raycaster->ray->side = 1;
         }
-        if (game->textures->map[raycaster->ray->map_pos_x][raycaster->ray->map_pos_y] > 0)
+        if (game->textures->map[raycaster->ray->map_pos_y][raycaster->ray->map_pos_x] == '1')
             raycaster->ray->hit = 1;
     }
     return (1);

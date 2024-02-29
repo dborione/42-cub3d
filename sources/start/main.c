@@ -101,6 +101,12 @@ int	main(int argc, char *argv[])
 
 	ft_render_frame(game);
 
+	if (!ft_raycasting(game))
+	{
+		ft_putendl_fd("Error.", 2);
+		system("leaks cub3D");
+		return (2);
+	}
 	// test pour la minimap
 	// game->minimap = 0;
 
