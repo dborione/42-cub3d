@@ -10,9 +10,14 @@ t_line  *ft_init_line(void)
     line = malloc(sizeof(t_line));
     if (!line)
         return (NULL);
+    line->wall_hit_x = 0;
+    line->height = 0;
     line->bottom = 0;
     line->top = 0;
-    line->height = 0;
+    line->texture_x = 0;
+    line->texture_y = 0;
+    line->texture_pos = 0;
+    line->step = 0;
     return (line);
 }
 

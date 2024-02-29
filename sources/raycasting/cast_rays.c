@@ -1,8 +1,7 @@
 #include "../../includes/cub3d.h"
 #include "../../libft/libft.h"
 #include "../../includes/cub3d_raycasting.h"
-#include <math.h>
-#include <limits.h>
+#include "../../includes/cub3d_render.h"
 
 /*
     On caste des rays pour chaque pixel de la largeur de la fenêtre
@@ -33,16 +32,11 @@ int ft_cast_rays(t_raycaster *raycaster)
         raycaster->ray->dir_x = INT_MAX;
     if (raycaster->ray->dir_y == 0)
         raycaster->ray->dir_y = INT_MAX;
-
-    // raycaster->ray->delta_dist_x = sqrt(1 + (raycaster->ray->dir_y * raycaster->ray->dir_y)
-    //     / (raycaster->ray->dir_x * raycaster->ray->dir_x));
-    // raycaster->ray->delta_dist_y = sqrt(1 + (raycaster->ray->dir_x * raycaster->ray->dir_x)
-    //     / (raycaster->ray->dir_y * raycaster->ray->dir_y));
     raycaster->ray->delta_dist_x = fabs(1 / raycaster->ray->dir_x);
     raycaster->ray->delta_dist_y = fabs(1 / raycaster->ray->dir_y);
 
-    printf("raycaster->ray->delta_dist_x: %f\n", raycaster->ray->delta_dist_x);
-    printf("raycaster->ray->delta_dist_y: %f\n", raycaster->ray->delta_dist_y);
+    // printf("raycaster->ray->delta_dist_x: %f\n", raycaster->ray->delta_dist_x);
+    // printf("raycaster->ray->delta_dist_y: %f\n", raycaster->ray->delta_dist_y);
 
     return (1);
 }
@@ -73,55 +67,69 @@ void ft_set_wall_height(t_raycaster *raycaster)
     // printf("line bottom: %d\n", raycaster->line->bottom);
 
     raycaster->line->height = (int)(HEIGHT / raycaster->ray->ray_to_wall_dist);
-    raycaster->line->bottom = -raycaster->line->height / 2 + HEIGHT / 2;
+    raycaster->line->bottom = -raycaster->line->height / 2 + HEIGHT / 2; //start
     if (raycaster->line->bottom < 0)
         raycaster->line->bottom = 0;
-    raycaster->line->top = raycaster->line->height / 2 + HEIGHT / 2;
+    raycaster->line->top = raycaster->line->height / 2 + HEIGHT / 2; //end
     if (raycaster->line->top >= HEIGHT)
         raycaster->line->top = HEIGHT - 1;
 }
 
 /*
-    On calcule le point exact où le mur est hit
+    On calcule le point exact où le mur est hit: la coordonnee x sur la texture
 */
-// static
-// void    ft_get_wall_hit_point(t_raycaster *raycaster)
-// {
-//     float wall_hit;
-//     int texture_x;
+static
+void    ft_get_wall_hit_point(t_raycaster *raycaster)
+{
+    raycaster->line->wall_hit_x = 0;
+    if (raycaster->ray->side == 0) // if side == EAST ou WEST
+        raycaster->line->wall_hit_x = raycaster->player_pos_y +
+            raycaster->ray->ray_to_wall_dist * raycaster->ray->dir_y;
+    else
+        raycaster->line->wall_hit_x = raycaster->player_pos_x +
+            raycaster->ray->ray_to_wall_dist * raycaster->ray->dir_x;
+    raycaster->line->wall_hit_x -= floor((double)raycaster->line->wall_hit_x); // double floor(double x) = returns the largest integer value less than or equal to x
+}
 
-//     wall_hit = 0;
-//     if (raycaster->ray->side == 0) // if side == EAST ou WEST
-//         wall_hit = raycaster->player_pos_y +
-//             raycaster->ray->ray_to_wall_dist * raycaster->ray->dir_y;
-//     else
-//         wall_hit = raycaster->player_pos_x +
-//             raycaster->ray->ray_to_wall_dist * raycaster->ray->dir_x;
-//     wall_hit -= floor((double)wall_hit); // double floor(double x) = returns the largest integer value less than or equal to x
+static
+void    ft_get_texture_pos(t_raycaster *raycaster)
+{
+    raycaster->line->texture_x = (int)(raycaster->line->wall_hit_x * WALL_WIDTH);
+    if (raycaster->ray->side == 0 && raycaster->ray->dir_x > 0)
+        raycaster->line->texture_x = WALL_WIDTH + raycaster->line->texture_x;
+    if (raycaster->ray->side == 1 && raycaster->ray->dir_x < 0)
+        raycaster->line->texture_x = WALL_WIDTH + raycaster->line->texture_x - 1;  
+    raycaster->line->step = 1.0 * WALL_HEIGHT / raycaster->line->height;
+    raycaster->line->texture_pos = (raycaster->line->bottom - HEIGHT / 2 + raycaster->line->height / 2)
+        * raycaster->line->step - 1;
+}
 
-//     // texture_x = (int)(wall_hit * TEXTURE_WIDTH);
-//     // if (raycaster->ray->side == 0 && raycaster->ray->dir_x > 0)
-//     //     texture_x = TEXTURE_WIDTH - texture_x - 1;
-//     // if (raycaster->ray->side == 1 && raycaster->ray->dir_x < 0)
-//     //     texture_x = TEXTURE_WIDTH - texture_x - 1;
-// }
+static
+void    ft_draw_imgs(t_game *game, t_raycaster *raycaster)
+{
+    int i;
+    int j;
 
+    i = raycaster->line->bottom;
+    j = -1;
+    while (++j < WIDTH)
+    {
+        while (++i <= raycaster->line->top)
+        {
+            raycaster->line->texture_y = (int)raycaster->line->texture_pos & (WALL_HEIGHT - 1);
+            raycaster->line->texture_pos += raycaster->line->step;
+            game->textures->frame->data[i * WALL_WIDTH + j] = BLUE;
+            // color = game->textures[texNum][WALL_HEIGHT * texture_y + texture_x];
+        }
+    }
 
-// void    ft_textures_to_img(t_game *game, t_raycaster *raycaster)
-// {
-//     int scale;
-
-//     scale = (line_y * WALL_WIDTH) - (((HEIGHT * game->player->pitch) * WALL_WIDTH) / 2)
-//         + ((raycaster->line->height * WALL_WIDTH) / 2);
-    
-// }
+}
 
 
 static
 void	verLine(t_game *game, int x, int y1, int y2, int color)
 {
 	int	y;
-
 	y = y1;
 	while (y <= y2)
 	{
@@ -150,11 +158,16 @@ int ft_raycasting(t_game *game)
     }
     ft_get_ray_to_wall_dist(raycaster);
     ft_set_wall_height(raycaster);
+    ft_get_wall_hit_point(raycaster);
+    ft_get_texture_pos(raycaster);
+    ft_draw_imgs(game, raycaster);
 
+    /* TESTS */
     int	color;
 
     if (game->textures->map[raycaster->ray->map_pos_y][raycaster->ray->map_pos_y] == '1')
-        color = 0xFFFF00;
+        color = GREEN;
+        // color = 0xFFFF00;
     // else if (game->textures->map[raycaster->ray->map_pos_y][raycaster->ray->map_pos_y] == 2)
     //     color = 0x00FF00;
     // else if (game->textures->map[raycaster->ray->map_pos_y][raycaster->ray->map_pos_y])
@@ -168,7 +181,7 @@ int ft_raycasting(t_game *game)
         color = color / 2;
     // printf("line top: %d\n", raycaster->line->top);
     // printf("height: %d\n", HEIGHT);
-    verLine(game, 50, raycaster->line->bottom, raycaster->line->top, color);
+    verLine(game, 550, raycaster->line->bottom, raycaster->line->top, color);
 
     return (1);
 }
