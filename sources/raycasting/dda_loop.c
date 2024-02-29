@@ -7,6 +7,8 @@ void    ft_init_dda(t_raycaster *raycaster)
 {
     raycaster->ray->map_pos_x = raycaster->player_pos_x;
     raycaster->ray->map_pos_y = raycaster->player_pos_y;
+    printf("raycaster->ray->dir_x: %f\n", raycaster->ray->dir_x);
+    printf("raycaster->ray->dir_y: %f\n", raycaster->ray->dir_y);
     if (raycaster->ray->dir_x < 0)
     {
         raycaster->ray->step_x = -1;
@@ -38,7 +40,7 @@ int ft_do_dda(t_game *game, t_raycaster *raycaster)
 {
     while (raycaster->ray->hit == 0)
     {
-        if (raycaster->ray->tile_dist_x < raycaster->ray->tile_dist_x)
+        if (raycaster->ray->tile_dist_x < raycaster->ray->tile_dist_y)
         {
             raycaster->ray->tile_dist_x += raycaster->ray->delta_dist_x;
             raycaster->ray->map_pos_x += raycaster->ray->step_x;

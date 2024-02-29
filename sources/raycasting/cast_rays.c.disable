@@ -1,0 +1,151 @@
+#include "../../includes/cub3d.h"
+#include "../../libft/libft.h"
+#include "../../includes/cub3d_raycasting.h"
+#include <math.h>
+#include <limits.h>
+
+
+
+void	verLine(t_game *game, int x, int y1, int y2, int color)
+{
+	int	y;
+
+	y = y1;
+	while (y <= y2)
+	{
+		mlx_pixel_put(game->mlx, game->mlx_win, x, y, color);
+		y++;
+	}
+}
+
+/*
+    On caste des rays pour chaque pixel de la largeur de la fenêtre
+    Le ray commence à la position du player
+    camera_pos_x = la position x sur la plane de camera, perpendiculaire
+        au vecteur de direction du player
+    côté droit de l'écran = 1
+    centre de l'écran = 0
+    côté gauche de l'écran = -1
+    donc direction du ray: addition du direction_vector et d'une partie du camera_plane vector
+*/
+static
+int ft_cast_rays(t_game *game, t_raycaster *raycaster)
+{
+    int     i;
+
+    i = -1;
+
+    while (++i < WIDTH)
+    {
+        raycaster->ray->camera_pos_x = 2 * i / (float)WIDTH - 1;
+        raycaster->ray->dir_x = raycaster->player_dir_x + raycaster->camera_plane_x
+            * raycaster->ray->camera_pos_x;
+        raycaster->ray->dir_y = raycaster->player_dir_y + raycaster->camera_plane_y
+            * raycaster->ray->camera_pos_x;
+
+        raycaster->ray->delta_dist_x = fabs(1 / raycaster->ray->dir_x);
+        raycaster->ray->delta_dist_y = fabs(1 / raycaster->ray->dir_y);
+
+        if (raycaster->ray->dir_x < 0)
+        {
+            raycaster->ray->step_x = -1;
+            raycaster->ray->tile_dist_x = (raycaster->player_pos_x - raycaster->ray->map_pos_x)
+                * raycaster->ray->delta_dist_x;
+        }
+        else
+        {
+            raycaster->ray->step_x = 1;
+            raycaster->ray->tile_dist_x = (raycaster->ray->map_pos_x + 1.0 - raycaster->player_pos_x)
+                * raycaster->ray->delta_dist_x;
+        }
+        if (raycaster->ray->dir_y < 0)
+        {
+            raycaster->ray->step_y = -1;
+            raycaster->ray->tile_dist_y = (raycaster->player_pos_y - raycaster->ray->map_pos_y)
+                * raycaster->ray->delta_dist_y;
+        }
+        else
+        {
+            raycaster->ray->step_y = 1;
+            raycaster->ray->tile_dist_y = (raycaster->ray->map_pos_y + 1.0 - raycaster->player_pos_y)
+                * raycaster->ray->delta_dist_y;
+        }        
+
+
+        while (raycaster->ray->hit == 0)
+        {
+            if (raycaster->ray->tile_dist_x < raycaster->ray->tile_dist_y)
+            {
+                raycaster->ray->tile_dist_x += raycaster->ray->delta_dist_x;
+                raycaster->ray->map_pos_x += raycaster->ray->step_x;
+                raycaster->ray->side = 0;
+            }
+            else
+            {
+                raycaster->ray->tile_dist_y += raycaster->ray->delta_dist_y;
+                raycaster->ray->map_pos_y += raycaster->ray->step_y;
+                raycaster->ray->side = 1;
+            }
+            if (game->textures->map[raycaster->ray->map_pos_y][raycaster->ray->map_pos_x] == '1')
+                raycaster->ray->hit = 1;
+        }
+
+        // if (raycaster->ray->side == 0)
+        //     raycaster->ray->ray_to_wall_dist = (raycaster->ray->tile_dist_x
+        //         - raycaster->ray->delta_dist_x);
+        // else
+        //     raycaster->ray->ray_to_wall_dist = (raycaster->ray->tile_dist_y
+        //         - raycaster->ray->delta_dist_y);
+
+
+        // raycaster->line->height = (int)(HEIGHT / raycaster->ray->ray_to_wall_dist);
+        // raycaster->line->bottom = -raycaster->line->height / 2 + HEIGHT / 2;
+
+        // if (raycaster->line->bottom < 0)
+        //     raycaster->line->bottom = 0;
+        // raycaster->line->top = raycaster->line->height / 2 + HEIGHT / 2;
+        // if (raycaster->line->top >= HEIGHT)
+        //     raycaster->line->top = HEIGHT - 1;
+
+        // int	color;
+
+        // if (game->textures->map[raycaster->ray->map_pos_y][raycaster->ray->map_pos_y] == 1)
+        //     color = 0xFFFF00;
+
+
+        // if (raycaster->ray->side == 1)
+        //     color = color / 2;
+
+
+        // verLine(game, 50, raycaster->line->bottom, raycaster->line->top, color);
+
+    }
+    return (1);
+}
+
+
+int ft_raycasting(t_game *game)
+{
+    t_raycaster *raycaster;
+
+    raycaster = NULL;
+    raycaster = ft_init_raycaster(game, raycaster);
+    if (!raycaster)
+    {
+        printf("error init raycasting\n");
+        return (0); //protect
+    }
+    if (!ft_cast_rays(game, raycaster))
+        return (0); //protect
+    // else if (game->textures->map[raycaster->ray->map_pos_y][raycaster->ray->map_pos_y] == 2)
+    //     color = 0x00FF00;
+    // else if (game->textures->map[raycaster->ray->map_pos_y][raycaster->ray->map_pos_y])
+    //     color = 0x0000FF;
+    // else if (game->textures->map[raycaster->ray->map_pos_y][raycaster->ray->map_pos_y])
+    //     color = 0xFFFFFF;
+    // else
+    //     color = 0xFFFF00;
+    
+
+    return (1);
+}

@@ -54,7 +54,7 @@ float    ft_set_player_dir_x(t_game *game, t_raycaster *raycaster)
 }
 
 static
-float    ft_set_player_dir_y(t_game *game, t_raycaster *raycaster)
+float   ft_set_player_dir_y(t_game *game, t_raycaster *raycaster)
 {
     if (game->player->yaw == -90.0f) //WEST
         raycaster->player_dir_y = -1;
@@ -64,6 +64,31 @@ float    ft_set_player_dir_y(t_game *game, t_raycaster *raycaster)
         raycaster->player_dir_y = 0;
     return (raycaster->player_dir_y);
 }
+
+static
+float    ft_set_camera_plane_x(t_game *game, t_raycaster *raycaster)
+{
+    if (game->player->yaw == -90.0f) //WEST
+        raycaster->camera_plane_x = -0.70;
+    else if (game->player->yaw == 90.0f) //EAST
+        raycaster->camera_plane_x = 0.70;
+    else if (game->player->yaw == 0.0f || game->player->yaw == 180.0f) //NORTH/SOUTH
+        raycaster->camera_plane_x = 0;
+    return (raycaster->camera_plane_x);
+}
+
+static
+float    ft_set_camera_plane_y(t_game *game, t_raycaster *raycaster)
+{
+    if (game->player->yaw == 0.0f) //NORTH
+        raycaster->camera_plane_y = 0.70;
+    else if (game->player->yaw == 180.0f) //SOUTH
+        raycaster->camera_plane_y = -0.70;
+    else if (game->player->yaw == -90.0f || game->player->yaw == 90.0f) //WEST/EAST
+        raycaster->camera_plane_y = 0;
+    return (raycaster->camera_plane_y);
+}
+
 
 // FOV = ratio between the length of the direction vector, and the length of the plane.
 t_raycaster   *ft_init_raycaster(t_game *game, t_raycaster *raycaster)
@@ -75,8 +100,8 @@ t_raycaster   *ft_init_raycaster(t_game *game, t_raycaster *raycaster)
     raycaster->player_pos_y = game->player->y / 3;
     raycaster->player_dir_x = ft_set_player_dir_x(game, raycaster);
     raycaster->player_dir_y = ft_set_player_dir_y(game, raycaster);
-    raycaster->camera_plane_x = 0;
-    raycaster->camera_plane_y = FOV; // voir en fonction N/S/E/W
+    raycaster->camera_plane_x = ft_set_camera_plane_x(game, raycaster);
+    raycaster->camera_plane_y = ft_set_camera_plane_y(game, raycaster);
     raycaster->ray = ft_init_ray();
     if (!raycaster->ray)
     {

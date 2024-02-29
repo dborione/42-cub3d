@@ -34,15 +34,19 @@ int ft_cast_rays(t_raycaster *raycaster)
         raycaster->ray->dir_x = INT_MAX;
     if (raycaster->ray->dir_y == 0)
         raycaster->ray->dir_y = INT_MAX;
-    printf("ray->camera_pos_x: %f\n", raycaster->ray->camera_pos_x);
-    printf("raycaster->ray->dir_x: %f\n", raycaster->ray->dir_x);
-    printf("raycaster->ray->dir_y: %f\n", raycaster->ray->dir_y);
+    // printf("ray->camera_pos_x: %f\n", raycaster->ray->camera_pos_x);
+    // printf("raycaster->ray->dir_x: %f\n", raycaster->ray->dir_x);
+    // printf("raycaster->ray->dir_y: %f\n", raycaster->ray->dir_y);
     raycaster->ray->delta_dist_x = sqrt(1 + (raycaster->ray->dir_y * raycaster->ray->dir_y)
         / (raycaster->ray->dir_x * raycaster->ray->dir_x));
     raycaster->ray->delta_dist_y = sqrt(1 + (raycaster->ray->dir_x * raycaster->ray->dir_x)
         / (raycaster->ray->dir_y * raycaster->ray->dir_y));
     printf("raycaster->ray->delta_dist_x: %f\n", raycaster->ray->delta_dist_x);
     printf("raycaster->ray->delta_dist_y: %f\n", raycaster->ray->delta_dist_y);
+
+
+
+    
     return (1);
 }
 
@@ -67,7 +71,7 @@ void ft_get_ray_to_wall_dist(t_raycaster *raycaster)
 static
 void ft_set_wall_height(t_raycaster *raycaster)
 {
-    printf("ray_to_wall_distt: %f\n", raycaster->ray->ray_to_wall_dist);
+    printf("ray_to_wall_dist: %f\n", raycaster->ray->ray_to_wall_dist);
     raycaster->line->height = (int)(HEIGHT / raycaster->ray->ray_to_wall_dist);
     printf("line height: %d\n", raycaster->line->height);
     raycaster->line->bottom = -raycaster->line->height / 2 + HEIGHT / 2;
@@ -153,7 +157,7 @@ int ft_raycasting(t_game *game)
 
     int	color;
 
-    if (game->textures->map[raycaster->ray->map_pos_y][raycaster->ray->map_pos_y] == 1)
+    if (game->textures->map[raycaster->ray->map_pos_y][raycaster->ray->map_pos_y] == '1')
         color = 0xFFFF00;
     // else if (game->textures->map[raycaster->ray->map_pos_y][raycaster->ray->map_pos_y] == 2)
     //     color = 0x00FF00;
@@ -166,8 +170,8 @@ int ft_raycasting(t_game *game)
     
     if (raycaster->ray->side == 1)
         color = color / 2;
-    printf("line top: %d\n", raycaster->line->top);
-    printf("height: %d\n", HEIGHT);
+    // printf("line top: %d\n", raycaster->line->top);
+    // printf("height: %d\n", HEIGHT);
     verLine(game, 50, raycaster->line->bottom, raycaster->line->top, color);
 
     return (1);
