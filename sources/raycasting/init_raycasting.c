@@ -69,9 +69,9 @@ static
 float    ft_set_camera_plane_x(t_game *game, t_raycaster *raycaster)
 {
     if (game->player->yaw == -90.0f) //WEST
-        raycaster->camera_plane_x = -0.70;
+        raycaster->camera_plane_x = -0.66;
     else if (game->player->yaw == 90.0f) //EAST
-        raycaster->camera_plane_x = 0.70;
+        raycaster->camera_plane_x = 0.66;
     else if (game->player->yaw == 0.0f || game->player->yaw == 180.0f) //NORTH/SOUTH
         raycaster->camera_plane_x = 0;
     return (raycaster->camera_plane_x);
@@ -81,9 +81,9 @@ static
 float    ft_set_camera_plane_y(t_game *game, t_raycaster *raycaster)
 {
     if (game->player->yaw == 0.0f) //NORTH
-        raycaster->camera_plane_y = 0.70;
+        raycaster->camera_plane_y = 0.66;
     else if (game->player->yaw == 180.0f) //SOUTH
-        raycaster->camera_plane_y = -0.70;
+        raycaster->camera_plane_y = -0.66;
     else if (game->player->yaw == -90.0f || game->player->yaw == 90.0f) //WEST/EAST
         raycaster->camera_plane_y = 0;
     return (raycaster->camera_plane_y);

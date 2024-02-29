@@ -33,9 +33,8 @@ int ft_cast_rays(t_game *game, t_raycaster *raycaster)
 {
     int     i;
 
-    i = -1;
-
-    while (++i < WIDTH)
+    i = 0;
+    while (i < WIDTH)
     {
         raycaster->ray->camera_pos_x = 2 * i / (float)WIDTH - 1;
         raycaster->ray->dir_x = raycaster->player_dir_x + raycaster->camera_plane_x
@@ -43,8 +42,16 @@ int ft_cast_rays(t_game *game, t_raycaster *raycaster)
         raycaster->ray->dir_y = raycaster->player_dir_y + raycaster->camera_plane_y
             * raycaster->ray->camera_pos_x;
 
-        raycaster->ray->delta_dist_x = fabs(1 / raycaster->ray->dir_x);
-        raycaster->ray->delta_dist_y = fabs(1 / raycaster->ray->dir_y);
+        // raycaster->ray->delta_dist_x = fabs(1 / raycaster->ray->dir_x);
+        // raycaster->ray->delta_dist_y = fabs(1 / raycaster->ray->dir_y);
+        raycaster->ray->delta_dist_x = sqrt(1 + (raycaster->ray->dir_y * raycaster->ray->dir_y)
+            / (raycaster->ray->dir_x * raycaster->ray->dir_x));
+        raycaster->ray->delta_dist_y = sqrt(1 + (raycaster->ray->dir_x * raycaster->ray->dir_x)
+            / (raycaster->ray->dir_y * raycaster->ray->dir_y));
+
+
+        raycaster->ray->map_pos_x = raycaster->player_pos_x;
+        raycaster->ray->map_pos_y = raycaster->player_pos_y;
 
         if (raycaster->ray->dir_x < 0)
         {
@@ -82,43 +89,46 @@ int ft_cast_rays(t_game *game, t_raycaster *raycaster)
             }
             else
             {
+                printf("raycaster->ray->step_y: %d\n", raycaster->ray->step_y);
+
                 raycaster->ray->tile_dist_y += raycaster->ray->delta_dist_y;
                 raycaster->ray->map_pos_y += raycaster->ray->step_y;
                 raycaster->ray->side = 1;
             }
+            printf("map x: %d\n", raycaster->ray->map_pos_x);
             if (game->textures->map[raycaster->ray->map_pos_y][raycaster->ray->map_pos_x] == '1')
                 raycaster->ray->hit = 1;
         }
 
-        // if (raycaster->ray->side == 0)
-        //     raycaster->ray->ray_to_wall_dist = (raycaster->ray->tile_dist_x
-        //         - raycaster->ray->delta_dist_x);
-        // else
-        //     raycaster->ray->ray_to_wall_dist = (raycaster->ray->tile_dist_y
-        //         - raycaster->ray->delta_dist_y);
+        if (raycaster->ray->side == 0)
+            raycaster->ray->ray_to_wall_dist = (raycaster->ray->tile_dist_x
+                - raycaster->ray->delta_dist_x);
+        else
+            raycaster->ray->ray_to_wall_dist = (raycaster->ray->tile_dist_y
+                - raycaster->ray->delta_dist_y);
 
 
-        // raycaster->line->height = (int)(HEIGHT / raycaster->ray->ray_to_wall_dist);
-        // raycaster->line->bottom = -raycaster->line->height / 2 + HEIGHT / 2;
+        raycaster->line->height = (int)(HEIGHT / raycaster->ray->ray_to_wall_dist);
+        raycaster->line->bottom = -raycaster->line->height / 2 + HEIGHT / 2;
 
-        // if (raycaster->line->bottom < 0)
-        //     raycaster->line->bottom = 0;
-        // raycaster->line->top = raycaster->line->height / 2 + HEIGHT / 2;
-        // if (raycaster->line->top >= HEIGHT)
-        //     raycaster->line->top = HEIGHT - 1;
+        if (raycaster->line->bottom < 0)
+            raycaster->line->bottom = 0;
+        raycaster->line->top = raycaster->line->height / 2 + HEIGHT / 2;
+        if (raycaster->line->top >= HEIGHT)
+            raycaster->line->top = HEIGHT - 1;
 
-        // int	color;
+        int	color;
 
-        // if (game->textures->map[raycaster->ray->map_pos_y][raycaster->ray->map_pos_y] == 1)
-        //     color = 0xFFFF00;
-
-
-        // if (raycaster->ray->side == 1)
-        //     color = color / 2;
+        if (game->textures->map[raycaster->ray->map_pos_y][raycaster->ray->map_pos_y] == 1)
+            color = 0xFFFF00;
 
 
-        // verLine(game, 50, raycaster->line->bottom, raycaster->line->top, color);
+        if (raycaster->ray->side == 1)
+            color = color / 2;
 
+
+        verLine(game, 50, raycaster->line->bottom, raycaster->line->top, color);
+        i++;
     }
     return (1);
 }

@@ -20,7 +20,6 @@ int ft_cast_rays(t_raycaster *raycaster)
     int     i;
 
     i = -1;
-
     while (++i < WIDTH)
     {
         raycaster->ray->camera_pos_x = 2 * i / (float)WIDTH - 1;
@@ -34,19 +33,17 @@ int ft_cast_rays(t_raycaster *raycaster)
         raycaster->ray->dir_x = INT_MAX;
     if (raycaster->ray->dir_y == 0)
         raycaster->ray->dir_y = INT_MAX;
-    // printf("ray->camera_pos_x: %f\n", raycaster->ray->camera_pos_x);
-    // printf("raycaster->ray->dir_x: %f\n", raycaster->ray->dir_x);
-    // printf("raycaster->ray->dir_y: %f\n", raycaster->ray->dir_y);
-    raycaster->ray->delta_dist_x = sqrt(1 + (raycaster->ray->dir_y * raycaster->ray->dir_y)
-        / (raycaster->ray->dir_x * raycaster->ray->dir_x));
-    raycaster->ray->delta_dist_y = sqrt(1 + (raycaster->ray->dir_x * raycaster->ray->dir_x)
-        / (raycaster->ray->dir_y * raycaster->ray->dir_y));
+
+    // raycaster->ray->delta_dist_x = sqrt(1 + (raycaster->ray->dir_y * raycaster->ray->dir_y)
+    //     / (raycaster->ray->dir_x * raycaster->ray->dir_x));
+    // raycaster->ray->delta_dist_y = sqrt(1 + (raycaster->ray->dir_x * raycaster->ray->dir_x)
+    //     / (raycaster->ray->dir_y * raycaster->ray->dir_y));
+    raycaster->ray->delta_dist_x = fabs(1 / raycaster->ray->dir_x);
+    raycaster->ray->delta_dist_y = fabs(1 / raycaster->ray->dir_y);
+
     printf("raycaster->ray->delta_dist_x: %f\n", raycaster->ray->delta_dist_x);
     printf("raycaster->ray->delta_dist_y: %f\n", raycaster->ray->delta_dist_y);
 
-
-
-    
     return (1);
 }
 
@@ -71,12 +68,12 @@ void ft_get_ray_to_wall_dist(t_raycaster *raycaster)
 static
 void ft_set_wall_height(t_raycaster *raycaster)
 {
-    printf("ray_to_wall_dist: %f\n", raycaster->ray->ray_to_wall_dist);
-    raycaster->line->height = (int)(HEIGHT / raycaster->ray->ray_to_wall_dist);
-    printf("line height: %d\n", raycaster->line->height);
-    raycaster->line->bottom = -raycaster->line->height / 2 + HEIGHT / 2;
-    printf("line bottom: %d\n", raycaster->line->bottom);
+    // printf("ray_to_wall_dist: %f\n", raycaster->ray->ray_to_wall_dist);
+    // printf("line height: %d\n", raycaster->line->height);
+    // printf("line bottom: %d\n", raycaster->line->bottom);
 
+    raycaster->line->height = (int)(HEIGHT / raycaster->ray->ray_to_wall_dist);
+    raycaster->line->bottom = -raycaster->line->height / 2 + HEIGHT / 2;
     if (raycaster->line->bottom < 0)
         raycaster->line->bottom = 0;
     raycaster->line->top = raycaster->line->height / 2 + HEIGHT / 2;
@@ -120,7 +117,7 @@ void ft_set_wall_height(t_raycaster *raycaster)
 // }
 
 
-
+static
 void	verLine(t_game *game, int x, int y1, int y2, int color)
 {
 	int	y;
@@ -132,7 +129,6 @@ void	verLine(t_game *game, int x, int y1, int y2, int color)
 		y++;
 	}
 }
-
 
 int ft_raycasting(t_game *game)
 {
