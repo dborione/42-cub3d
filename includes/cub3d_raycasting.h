@@ -52,7 +52,15 @@ typedef struct s_raycaster
 
 
 
-int ft_dda_loop(t_game *game, t_raycaster *raycaster);
-t_raycaster   *ft_init_raycaster(t_game *game, t_raycaster *raycaster);
+void        ft_dda_loop(t_game *game, t_raycaster *raycaster);
+t_raycaster *ft_init_raycaster(t_game *game, t_raycaster *raycaster);
+t_ray       *ft_init_ray(void);
+t_line      *ft_init_line(void);
+void        ft_get_wall_infos(t_raycaster *raycaster);
+void        ft_get_texture_pos(t_raycaster *raycaster);
+void        ft_draw_imgs(t_game *game, t_raycaster *raycaster);
+
+ /* TESTS */
+void    ft_draw_test_line(t_game *game, t_raycaster *raycaster);
 
 #endif

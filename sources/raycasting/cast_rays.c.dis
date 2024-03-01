@@ -42,13 +42,8 @@ int ft_cast_rays(t_game *game, t_raycaster *raycaster)
         raycaster->ray->dir_y = raycaster->player_dir_y + raycaster->camera_plane_y
             * raycaster->ray->camera_pos_x;
 
-        // raycaster->ray->delta_dist_x = fabs(1 / raycaster->ray->dir_x);
-        // raycaster->ray->delta_dist_y = fabs(1 / raycaster->ray->dir_y);
-        raycaster->ray->delta_dist_x = sqrt(1 + (raycaster->ray->dir_y * raycaster->ray->dir_y)
-            / (raycaster->ray->dir_x * raycaster->ray->dir_x));
-        raycaster->ray->delta_dist_y = sqrt(1 + (raycaster->ray->dir_x * raycaster->ray->dir_x)
-            / (raycaster->ray->dir_y * raycaster->ray->dir_y));
-
+        raycaster->ray->delta_dist_x = fabs(1 / raycaster->ray->dir_x);
+        raycaster->ray->delta_dist_y = fabs(1 / raycaster->ray->dir_y);
 
         raycaster->ray->map_pos_x = raycaster->player_pos_x;
         raycaster->ray->map_pos_y = raycaster->player_pos_y;
@@ -147,15 +142,6 @@ int ft_raycasting(t_game *game)
     }
     if (!ft_cast_rays(game, raycaster))
         return (0); //protect
-    // else if (game->textures->map[raycaster->ray->map_pos_y][raycaster->ray->map_pos_y] == 2)
-    //     color = 0x00FF00;
-    // else if (game->textures->map[raycaster->ray->map_pos_y][raycaster->ray->map_pos_y])
-    //     color = 0x0000FF;
-    // else if (game->textures->map[raycaster->ray->map_pos_y][raycaster->ray->map_pos_y])
-    //     color = 0xFFFFFF;
-    // else
-    //     color = 0xFFFF00;
     
-
     return (1);
 }

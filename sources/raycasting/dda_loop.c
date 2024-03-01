@@ -34,7 +34,7 @@ void    ft_init_dda(t_raycaster *raycaster)
 }
 
 static
-int ft_do_dda(t_game *game, t_raycaster *raycaster)
+void    ft_do_dda(t_game *game, t_raycaster *raycaster)
 {
     while (raycaster->ray->hit == 0)
     {
@@ -53,15 +53,12 @@ int ft_do_dda(t_game *game, t_raycaster *raycaster)
         if (game->textures->map[raycaster->ray->map_pos_y][raycaster->ray->map_pos_x] == '1')
             raycaster->ray->hit = 1;
     }
-    return (1);
 }
 
-int ft_dda_loop(t_game *game, t_raycaster *raycaster)
+void    ft_dda_loop(t_game *game, t_raycaster *raycaster)
 {
     raycaster->ray->map_pos_x = raycaster->player_pos_x;
     raycaster->ray->map_pos_y = raycaster->player_pos_y;
     ft_init_dda(raycaster);
-    if (!ft_do_dda(game, raycaster))
-        return (0);
-    return (1);
+    ft_do_dda(game, raycaster);
 }
