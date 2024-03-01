@@ -27,13 +27,13 @@ void ft_set_wall_height(t_raycaster *raycaster)
     // printf("line height: %d\n", raycaster->line->height);
     // printf("line bottom: %d\n", raycaster->line->bottom);
 
-    raycaster->line->height = (int)(HEIGHT / raycaster->ray->ray_to_wall_dist);
-    raycaster->line->bottom = -raycaster->line->height / 2 + HEIGHT / 2; //start
+    raycaster->line->height = (int)(WIN_HEIGHT / raycaster->ray->ray_to_wall_dist);
+    raycaster->line->bottom = -raycaster->line->height / 2 + WIN_HEIGHT / 2; //start
     if (raycaster->line->bottom < 0)
         raycaster->line->bottom = 0;
-    raycaster->line->top = raycaster->line->height / 2 + HEIGHT / 2; //end
-    if (raycaster->line->top >= HEIGHT)
-        raycaster->line->top = HEIGHT - 1;
+    raycaster->line->top = raycaster->line->height / 2 + WIN_HEIGHT / 2; //end
+    if (raycaster->line->top >= WIN_HEIGHT)
+        raycaster->line->top = WIN_HEIGHT - 1;
 }
 
 /*
@@ -49,7 +49,7 @@ void    ft_get_wall_hit_point(t_raycaster *raycaster)
     else
         raycaster->line->wall_hit_x = raycaster->player_pos_x +
             raycaster->ray->ray_to_wall_dist * raycaster->ray->dir_x;
-    raycaster->line->wall_hit_x -= floor((double)raycaster->line->wall_hit_x); // double floor(double x) = returns the largest integer value less than or equal to x
+    raycaster->line->wall_hit_x -= floor(raycaster->line->wall_hit_x); // double floor(double x) = returns the largest integer value less than or equal to x
 }
 
 void    ft_get_wall_infos(t_raycaster *raycaster)

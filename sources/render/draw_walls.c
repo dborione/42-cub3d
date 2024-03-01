@@ -24,7 +24,7 @@ void	ft_draw_line(
 
 	wall_i = texture.size_line * line;
 	count = 0;
-	factor = DISTANCE_FOR_FULL_WALL / game->distance * (WIDTH / WALL_WIDTH);
+	factor = DISTANCE_FOR_FULL_WALL / game->distance * (WIN_WIDTH / WALL_WIDTH);
 	end = texture.size_line * (line + 1);
 	while (wall_i < end)
 	/*
@@ -55,8 +55,8 @@ void	ft_draw_lines(t_game *game, t_cub3d_images texture)
 
 	line = 0;
 	frame_i = 0;
-	factor = DISTANCE_FOR_FULL_WALL / game->distance * (HEIGHT / WALL_HEIGHT);
-	while (line < WALL_HEIGHT && line < HEIGHT)
+	factor = DISTANCE_FOR_FULL_WALL / game->distance * (WIN_HEIGHT / WALL_HEIGHT);
+	while (line < WALL_HEIGHT && line < WIN_HEIGHT)
 	{
 		count = 0;
 		while (count < factor)

@@ -47,7 +47,7 @@ void	ft_draw_floor(t_game *game)
 
 	y = 580;
 	i = game->textures->frame->size_line * y;
-	while (y < HEIGHT)
+	while (y < WIN_HEIGHT)
 	{
 		x = 0;
 		while (x < game->textures->frame->size_line)

@@ -98,8 +98,8 @@ int					ft_load_game(t_game *game, char *map_path)
 	game->textures = ft_new_textures();
 	if (!game->textures)
 		return (0);
-	int width = WIDTH;
-	int	height = HEIGHT;
+	int width = WIN_WIDTH;
+	int	height = WIN_HEIGHT;
 	game->textures->frame->pointer = mlx_new_image(game->mlx, width, height);
 	game->textures->test = mlx_xpm_file_to_image(game->mlx, "./maps/textures/wolf.xpm", &width, &height);
 	if (!game->textures->test)

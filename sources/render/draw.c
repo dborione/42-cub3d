@@ -24,7 +24,7 @@ void ft_draw_frame(t_game *game)
 
 	pen_location.y = 0;
 	i = 0;
-	while (frame.data[i] && pen_location.y < HEIGHT)
+	while (frame.data[i] && pen_location.y < WIN_HEIGHT)
 	{
 		pen_location.x = 0;
 		while (pen_location.x < frame.size_line)
