@@ -62,7 +62,7 @@ void    ft_get_texture_pos(t_raycaster *raycaster)
     if (raycaster->ray->side == 1 && raycaster->ray->dir_x < 0)
         raycaster->line->texture_x = WALL_WIDTH + raycaster->line->texture_x - 1;  
     raycaster->line->step = 1.0 * WALL_HEIGHT / raycaster->line->height;
-    raycaster->line->texture_pos = (raycaster->line->bottom - HEIGHT / 2 + raycaster->line->height / 2)
+    raycaster->line->texture_pos = (raycaster->line->bottom - WIN_HEIGHT / 2 + raycaster->line->height / 2)
         * raycaster->line->step - 1;
 }
 
@@ -73,7 +73,7 @@ void    ft_draw_imgs(t_game *game, t_raycaster *raycaster)
 
     i = raycaster->line->bottom;
     j = -1;
-    while (++j < WIDTH)
+    while (++j < WIN_WIDTH)
     {
         while (++i <= raycaster->line->top)
         {
@@ -99,25 +99,16 @@ void	verLine(t_game *game, int x, int y1, int y2, int color)
 }
 
  /* TESTS */
-void    ft_draw_test_line(t_game *game, t_raycaster *raycaster)
+void    ft_draw_test_line(t_game *game, t_raycaster *raycaster, int i)
 {
     int	color;
 
     if (game->textures->map[raycaster->ray->map_pos_y][raycaster->ray->map_pos_y] == '1')
         color = GREEN;
-        // color = 0xFFFF00;
-    // else if (game->textures->map[raycaster->ray->map_pos_y][raycaster->ray->map_pos_y] == 2)
-    //     color = 0x00FF00;
-    // else if (game->textures->map[raycaster->ray->map_pos_y][raycaster->ray->map_pos_y])
-    //     color = 0x0000FF;
-    // else if (game->textures->map[raycaster->ray->map_pos_y][raycaster->ray->map_pos_y])
-    //     color = 0xFFFFFF;
-    // else
-    //     color = 0xFFFF00;
     
     if (raycaster->ray->side == 1)
         color = color / 2;
     // printf("line top: %d\n", raycaster->line->top);
     // printf("height: %d\n", HEIGHT);
-    verLine(game, 550, raycaster->line->bottom, raycaster->line->top, color);
+    verLine(game, i, raycaster->line->bottom, raycaster->line->top, color);
 }

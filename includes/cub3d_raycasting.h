@@ -12,8 +12,8 @@ typedef struct s_line
 {
     float   wall_hit_x;
     int     height;
-    int     bottom;
-    int     top;
+    int     bottom; //start
+    int     top; //end
     int     texture_x;
     int     texture_y;
     float   texture_pos;
@@ -61,6 +61,6 @@ void        ft_get_texture_pos(t_raycaster *raycaster);
 void        ft_draw_imgs(t_game *game, t_raycaster *raycaster);
 
  /* TESTS */
-void    ft_draw_test_line(t_game *game, t_raycaster *raycaster);
+void    ft_draw_test_line(t_game *game, t_raycaster *raycaster, int i);
 
 #endif
