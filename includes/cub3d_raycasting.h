@@ -3,14 +3,21 @@
 # include "cub3d.h"
 # include "../libft/libft.h"
 
+# include <math.h>
+# include <limits.h>
+
 # define FOV 0.70;
 
 typedef struct s_line
 {
-    int height;
-    int bottom;
-    int top;
-
+    float   wall_hit_x;
+    int     height;
+    int     bottom;
+    int     top;
+    int     texture_x;
+    int     texture_y;
+    float   texture_pos;
+    float   step;
 }   t_line;
 
 typedef struct s_ray
