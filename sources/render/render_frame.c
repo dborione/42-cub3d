@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_frame.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
+/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 13:12:36 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/02/23 12:08:56 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/01 13:37:04 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ void	ft_render_frame(t_game *game)
 		return ; // erreur de récupération de l'image
 	ft_draw_ceiling(game);
 	ft_draw_floor(game);
-	ft_draw_wall(game);
+	ft_draw_wall(game, game->textures->north_texture);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->frame->pointer, 0, 0);
 }

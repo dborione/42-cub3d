@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_walls.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
+/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 11:52:46 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/02/28 17:03:09 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/01 13:35:25 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,11 @@ void	ft_draw_lines(t_game *game, t_cub3d_images texture)
 	}
 }
 
-void	ft_draw_wall(t_game *game)
+void	ft_draw_wall(t_game *game, void *target)
 {
 	t_cub3d_images	texture;
 
-	texture.data = mlx_get_data_addr(game->textures->north_texture,
+	texture.data = mlx_get_data_addr(target,
 		&texture.bits_per_pixel, &texture.size_line, &texture.endian);
 	game->distance = 6.7625;
 	ft_draw_lines(game, texture);
