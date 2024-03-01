@@ -19,11 +19,11 @@
 #include <stdio.h>
 
 # define TILE_SIZE 32
-# ifndef WIDTH
-#  define WIDTH 1920
+# ifndef WIN_WIDTH
+#  define WIN_WIDTH 1920
 # endif
-# ifndef HEIGHT
-#  define HEIGHT 1080
+# ifndef WIN_HEIGHT
+#  define WIN_HEIGHT 1080
 # endif
 # ifndef DISTANCE_FOR_FULL_WALL
 #  define DISTANCE_FOR_FULL_WALL 6.7625
