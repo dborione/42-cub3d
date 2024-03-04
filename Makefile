@@ -9,11 +9,11 @@ RM		= rm -f
 # Screen Resolution
 
 ifeq ("$(wildcard .mini)","")
-    WIDTH = 1920
-	HEIGHT = 1080
+    WIN_WIDTH = 1920
+	WIN_HEIGHT = 1080
 else
-	WIDTH = 1408
-	HEIGHT = 792
+	WIN_WIDTH = 1408
+	WIN_HEIGHT = 792
 endif
 
 # Colors
