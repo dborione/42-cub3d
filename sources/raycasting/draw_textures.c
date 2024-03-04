@@ -119,7 +119,7 @@ void verLine(t_game *game, t_raycaster *raycaster, int x, int drawStart, int dra
         //     + game->textures->frame->data[raycaster->line->texture_x]
         //     * (game->textures->frame->bits_per_pixel / 8));
         // mlx_pixel_put(game->mlx, game->mlx_win, x, drawStart, pixel);
-        mlx_pixel_put(game->mlx, game->mlx_win, x, drawStart, color);
+        mlx_pixel_put(game->mlx, game->mlx_win, x, drawStart, color); // implementer ici le drawwalls ici
 		drawStart++;
 	}
 }
@@ -129,9 +129,9 @@ void    ft_draw_test_line(t_game *game, t_raycaster *raycaster, int i)
 {
     int	color;
     color = 0;
-    if (game->textures->map[raycaster->ray->map_pos_y][raycaster->ray->map_pos_x] == '1')
-        color = GREEN / 2;
-    
+    // if (game->textures->map[raycaster->ray->map_pos_y][raycaster->ray->map_pos_x] == '1')
+    //     color = GREEN / 2;
+
     if (raycaster->ray->side == EW && raycaster->ray->dir_x < 0)
         color = BLUE;
     else if (raycaster->ray->side == EW && raycaster->ray->dir_x <= 0)
