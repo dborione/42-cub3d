@@ -56,7 +56,7 @@ int ft_raycasting(t_game *game)
         ft_dda_loop(game, raycaster);
         ft_get_wall_infos(game, raycaster);
 
-        // ft_get_texture_pos(raycaster);
+        ft_get_texture_pos(raycaster);
         // ft_draw_imgs(game, raycaster, i);
 
         ft_draw_test_line(game, raycaster, i);
