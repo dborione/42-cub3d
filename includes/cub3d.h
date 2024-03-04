@@ -49,8 +49,7 @@ typedef struct	s_game {
 	t_cub3d_textures	*textures;
 	t_location			*player;
 	float				distance;
-	void				*minimap_img_ptr;
-	int					minimap;
+	int					buf[WIN_HEIGHT][WIN_WIDTH];
 }						t_game;
 
 /*

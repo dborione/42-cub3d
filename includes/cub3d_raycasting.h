@@ -7,6 +7,8 @@
 # include <limits.h>
 
 # define FOV 0.70;
+# define EW 0 //east/west
+# define NS 1 //nprth/south
 
 typedef struct s_line
 {
@@ -17,7 +19,9 @@ typedef struct s_line
     int     texture_x;
     int     texture_y;
     float   texture_pos;
+    float   texture_map_pos;
     float   step;
+    int     text_num;
 }   t_line;
 
 typedef struct s_ray
@@ -56,11 +60,11 @@ void        ft_dda_loop(t_game *game, t_raycaster *raycaster);
 t_raycaster *ft_init_raycaster(t_game *game, t_raycaster *raycaster);
 t_ray       *ft_init_ray(void);
 t_line      *ft_init_line(void);
-void        ft_get_wall_infos(t_raycaster *raycaster);
+void        ft_get_wall_infos(t_game *game, t_raycaster *raycaster);
 void        ft_get_texture_pos(t_raycaster *raycaster);
-void        ft_draw_imgs(t_game *game, t_raycaster *raycaster);
+void        ft_draw_imgs(t_game *game, t_raycaster *raycaster, int x);
 
  /* TESTS */
-void    ft_draw_test_line(t_game *game, t_raycaster *raycaster, int i);
+void    ft_draw_test_line(t_game *game, t_raycaster *raycaster, int x);
 
 #endif
