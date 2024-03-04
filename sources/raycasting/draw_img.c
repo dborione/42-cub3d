@@ -108,18 +108,18 @@ void verLine(t_game *game, int x, int drawStart, int drawEnd, int color)
 void    ft_draw_test_line(t_game *game, t_raycaster *raycaster, int i)
 {
     int	color;
-
-    if (game->textures->map[raycaster->ray->map_pos_y][raycaster->ray->map_pos_y] == '1')
-        color = BLUE;
+    color = 0;
+    if (game->textures->map[raycaster->ray->map_pos_y][raycaster->ray->map_pos_x] == '1')
+        color = GREEN / 2;
     
     if (raycaster->ray->side == EW && raycaster->ray->dir_x < 0)
         color = BLUE;
     else if (raycaster->ray->side == EW && raycaster->ray->dir_x <= 0)
         color = color / 2;
     else if (raycaster->ray->side == NS && raycaster->ray->dir_y < 0)
-        color = color / 2;
+        color = color / 3;
     else if (raycaster->ray->side == NS && raycaster->ray->dir_y <= 0)
-        color = color / 2;
+        color = color / 4;
 
     verLine(game, i, raycaster->line->bottom, raycaster->line->top, color);
 }

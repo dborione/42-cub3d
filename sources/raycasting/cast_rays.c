@@ -60,10 +60,11 @@ int ft_raycasting(t_game *game)
         // ft_draw_imgs(game, raycaster, i);
 
         ft_draw_test_line(game, raycaster, i);
+        free(raycaster->line);
+        free(raycaster->ray);
+        free(raycaster);
         i++;
     }
-    free(raycaster->line);
-    free(raycaster->ray);
-    free(raycaster);
+
     return (1);
 }
