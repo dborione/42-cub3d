@@ -13,6 +13,7 @@
     côté gauche de l'écran = -1
     donc direction du ray: addition du direction_vector et d'une partie du camera_plane vector
 */
+/* Ray direction + position */
 static
 void    ft_cast_rays(t_raycaster *raycaster, int i)
 {
@@ -23,13 +24,15 @@ void    ft_cast_rays(t_raycaster *raycaster, int i)
     raycaster->ray->dir_y = raycaster->player_dir_y + raycaster->camera_plane_y
         * raycaster->ray->camera_pos_x;
     // check if raycaster->ray->dir_x ou raycaster->ray->dir_y == 0 pour la division
-    if (raycaster->ray->dir_x == 0)
-        raycaster->ray->dir_x = INT_MAX;
-    if (raycaster->ray->dir_y == 0)
-        raycaster->ray->dir_y = INT_MAX;
+    // if (raycaster->ray->dir_x == 0)
+    //     raycaster->ray->dir_x = INT_MAX;
+    // if (raycaster->ray->dir_y == 0)
+    //     raycaster->ray->dir_y = INT_MAX;
+    // raycaster->ray->delta_dist = length of ray from one x or y-side to next x or y-side
     raycaster->ray->delta_dist_x = fabs(1 / raycaster->ray->dir_x);
     raycaster->ray->delta_dist_y = fabs(1 / raycaster->ray->dir_y);
 }
+
 
 int ft_raycasting(t_game *game)
 {
@@ -37,25 +40,30 @@ int ft_raycasting(t_game *game)
     int         i;
 
     raycaster = NULL;
-    raycaster = ft_init_raycaster(game, raycaster);
-    if (!raycaster)
-    {
-        ft_printf("error init raycasting\n");
-        return (0);
-    }
-    i = -1;
-    while (++i < WIN_WIDTH)
-    {
+
+    i = 0;
+    while (i < WIN_WIDTH)
+    {   
+        raycaster = ft_init_raycaster(game, raycaster);
+        if (!raycaster)
+        {
+            ft_printf("error init raycasting\n");
+            return (0);
+        }
         ft_cast_rays(raycaster, i);
         // printf("raycaster->ray->delta_dist_x: %f\n", raycaster->ray->delta_dist_x);
         // printf("raycaster->ray->delta_dist_y: %f\n", raycaster->ray->delta_dist_y);
         ft_dda_loop(game, raycaster);
-        ft_get_wall_infos(raycaster);
+        ft_get_wall_infos(game, raycaster);
 
         // ft_get_texture_pos(raycaster);
-        // ft_draw_imgs(game, raycaster);
+        // ft_draw_imgs(game, raycaster, i);
 
-        ft_draw_test_line(game, raycaster, 550);
+        ft_draw_test_line(game, raycaster, i);
+        i++;
     }
+    free(raycaster->line);
+    free(raycaster->ray);
+    free(raycaster);
     return (1);
 }

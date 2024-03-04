@@ -38,6 +38,8 @@ void	ft_unload_game(t_game *game)
 	}
 	if (game->player)
 		free(game->player);
+	free(game->textures->floor);
+	free(game->textures->ceiling);
 	free(game->textures);
 	free(game);
 }

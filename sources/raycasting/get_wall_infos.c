@@ -23,10 +23,6 @@ void ft_get_ray_to_wall_dist(t_raycaster *raycaster)
 static
 void ft_set_wall_height(t_raycaster *raycaster)
 {
-    // printf("ray_to_wall_dist: %f\n", raycaster->ray->ray_to_wall_dist);
-    // printf("line height: %d\n", raycaster->line->height);
-    // printf("line bottom: %d\n", raycaster->line->bottom);
-
     raycaster->line->height = (int)(WIN_HEIGHT / raycaster->ray->ray_to_wall_dist);
     raycaster->line->bottom = -raycaster->line->height / 2 + WIN_HEIGHT / 2; //start
     if (raycaster->line->bottom < 0)
@@ -40,10 +36,11 @@ void ft_set_wall_height(t_raycaster *raycaster)
     On calcule le point exact où le mur est hit: la coordonnee x sur la texture
 */
 static
-void    ft_get_wall_hit_point(t_raycaster *raycaster)
+void    ft_get_wall_hit_point(t_game *game, t_raycaster *raycaster)
 {
+    raycaster->line->texture_map_pos = game->textures->map[(int)raycaster->player_pos_y][(int)raycaster->player_pos_x] - 1;
     raycaster->line->wall_hit_x = 0;
-    if (raycaster->ray->side == 0) // if side == EAST ou WEST
+    if (raycaster->ray->side == EW) // if side == EAST ou WEST
         raycaster->line->wall_hit_x = raycaster->player_pos_y +
             raycaster->ray->ray_to_wall_dist * raycaster->ray->dir_y;
     else
@@ -52,9 +49,9 @@ void    ft_get_wall_hit_point(t_raycaster *raycaster)
     raycaster->line->wall_hit_x -= floor(raycaster->line->wall_hit_x); // double floor(double x) = returns the largest integer value less than or equal to x
 }
 
-void    ft_get_wall_infos(t_raycaster *raycaster)
+void    ft_get_wall_infos(t_game *game, t_raycaster *raycaster)
 {
     ft_get_ray_to_wall_dist(raycaster);
     ft_set_wall_height(raycaster);
-    ft_get_wall_hit_point(raycaster);
+    ft_get_wall_hit_point(game, raycaster);
 }

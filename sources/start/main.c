@@ -79,16 +79,14 @@ int	main(int argc, char *argv[])
 		ft_putendl_fd("Error.", 2);
 		return (1);
 	}
-	// init raycasting
 	if (!ft_init_game(&game))
 	{
 		ft_putendl_fd("Error.", 2);
 		system("leaks cub3D");
 		return (127);
 	}
-	if (!ft_load_game(game, argv[1]))
+	if (!ft_load_game(game, argv[1])) //leak
 	{
-		// free game
 		ft_putendl_fd("Error.", 2);
 		system("leaks cub3D");
 		return (2);
@@ -96,24 +94,16 @@ int	main(int argc, char *argv[])
 	ft_checking_game(game);
 	ft_printf("Game started !\n");
 	ft_printf("Height: %d\nWidth: %d\n", game->textures->map_height, game->textures->map_width);
-	// printf("Player location : x %f, y %f, pitch %f, yaw %f",
-	// 	game->player->x, game->player->y, game->player->pitch, game->player->yaw);
+	printf("Player location : x %f, y %f, pitch %f, yaw %f",
+		game->player->x, game->player->y, game->player->pitch, game->player->yaw);
 
 	ft_render_frame(game);
 
-	if (!ft_raycasting(game))
-	{
-		ft_putendl_fd("Error.", 2);
-		system("leaks cub3D");
-		return (2);
-	}
-	// test pour la minimap
-	// game->minimap = 0;
 
 	mlx_hook(game->mlx_win, 17, 1L << 2, ft_quit_window, game);
 	mlx_key_hook(game->mlx_win, ft_key_hook, game);
+	// mlx_loop_hook(game->mlx, &main_loop, 0);
 	mlx_loop(game->mlx);
-
 	ft_unload_game(game);
 	system("leaks cub3D");
 	return (0);

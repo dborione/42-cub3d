@@ -105,9 +105,9 @@ int					ft_load_game(t_game *game, char *map_path)
 	if (!game->textures->test)
 		ft_printf("wolf error \n");
 	ft_printf("Textures initialized\n");
-	if (!ft_load_textures(game, map_path))
+	if (!ft_load_textures(game, map_path)) //leak
 	{
-		ft_unload_game(game);
+		ft_unload_game(game); //leak
 		return (0);
 	}
 	ft_printf("Textures loaded\n");
