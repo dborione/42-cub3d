@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 11:41:55 by dborione          #+#    #+#             */
-/*   Updated: 2024/03/05 14:10:10 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/05 14:15:35 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "../../includes/cub3d_raycasting.h"
 
 static
-float    ft_set_player_dir_x(t_game *game, t_raycaster *raycaster)
+void    ft_set_player_direction(t_game *game, t_raycaster *raycaster)
 {
     if (game->player->yaw == 0.0f) //NORTH
         raycaster->player_dir_x = -1;
@@ -23,19 +23,12 @@ float    ft_set_player_dir_x(t_game *game, t_raycaster *raycaster)
         raycaster->player_dir_x = 1;
     else if (game->player->yaw == -90.0f || game->player->yaw == 90.0f) //WEST/EAST
         raycaster->player_dir_x = 0;
-    return (raycaster->player_dir_x);
-}
-
-static
-float   ft_set_player_dir_y(t_game *game, t_raycaster *raycaster)
-{
-    if (game->player->yaw == -90.0f) //WEST
+	if (game->player->yaw == -90.0f) //WEST
         raycaster->player_dir_y = -1;
     else if (game->player->yaw == 90.0f) //EAST
         raycaster->player_dir_y = 1;
     else if (game->player->yaw == 0.0f || game->player->yaw == 180.0f) //NORTH/SOUTH
         raycaster->player_dir_y = 0;
-    return (raycaster->player_dir_y);
 }
 
 static
@@ -72,8 +65,7 @@ t_raycaster   *ft_new_raycaster(t_game *game)
         return (NULL);
     raycaster->player_pos_x = game->player->x / 3;
     raycaster->player_pos_y = game->player->y / 3;
-    raycaster->player_dir_x = ft_set_player_dir_x(game, raycaster);
-    raycaster->player_dir_y = ft_set_player_dir_y(game, raycaster);
+    ft_set_player_direction(game, raycaster);
     raycaster->camera_plane_x = ft_set_camera_plane_x(game, raycaster);
     raycaster->camera_plane_y = ft_set_camera_plane_y(game, raycaster);
     raycaster->ray = ft_new_ray();
@@ -96,8 +88,7 @@ void	ft_update_raycaster(t_game *game, t_raycaster *raycaster)
 {
     // raycaster->player_pos_x = game->player->x / 3; pas besoin car la position du joueur ne change pas
     // raycaster->player_pos_y = game->player->y / 3;
-    raycaster->player_dir_x = ft_set_player_dir_x(game, raycaster);
-    raycaster->player_dir_y = ft_set_player_dir_y(game, raycaster);
+    ft_set_player_direction(game, raycaster);
     raycaster->camera_plane_x = ft_set_camera_plane_x(game, raycaster);
     raycaster->camera_plane_y = ft_set_camera_plane_y(game, raycaster);
     ft_clear_ray(raycaster->ray);

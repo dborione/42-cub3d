@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 11:41:55 by dborione          #+#    #+#             */
-/*   Updated: 2024/03/05 14:03:57 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/05 14:17:59 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,9 +152,8 @@ void    ft_draw_test_line(t_game *game, t_raycaster *raycaster, int i)
 {
     int	color;
     color = 0;
-    // if (game->textures->map[raycaster->ray->map_pos_y][raycaster->ray->map_pos_x] == '1')
-    //     color = GREEN / 2;
-
+    if (game->textures->map[raycaster->ray->map_pos_y][raycaster->ray->map_pos_x] == '1')
+        color = GREEN / 2;
     if (raycaster->ray->side == EW && raycaster->ray->dir_x < 0)
         color = BLUE;
     else if (raycaster->ray->side == EW && raycaster->ray->dir_x <= 0)
