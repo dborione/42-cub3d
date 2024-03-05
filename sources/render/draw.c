@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:39:46 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/03/05 15:26:13 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/05 16:36:52 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,14 @@
 // 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->test, 0, 0);
 // }
 
-void ft_draw_vertical_line(t_game *game, t_raycaster *raycaster, int x)
+void ft_draw_vertical_line(t_game *game, t_raycaster *raycaster, int x) // ajouter le target ici
 {
 	t_cub3d_images	texture;
 	void			*target;
 	int				factor;
+	int				count;
+	int				line;
+	int				rest;
 
 	if (raycaster->ray->side == NS)
 		target = game->textures->north_texture;
@@ -56,12 +59,35 @@ void ft_draw_vertical_line(t_game *game, t_raycaster *raycaster, int x)
 		mais je la garde pour le moment pour avoir un
 	*/
 	factor = (raycaster->line->top - raycaster->line->bottom) / WALL_HEIGHT;
-	while (raycaster->line->bottom < raycaster->line->top)
+	rest = (raycaster->line->top - raycaster->line->bottom) % WALL_HEIGHT;
+	ft_printf("factor : top %d - botton : %d / wall %d = %d, rest : %d\n",
+		raycaster->line->top, raycaster->line->bottom, WALL_HEIGHT, factor, rest);
+	line = 0;
+	while (raycaster->line->bottom < raycaster->line->top && line < WALL_HEIGHT)
 	{
-		game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4] = texture.data[0 + factor %];
-		game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4 + 1] = texture.data[1];
-		game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4 + 2] = texture.data[2];
-		game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4 + 3] = texture.data[3];
-		raycaster->line->bottom++;
-	}
+		count = 0;
+		if (line == 0 || line == WALL_HEIGHT - 1)
+		{
+			while (rest / 2)
+			{
+				game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4] = texture.data[0 + texture.size_line  * line];
+				game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4 + 1] = texture.data[1 + texture.size_line  * line];
+				game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4 + 2] = texture.data[2 + texture.size_line  * line];
+				game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4 + 3] = texture.data[3 + texture.size_line  * line];
+				raycaster->line->bottom++;
+				rest--;
+			}
+			rest*=2;
+		}
+		while (count < factor)// faire attention aux facteurs negatifs
+		{
+			game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4] = texture.data[0 + texture.size_line  * line];
+			game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4 + 1] = texture.data[1 + texture.size_line  * line];
+			game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4 + 2] = texture.data[2 + texture.size_line  * line];
+			game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4 + 3] = texture.data[3 + texture.size_line  * line];
+			raycaster->line->bottom++;
+			count++;
+		}
+		line++;
+ 	}
 }
