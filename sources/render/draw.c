@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:39:46 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/03/05 16:36:52 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/05 16:55:21 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,10 @@ void ft_draw_vertical_line(t_game *game, t_raycaster *raycaster, int x) // ajout
 	while (raycaster->line->bottom < raycaster->line->top && line < WALL_HEIGHT)
 	{
 		count = 0;
-		if (line == 0 || line == WALL_HEIGHT - 1)
+		//if (line && rest && line % rest)
+		if (line > WALL_HEIGHT - rest || line < rest)
 		{
-			while (rest / 2)
+			//while (rest)
 			{
 				game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4] = texture.data[0 + texture.size_line  * line];
 				game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4 + 1] = texture.data[1 + texture.size_line  * line];
@@ -77,7 +78,6 @@ void ft_draw_vertical_line(t_game *game, t_raycaster *raycaster, int x) // ajout
 				raycaster->line->bottom++;
 				rest--;
 			}
-			rest*=2;
 		}
 		while (count < factor)// faire attention aux facteurs negatifs
 		{
