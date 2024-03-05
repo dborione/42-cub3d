@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   dda_loop.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/08 11:41:55 by dborione          #+#    #+#             */
+/*   Updated: 2024/03/05 13:58:19 by rbarbiot         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 #include "../../libft/libft.h"
 #include "../../includes/cub3d_raycasting.h"
@@ -8,8 +20,6 @@
 static
 void    ft_get_tile_dist(t_raycaster *raycaster)
 {
-    // printf("line bottom: %d\n", raycaster->line->bottom);
-    // printf("line bottom: %d\n", raycaster->line->bottom);
     if (raycaster->ray->dir_x < 0)
     {
         raycaster->ray->step_x = -1;
@@ -58,7 +68,6 @@ void    ft_do_dda(t_game *game, t_raycaster *raycaster)
     }
 }
 
-/* get current position */
 static
 void    ft_get_current_pos(t_raycaster *raycaster)
 {

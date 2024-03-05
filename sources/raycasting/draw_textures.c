@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_textures.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/08 11:41:55 by dborione          #+#    #+#             */
+/*   Updated: 2024/03/05 14:03:57 by rbarbiot         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 #include "../../libft/libft.h"
 #include "../../includes/cub3d_raycasting.h"
@@ -108,6 +120,17 @@ void    ft_draw_imgs(t_game *game, t_raycaster *raycaster, int x)
 /* TESTS */
 void verLine(t_game *game, t_raycaster *raycaster, int x, int drawStart, int drawEnd, int color)
 {
+	int	colomn_size;
+	int	factor;
+	int	count;
+
+	colomn_size = drawEnd - drawStart;
+	/*
+		colomn_size pourra etre retiré car on ne l'utilise qu'une seule fois
+		mais je la garde pour le moment pour avoir un
+	*/
+	count = 0;
+	factor = WALL_HEIGHT / colomn_size;
 	while (drawStart < drawEnd)
 	{
         //char    *pixel;

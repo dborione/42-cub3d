@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cast_rays.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/08 11:41:55 by dborione          #+#    #+#             */
+/*   Updated: 2024/03/05 14:09:55 by rbarbiot         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 #include "../../libft/libft.h"
 #include "../../includes/cub3d_raycasting.h"
@@ -39,32 +51,23 @@ int ft_raycasting(t_game *game)
     t_raycaster *raycaster;
     int         i;
 
-    raycaster = NULL;
-
+    raycaster = ft_new_raycaster(game);
+	if (!raycaster)
+		return (0);
     i = 0;
     while (i < WIN_WIDTH)
     {   
-        raycaster = ft_init_raycaster(game, raycaster);
-        if (!raycaster)
-        {
-            ft_printf("error init raycasting\n");
-            return (0);
-        }
+       	ft_update_raycaster(game, raycaster);
         ft_cast_rays(raycaster, i);
-        // printf("raycaster->ray->delta_dist_x: %f\n", raycaster->ray->delta_dist_x);
-        // printf("raycaster->ray->delta_dist_y: %f\n", raycaster->ray->delta_dist_y);
         ft_dda_loop(game, raycaster);
         ft_get_wall_infos(game, raycaster);
 
         ft_get_texture_pos(raycaster);
-        // ft_draw_imgs(game, raycaster, i);
-
         ft_draw_test_line(game, raycaster, i);
-        free(raycaster->line);
-        free(raycaster->ray);
-        free(raycaster);
         i++;
     }
-
+	free(raycaster->ray);
+	free(raycaster->line);
+	free(raycaster);
     return (1);
 }

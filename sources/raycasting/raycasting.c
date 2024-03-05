@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycasting.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/08 11:41:55 by dborione          #+#    #+#             */
+/*   Updated: 2024/03/05 14:10:10 by rbarbiot         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 #include "../../libft/libft.h"
 #include "../../includes/cub3d_raycasting.h"
@@ -51,8 +63,10 @@ float    ft_set_camera_plane_y(t_game *game, t_raycaster *raycaster)
 }
 
 // FOV = ratio between the length of the direction vector, and the length of the plane.
-t_raycaster   *ft_init_raycaster(t_game *game, t_raycaster *raycaster)
+t_raycaster   *ft_new_raycaster(t_game *game)
 {
+	t_raycaster	*raycaster;
+
     raycaster = malloc(sizeof(t_raycaster));
     if (!raycaster)
         return (NULL);
@@ -62,13 +76,13 @@ t_raycaster   *ft_init_raycaster(t_game *game, t_raycaster *raycaster)
     raycaster->player_dir_y = ft_set_player_dir_y(game, raycaster);
     raycaster->camera_plane_x = ft_set_camera_plane_x(game, raycaster);
     raycaster->camera_plane_y = ft_set_camera_plane_y(game, raycaster);
-    raycaster->ray = ft_init_ray();
+    raycaster->ray = ft_new_ray();
     if (!raycaster->ray)
     {
         free (raycaster);
         return (NULL);
     }
-    raycaster->line = ft_init_line();
+    raycaster->line = ft_new_line();
     if (!raycaster->line)
     {
         free(raycaster->ray);
@@ -76,4 +90,16 @@ t_raycaster   *ft_init_raycaster(t_game *game, t_raycaster *raycaster)
         return (NULL);
     }
     return (raycaster);
+}
+
+void	ft_update_raycaster(t_game *game, t_raycaster *raycaster)
+{
+    // raycaster->player_pos_x = game->player->x / 3; pas besoin car la position du joueur ne change pas
+    // raycaster->player_pos_y = game->player->y / 3;
+    raycaster->player_dir_x = ft_set_player_dir_x(game, raycaster);
+    raycaster->player_dir_y = ft_set_player_dir_y(game, raycaster);
+    raycaster->camera_plane_x = ft_set_camera_plane_x(game, raycaster);
+    raycaster->camera_plane_y = ft_set_camera_plane_y(game, raycaster);
+    ft_clear_ray(raycaster->ray);
+    ft_clear_line(raycaster->line);
 }
