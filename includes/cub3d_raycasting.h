@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d_raycasting.h                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/08 11:41:55 by dborione          #+#    #+#             */
+/*   Updated: 2024/03/05 14:07:51 by rbarbiot         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_RAYCASTING
 # define CUB3D_RAYCASTING
 # include "cub3d.h"
@@ -50,6 +62,7 @@ typedef struct s_raycaster
     float   player_dir_y; // -1 pour W, 1 pour E, 0 pour S/N
     float   camera_plane_x; // 0.66 pour E, -0.66 pour W, 0 pour S/N
     float   camera_plane_y; // 0.66 pour N, -0.66 pour S, 0 pour E/W
+	char	wall_id;
     t_ray   *ray;
     t_line  *line;
 }   t_raycaster;
@@ -57,12 +70,34 @@ typedef struct s_raycaster
 
 
 void        ft_dda_loop(t_game *game, t_raycaster *raycaster);
-t_raycaster *ft_init_raycaster(t_game *game, t_raycaster *raycaster);
-t_ray       *ft_init_ray(void);
-t_line      *ft_init_line(void);
 void        ft_get_wall_infos(t_game *game, t_raycaster *raycaster);
 void        ft_get_texture_pos(t_raycaster *raycaster);
 void        ft_draw_imgs(t_game *game, t_raycaster *raycaster, int x);
+
+/* News */
+
+t_raycaster *ft_new_raycaster(t_game *game);
+t_ray       *ft_new_ray(void);
+t_line      *ft_new_line(void);
+
+/* Clears */
+
+void		ft_clear_line(t_line *line);
+void		ft_clear_ray(t_ray *ray);
+
+/*
+	Ils permettent d'éviter de devoir free puis init à
+	chaque boucle, ils remettent toutes les valeurs
+	tel qu'à l'initialisation
+*/
+
+/* Update */
+
+void	ft_update_raycaster(t_game *game, t_raycaster *raycaster);
+
+/*
+	Met à jour le rayson (utile quand on le décalle pixel par pixel)
+*/
 
  /* TESTS */
 void    ft_draw_test_line(t_game *game, t_raycaster *raycaster, int x);
