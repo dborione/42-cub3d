@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 11:41:55 by dborione          #+#    #+#             */
-/*   Updated: 2024/03/05 14:17:59 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/05 14:31:32 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,16 +133,8 @@ void verLine(t_game *game, t_raycaster *raycaster, int x, int drawStart, int dra
 	factor = WALL_HEIGHT / colomn_size;
 	while (drawStart < drawEnd)
 	{
-        //char    *pixel;
-
-        //pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
-        //*(int *)pixel = color;
-        // int pixel =(game->textures->frame->data[raycaster->line->texture_y]
-        //     * WALL_WIDTH
-        //     + game->textures->frame->data[raycaster->line->texture_x]
-        //     * (game->textures->frame->bits_per_pixel / 8));
-        // mlx_pixel_put(game->mlx, game->mlx_win, x, drawStart, pixel);
-        mlx_pixel_put(game->mlx, game->mlx_win, x, drawStart, color); // implementer ici le drawwalls ici
+		game->textures->frame->data[drawStart * game->textures->frame->size_line + x] = color;
+        // mlx_pixel_put(game->mlx, game->mlx_win, x, drawStart, color); // implementer ici le drawwalls ici
 		drawStart++;
 	}
 }

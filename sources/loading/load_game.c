@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 10:51:20 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/02/23 15:01:35 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/05 14:23:41 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,10 +100,9 @@ int					ft_load_game(t_game *game, char *map_path)
 		return (0);
 	int width = WIN_WIDTH;
 	int	height = WIN_HEIGHT;
-	game->textures->frame->pointer = mlx_new_image(game->mlx, width, height);
-	game->textures->test = mlx_xpm_file_to_image(game->mlx, "./maps/textures/wolf.xpm", &width, &height);
-	if (!game->textures->test)
-		ft_printf("wolf error \n");
+	game->textures->frame->pointer = mlx_new_image(game->mlx, width, height); // ajouter une protection
+	game->textures->frame->data = mlx_get_data_addr(game->textures->frame->pointer,
+		&(game->textures->frame)->bits_per_pixel, &(game->textures->frame)->size_line, &(game->textures->frame)->endian);
 	ft_printf("Textures initialized\n");
 	if (!ft_load_textures(game, map_path)) //leak
 	{
