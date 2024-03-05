@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:39:46 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/03/05 15:07:14 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/05 15:26:13 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,9 @@
 
 void ft_draw_vertical_line(t_game *game, t_raycaster *raycaster, int x)
 {
-	int drawStart = raycaster->line->bottom;
-	int drawEnd = raycaster->line->top;
 	t_cub3d_images	texture;
 	void			*target;
+	int				factor;
 
 	if (raycaster->ray->side == NS)
 		target = game->textures->north_texture;
@@ -56,12 +55,13 @@ void ft_draw_vertical_line(t_game *game, t_raycaster *raycaster, int x)
 		colomn_size pourra etre retiré car on ne l'utilise qu'une seule fois
 		mais je la garde pour le moment pour avoir un
 	*/
-	while (drawStart < drawEnd)
+	factor = (raycaster->line->top - raycaster->line->bottom) / WALL_HEIGHT;
+	while (raycaster->line->bottom < raycaster->line->top)
 	{
-		game->textures->frame->data[drawStart * game->textures->frame->size_line + x*4] = texture.data[0];
-		game->textures->frame->data[drawStart * game->textures->frame->size_line + x*4 + 1] = texture.data[1];
-		game->textures->frame->data[drawStart * game->textures->frame->size_line + x*4 + 2] = texture.data[2];
-		game->textures->frame->data[drawStart * game->textures->frame->size_line + x*4 + 3] = texture.data[3];
-		drawStart++;
+		game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4] = texture.data[0 + factor %];
+		game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4 + 1] = texture.data[1];
+		game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4 + 2] = texture.data[2];
+		game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4 + 3] = texture.data[3];
+		raycaster->line->bottom++;
 	}
 }
