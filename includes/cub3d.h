@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
+/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 10:57:07 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/02/28 14:58:47 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/05 14:55:58 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,13 @@
 # ifndef DISTANCE_FOR_FULL_WALL
 #  define DISTANCE_FOR_FULL_WALL 6.7625
 # endif
+
+/* Directionts */
+
+# define YAW_NORTH 0.0f
+# define YAW_SOUTH 180.0f
+# define YAW_WEST -90.0f
+# define YAW_EAST 90.0f
 
 typedef struct s_location
 {

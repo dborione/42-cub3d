@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 11:41:55 by dborione          #+#    #+#             */
-/*   Updated: 2024/03/05 14:09:55 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/05 15:08:46 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int ft_raycasting(t_game *game)
         ft_get_wall_infos(game, raycaster);
 
         ft_get_texture_pos(raycaster);
-        ft_draw_test_line(game, raycaster, i);
+        ft_draw_vertical_line(game, raycaster, i);
         i++;
     }
 	free(raycaster->ray);

@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:14:06 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/03/01 13:38:32 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/05 15:08:36 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,7 @@ int	ft_key_hook(int keycode, t_game *game)
 
 	x = 0;
 	y = 0;
-	
-	if (keycode == T_KEY)
-	{
-		ft_draw_frame(game);
-		//mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->test, x, y);
-	}
+
 	// else if (keycode == M_KEY)
 	// {
 	// 	if (game->minimap != 0) // minimap is already on screen
@@ -41,25 +36,33 @@ int	ft_key_hook(int keycode, t_game *game)
 	// 	else
 	// 		ft_render_minimap(game);
 	// }
-	else if (keycode == W_KEY || keycode == UP_ARROW_KEY)
+	if (keycode == W_KEY || keycode == UP_ARROW_KEY)
 	{
-		ft_draw_wall(game, game->textures->north_texture);
-		mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->frame->pointer, x, y);
+		game->player->yaw = YAW_NORTH;
+		ft_render_frame(game);
+		// ft_draw_wall(game, game->textures->north_texture);
+		// mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->frame->pointer, x, y);
 	}
 	else if (keycode == A_KEY || keycode == LEFT_ARROW_KEY)
 	{
-		ft_draw_wall(game, game->textures->west_texture);
-		mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->frame->pointer, x, y);
+		game->player->yaw = YAW_WEST;
+		ft_render_frame(game);
+		// ft_draw_wall(game, game->textures->west_texture);
+		// mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->frame->pointer, x, y);
 	}
 	else if (keycode == D_KEY || keycode == RIGHT_ARROW_KEY)
 	{
-		ft_draw_wall(game, game->textures->east_texture);
-		mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->frame->pointer, x, y);
+		game->player->yaw = YAW_EAST;
+		ft_render_frame(game);
+		// ft_draw_wall(game, game->textures->east_texture);
+		// mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->frame->pointer, x, y);
 	}
 	else if (keycode == S_KEY || keycode == DOWN_ARROW_KEY)
 	{
-		ft_draw_wall(game, game->textures->south_texture);
-		mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->frame->pointer, x, y);
+		game->player->yaw = YAW_SOUTH;
+		ft_render_frame(game);
+		// ft_draw_wall(game, game->textures->south_texture);
+		// mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->frame->pointer, x, y);
 	}
 	else if (keycode == ESC_KEY)
 		ft_quit_window(game);

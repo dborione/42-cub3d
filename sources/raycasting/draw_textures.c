@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 11:41:55 by dborione          #+#    #+#             */
-/*   Updated: 2024/03/05 14:44:05 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/05 15:05:06 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,49 +117,4 @@ void    ft_draw_imgs(t_game *game, t_raycaster *raycaster, int x)
     }
 }
 
-/* TESTS */
-void verLine(t_game *game, t_raycaster *raycaster, int x, int drawStart, int drawEnd, int color)
-{
-	t_cub3d_images	texture;
-	void			*target;
-
-	if (raycaster->ray->side == NS)
-		target = game->textures->north_texture;
-	else
-		target = game->textures->west_texture;
-	texture.data = mlx_get_data_addr(target,
-		&texture.bits_per_pixel, &texture.size_line, &texture.endian);
-	/*
-		colomn_size pourra etre retiré car on ne l'utilise qu'une seule fois
-		mais je la garde pour le moment pour avoir un
-	*/
-	while (drawStart < drawEnd)
-	{
-		game->textures->frame->data[drawStart * game->textures->frame->size_line + x*4] = texture.data[0];
-		game->textures->frame->data[drawStart * game->textures->frame->size_line + x*4 + 1] = texture.data[1];
-		game->textures->frame->data[drawStart * game->textures->frame->size_line + x*4 + 2] = texture.data[2];
-		game->textures->frame->data[drawStart * game->textures->frame->size_line + x*4 + 3] = texture.data[3];
-        // mlx_pixel_put(game->mlx, game->mlx_win, x, drawStart, color); // implementer ici le drawwalls ici
-		drawStart++;
-	}
-}
-
- /* TESTS */
-void    ft_draw_test_line(t_game *game, t_raycaster *raycaster, int i)
-{
-    int	color;
-    color = 0;
-    if (game->textures->map[raycaster->ray->map_pos_y][raycaster->ray->map_pos_x] == '1')
-        color = GREEN / 2;
-    if (raycaster->ray->side == EW && raycaster->ray->dir_x < 0)
-        color = BLUE;
-    else if (raycaster->ray->side == EW && raycaster->ray->dir_x <= 0)
-        color = color / 2;
-    else if (raycaster->ray->side == NS && raycaster->ray->dir_y < 0)
-        color = color / 3;
-    else if (raycaster->ray->side == NS && raycaster->ray->dir_y <= 0)
-        color = color / 4;
-
-    verLine(game, raycaster, i, raycaster->line->bottom, raycaster->line->top, color);
-}
 
