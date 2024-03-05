@@ -67,3 +67,8 @@ le problème est que l'écran fait 2,7 fois la taille de l'image
 on doit afficher
 
 transformer cette valeur en forme fractionnaire 
+
+Enregistrer la distance des 2 cotés du mur 
+faire un facteur pour chacun puis un pour passer d'un coté à l'autre 
+
+On calcule l'angle en fonction de la direction

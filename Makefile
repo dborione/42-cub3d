@@ -34,7 +34,7 @@ DEPENDS	:= $(OBJS:.o=.d)
 
 ${OBJ_DIR}%.o:	${FTS_DIR}%.c
 		@mkdir -p ${@D}
-		@${CC} ${CFLAGS} -D WIDTH=${WIDTH} -D HEIGHT=${HEIGHT} -MMD -MP -c $< -o $@
+		@${CC} ${CFLAGS} -D WIN_WIDTH=${WIN_WIDTH} -D WIN_HEIGHT=${WIN_HEIGHT} -MMD -MP -c $< -o $@
 
 # Rules
 

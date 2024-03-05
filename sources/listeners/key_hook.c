@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
+/*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:14:06 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/03/05 15:08:36 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/05 18:57:57 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,6 @@
 
 int	ft_key_hook(int keycode, t_game *game)
 {
-	int	x;
-	int	y;
-
-	x = 0;
-	y = 0;
-
 	// else if (keycode == M_KEY)
 	// {
 	// 	if (game->minimap != 0) // minimap is already on screen
