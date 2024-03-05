@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 19:00:21 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/02/23 13:12:41 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/05 19:22:19 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@ void	ft_draw_ceiling(t_game *game)
 	int	i;
 	int	x;
 	int	y;
+	int	end;
 
 	i = 0;
 	y = 0;
-	ft_printf("size_line %d\n", game->textures->frame->size_line);
-	while (y < 580)
+	//ft_printf("size_line %d\n", game->textures->frame->size_line);
+	end =  WIN_HEIGHT / 10 * 6;
+	while (y < end)
 	{
 		x = 0;
 		while (x < game->textures->frame->size_line)
@@ -45,7 +47,7 @@ void	ft_draw_floor(t_game *game)
 	int	x;
 	int	y;
 
-	y = 580;
+	y =  WIN_HEIGHT / 10 * 6;
 	i = game->textures->frame->size_line * y;
 	while (y < WIN_HEIGHT)
 	{
