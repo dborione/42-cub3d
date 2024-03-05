@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 11:41:55 by dborione          #+#    #+#             */
-/*   Updated: 2024/03/05 14:31:32 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/05 14:44:05 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,20 +120,25 @@ void    ft_draw_imgs(t_game *game, t_raycaster *raycaster, int x)
 /* TESTS */
 void verLine(t_game *game, t_raycaster *raycaster, int x, int drawStart, int drawEnd, int color)
 {
-	int	colomn_size;
-	int	factor;
-	int	count;
+	t_cub3d_images	texture;
+	void			*target;
 
-	colomn_size = drawEnd - drawStart;
+	if (raycaster->ray->side == NS)
+		target = game->textures->north_texture;
+	else
+		target = game->textures->west_texture;
+	texture.data = mlx_get_data_addr(target,
+		&texture.bits_per_pixel, &texture.size_line, &texture.endian);
 	/*
 		colomn_size pourra etre retiré car on ne l'utilise qu'une seule fois
 		mais je la garde pour le moment pour avoir un
 	*/
-	count = 0;
-	factor = WALL_HEIGHT / colomn_size;
 	while (drawStart < drawEnd)
 	{
-		game->textures->frame->data[drawStart * game->textures->frame->size_line + x] = color;
+		game->textures->frame->data[drawStart * game->textures->frame->size_line + x*4] = texture.data[0];
+		game->textures->frame->data[drawStart * game->textures->frame->size_line + x*4 + 1] = texture.data[1];
+		game->textures->frame->data[drawStart * game->textures->frame->size_line + x*4 + 2] = texture.data[2];
+		game->textures->frame->data[drawStart * game->textures->frame->size_line + x*4 + 3] = texture.data[3];
         // mlx_pixel_put(game->mlx, game->mlx_win, x, drawStart, color); // implementer ici le drawwalls ici
 		drawStart++;
 	}
