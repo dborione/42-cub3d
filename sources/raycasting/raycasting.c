@@ -17,28 +17,28 @@
 static
 void    ft_set_player_direction(t_game *game, t_raycaster *raycaster)
 {
-    if (game->player->yaw == 0.0f) //NORTH
-        raycaster->player_dir_x = -1;
-    else if (game->player->yaw == 180.0f) //SOUTH
-        raycaster->player_dir_x = 1;
-    else if (game->player->yaw == -90.0f || game->player->yaw == 90.0f) //WEST/EAST
-        raycaster->player_dir_x = 0;
-	if (game->player->yaw == -90.0f) //WEST
+    if (game->player->yaw == YAW_NORTH)
         raycaster->player_dir_y = -1;
-    else if (game->player->yaw == 90.0f) //EAST
+    else if (game->player->yaw == YAW_SOUTH)
         raycaster->player_dir_y = 1;
-    else if (game->player->yaw == 0.0f || game->player->yaw == 180.0f) //NORTH/SOUTH
+    else if (game->player->yaw == YAW_WEST || game->player->yaw == YAW_EAST)
         raycaster->player_dir_y = 0;
+	if (game->player->yaw == YAW_WEST)
+        raycaster->player_dir_x = -1;
+    else if (game->player->yaw == YAW_EAST)
+        raycaster->player_dir_x = 1;
+    else if (game->player->yaw == YAW_NORTH || game->player->yaw == YAW_SOUTH)
+        raycaster->player_dir_x = 0;
 }
 
 static
 float    ft_set_camera_plane_x(t_game *game, t_raycaster *raycaster)
 {
-    if (game->player->yaw == -90.0f) //WEST
-        raycaster->camera_plane_x = -0.66;
-    else if (game->player->yaw == 90.0f) //EAST
+    if (game->player->yaw == YAW_NORTH)
         raycaster->camera_plane_x = 0.66;
-    else if (game->player->yaw == 0.0f || game->player->yaw == 180.0f) //NORTH/SOUTH
+    else if (game->player->yaw == YAW_SOUTH)
+        raycaster->camera_plane_x = -0.66;
+    else if (game->player->yaw == YAW_WEST || game->player->yaw == YAW_EAST)
         raycaster->camera_plane_x = 0;
     return (raycaster->camera_plane_x);
 }
@@ -46,11 +46,11 @@ float    ft_set_camera_plane_x(t_game *game, t_raycaster *raycaster)
 static
 float    ft_set_camera_plane_y(t_game *game, t_raycaster *raycaster)
 {
-    if (game->player->yaw == 0.0f) //NORTH
-        raycaster->camera_plane_y = 0.66;
-    else if (game->player->yaw == 180.0f) //SOUTH
+    if (game->player->yaw == YAW_WEST)
         raycaster->camera_plane_y = -0.66;
-    else if (game->player->yaw == -90.0f || game->player->yaw == 90.0f) //WEST/EAST
+    else if (game->player->yaw == YAW_EAST)
+        raycaster->camera_plane_y = 0.66;
+    else if (game->player->yaw == YAW_NORTH || game->player->yaw == YAW_SOUTH)
         raycaster->camera_plane_y = 0;
     return (raycaster->camera_plane_y);
 }
@@ -63,11 +63,14 @@ t_raycaster   *ft_new_raycaster(t_game *game)
     raycaster = malloc(sizeof(t_raycaster));
     if (!raycaster)
         return (NULL);
-    raycaster->player_pos_x = game->player->x / 3;
-    raycaster->player_pos_y = game->player->y / 3;
+    raycaster->player_pos_x = game->player->x / 3 + 1;
+    raycaster->player_pos_y = game->player->y / 3 + 1;
     ft_set_player_direction(game, raycaster);
     raycaster->camera_plane_x = ft_set_camera_plane_x(game, raycaster);
     raycaster->camera_plane_y = ft_set_camera_plane_y(game, raycaster);
+    // printf("\npl_dir_x: %f, pl_dir_y: %f, camera_dir_x: %f, camera_dir_y: %f\n",
+    //     raycaster->player_dir_x, raycaster->player_dir_y, raycaster->camera_plane_x, raycaster->camera_plane_y);
+    // printf("player_x: %f, player_y: %f\n", game->player->x / 3, game->player->y / 3);
     raycaster->ray = ft_new_ray();
     if (!raycaster->ray)
     {
