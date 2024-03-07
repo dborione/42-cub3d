@@ -15,16 +15,45 @@
 #include "../includes/cub3d_listeners.h"
 
 static
+void	ft_look_back(t_game *game)
+{
+	if (game->player->yaw == YAW_NORTH)
+		game->player->yaw = YAW_SOUTH;
+	else if (game->player->yaw == YAW_SOUTH)
+		game->player->yaw = YAW_NORTH;
+	else if (game->player->yaw == YAW_WEST)
+		game->player->yaw = YAW_EAST;
+	else if (game->player->yaw == YAW_EAST)
+		game->player->yaw = YAW_WEST;
+	ft_render_frame(game);
+}
+
+static
+void	ft_look_right(t_game *game)
+{
+	if (game->player->yaw == YAW_NORTH)
+		game->player->yaw = YAW_EAST;
+	else if (game->player->yaw == YAW_EAST)
+		game->player->yaw = YAW_SOUTH;
+	else if (game->player->yaw == YAW_SOUTH)
+		game->player->yaw = YAW_WEST;
+	else if (game->player->yaw == YAW_WEST)
+		game->player->yaw = YAW_NORTH;
+	ft_render_frame(game);
+}
+
+static
 void	ft_look_left(t_game *game)
 {
 	if (game->player->yaw == YAW_NORTH)
 		game->player->yaw = YAW_WEST;
-	if (game->player->yaw == YAW_NORTH)
-		game->player->yaw = YAW_WEST;
-	if (game->player->yaw == YAW_NORTH)
-		game->player->yaw = YAW_WEST;
-	if (game->player->yaw == YAW_NORTH)
-		game->player->yaw = YAW_WEST;
+	else if (game->player->yaw == YAW_WEST)
+		game->player->yaw = YAW_SOUTH;
+	else if (game->player->yaw == YAW_SOUTH)
+		game->player->yaw = YAW_EAST;
+	else if (game->player->yaw == YAW_EAST)
+		game->player->yaw = YAW_NORTH;
+	ft_render_frame(game);
 }
 
 static
@@ -33,17 +62,14 @@ int	ft_key_pressed(int keycode, t_game *game)
 	if (keycode == W_KEY || keycode == A_KEY
 		|| keycode == S_KEY || keycode == D_KEY)
 		ft_player_movement(game, keycode);
-	else if (keycode == UP_ARROW_KEY)
-		game->player->yaw = YAW_NORTH;
 	else if (keycode == LEFT_ARROW_KEY)
-		game->player->yaw = YAW_WEST;
+		ft_look_left(game);
 	else if (keycode == RIGHT_ARROW_KEY)
-		game->player->yaw = YAW_EAST;
+		ft_look_right(game);
 	else if (keycode == DOWN_ARROW_KEY)
-		game->player->yaw = YAW_SOUTH;
+		ft_look_back(game);
 	else if (keycode == ESC_KEY)
 		ft_quit_window(game);
-	ft_render_frame(game);
 	return (0);
 }
 
