@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 11:41:55 by dborione          #+#    #+#             */
-/*   Updated: 2024/03/07 15:07:38 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/07 15:27:27 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ typedef struct s_ray
     float   dir_y;
     int     map_pos_x; // les positions x et y de la case de la map où le vecteur est situé
     int     map_pos_y;
+	int     last_map_pos_x; // les positions x et y de la case de la map où le vecteur est situé
+    int     last_map_pos_y;
     float   tile_dist_x; // la distance que le ray doit parcourir entre sa position de depart et la première pos de la map x
     float   tile_dist_y; // la distance que le ray doit parcourir entre sa position de depart et la première pos de la map y
     float   delta_dist_x; // la distance que le ray doit parcourir entre une tile_pos_x et la prochaine intersection x
