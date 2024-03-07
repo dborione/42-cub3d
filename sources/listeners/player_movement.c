@@ -93,4 +93,5 @@ void	ft_player_movement(t_game *game, int keycode)
 	if (game->player->yaw == YAW_EAST)
         ft_move_east(game, keycode);
     // printf("x: %f, y: %f\n", game->player->x, game->player->y);
+	ft_render_frame(game);
 }
