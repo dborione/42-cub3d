@@ -44,5 +44,6 @@
 
 void	ft_key_hook_pressed(t_game *game);
 void	ft_close_button_hook(t_game *game);
+void	ft_player_movement(t_game *game, int keycode);
 
 #endif
