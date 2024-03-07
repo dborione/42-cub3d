@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:39:46 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/03/05 16:55:21 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/07 17:27:15 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,23 @@ void ft_draw_vertical_line(t_game *game, t_raycaster *raycaster, int x) // ajout
 		colomn_size pourra etre retiré car on ne l'utilise qu'une seule fois
 		mais je la garde pour le moment pour avoir un
 	*/
-	factor = (raycaster->line->top - raycaster->line->bottom) / WALL_HEIGHT;
-	remainder = (raycaster->line->top - raycaster->line->bottom) % WALL_HEIGHT;
-	// ft_printf("factor : top %d - botton : %d / wall %d = %d, rest : %d\n",
-	// 	raycaster->line->top, raycaster->line->bottom, WALL_HEIGHT, factor, rest);
+	factor = raycaster->line->height / WALL_HEIGHT;
+	remainder = raycaster->line->height % WALL_HEIGHT;
+	// ft_printf("factor : top %d - bottom : %d / wall %d = %d, rest : %d, Height : %d\n",
+	// 	raycaster->line->top, raycaster->line->bottom, WALL_HEIGHT, factor, remainder, raycaster->line->height);
 	line = 0;
+	count = 0;
+	while (count < raycaster->line->height - (raycaster->line->top - raycaster->line->bottom))
+		count++;
+	if (count)
+		count /= 2;
+	while (count && count - factor > 0)
+	{
+		line++;
+		count -= factor;
+	}
 	while (raycaster->line->bottom < raycaster->line->top && line < WALL_HEIGHT)
 	{
-		count = 0;
 		//if (line && rest && line % rest)
 		if (line > WALL_HEIGHT - remainder || line < remainder)
 		{
@@ -79,7 +88,7 @@ void ft_draw_vertical_line(t_game *game, t_raycaster *raycaster, int x) // ajout
 				remainder--;
 			}
 		}
-		while (count < factor)// faire attention aux facteurs negatifs
+		while (count < factor && raycaster->line->bottom < raycaster->line->top)// faire attention aux facteurs negatifs
 		{
 			game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4] = texture.data[0 + texture.size_line  * line];
 			game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4 + 1] = texture.data[1 + texture.size_line  * line];
@@ -89,5 +98,6 @@ void ft_draw_vertical_line(t_game *game, t_raycaster *raycaster, int x) // ajout
 			count++;
 		}
 		line++;
+		count = 0;
  	}
 }

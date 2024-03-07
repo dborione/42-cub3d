@@ -3,16 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   player_movement.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dborione <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 15:14:31 by dborione          #+#    #+#             */
-/*   Updated: 2024/03/07 15:14:32 by dborione         ###   ########.fr       */
+/*   Updated: 2024/03/07 17:30:05 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 #include "../includes/cub3d_render.h"
 #include "../includes/cub3d_listeners.h"
+
+// Ajouter la protection quand on est en 0 0 ou x 0 ou 0 y
+// Pour eviter qu'on parte en negatif dans la verif
 
 static
 void    ft_move_north(t_game *game, int keycode)
