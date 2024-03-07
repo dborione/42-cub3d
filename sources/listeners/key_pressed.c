@@ -15,6 +15,19 @@
 #include "../includes/cub3d_listeners.h"
 
 static
+void	ft_look_left(t_game *game)
+{
+	if (game->player->yaw == YAW_NORTH)
+		game->player->yaw = YAW_WEST;
+	if (game->player->yaw == YAW_NORTH)
+		game->player->yaw = YAW_WEST;
+	if (game->player->yaw == YAW_NORTH)
+		game->player->yaw = YAW_WEST;
+	if (game->player->yaw == YAW_NORTH)
+		game->player->yaw = YAW_WEST;
+}
+
+static
 int	ft_key_pressed(int keycode, t_game *game)
 {
 	if (keycode == W_KEY || keycode == A_KEY
