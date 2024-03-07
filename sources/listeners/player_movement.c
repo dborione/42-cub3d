@@ -18,16 +18,16 @@ static
 void    ft_move_north(t_game *game, int keycode)
 {
     if (keycode == W_KEY &&
-        game->textures->map[(int)game->player->y - 1][(int)game->player->x] == '0')
+        game->textures->map[(int)(game->player->y - 0.2)][(int)game->player->x] == '0')
             game->player->y -= 0.2;
     else if (keycode == S_KEY &&
-        game->textures->map[(int)game->player->y + 1][(int)game->player->x] == '0')
+        game->textures->map[(int)(game->player->y + 0.2)][(int)game->player->x] == '0')
         game->player->y += 0.2;
     else if (keycode == A_KEY &&
-        game->textures->map[(int)game->player->y][(int)game->player->x - 1] == '0')
+        game->textures->map[(int)game->player->y][(int)(game->player->x - 0.2)] == '0')
         game->player->x -= 0.2;
     else if (keycode == D_KEY &&
-        game->textures->map[(int)game->player->y][(int)game->player->x + 1] == '0')
+        game->textures->map[(int)game->player->y][(int)(game->player->x + 0.2)] == '0')
         game->player->x += 0.2;
 }
 
@@ -35,16 +35,16 @@ static
 void    ft_move_south(t_game *game, int keycode)
 {
     if (keycode == W_KEY &&
-        game->textures->map[(int)game->player->y + 1][(int)game->player->x] == '0')
+        game->textures->map[(int)(game->player->y + 0.2)][(int)game->player->x] == '0')
         game->player->y += 0.2;
     else if (keycode == S_KEY &&
-        game->textures->map[(int)game->player->y - 1][(int)game->player->x] == '0')
+        game->textures->map[(int)(game->player->y - 0.2)][(int)game->player->x] == '0')
         game->player->y -= 0.2;
     else if (keycode == A_KEY &&
-        game->textures->map[(int)game->player->y][(int)game->player->x + 1] == '0')
+        game->textures->map[(int)game->player->y][(int)(game->player->x + 0.2)] == '0')
         game->player->x += 0.2;
     else if (keycode == D_KEY &&
-        game->textures->map[(int)game->player->y][(int)game->player->x - 1] == '0')
+        game->textures->map[(int)game->player->y][(int)(game->player->x - 0.2)] == '0')
         game->player->x -= 0.2;
 }
 
@@ -55,13 +55,13 @@ void    ft_move_west(t_game *game, int keycode)
         game->textures->map[(int)game->player->y][(int)(game->player->x - 0.2)] == '0')
         game->player->x -= 0.2;
     else if (keycode == S_KEY &&
-        game->textures->map[(int)game->player->y][(int)game->player->x + 1] == '0')
+        game->textures->map[(int)game->player->y][(int)(game->player->x + 0.2)] == '0')
         game->player->x += 0.2;
     else if (keycode == A_KEY &&
-        game->textures->map[(int)game->player->y + 1][(int)game->player->x] == '0')
+        game->textures->map[(int)(game->player->y + 0.2)][(int)game->player->x] == '0')
         game->player->y += 0.2;
     else if (keycode == D_KEY &&
-        game->textures->map[(int)game->player->y - 1][(int)game->player->x] == '0')
+        game->textures->map[(int)(game->player->y - 0.2)][(int)game->player->x] == '0')
         game->player->y -= 0.2;
 }
 
@@ -69,16 +69,16 @@ static
 void    ft_move_east(t_game *game, int keycode)
 {
     if (keycode == W_KEY &&
-        game->textures->map[(int)game->player->y][(int)game->player->x + 1] == '0')
+        game->textures->map[(int)game->player->y][(int)(game->player->x + 0.2)] == '0')
         game->player->x += 0.2;
     else if (keycode == S_KEY &&
-        game->textures->map[(int)game->player->y][(int)game->player->x - 1] == '0')
+        game->textures->map[(int)game->player->y][(int)(game->player->x - 0.2)] == '0')
         game->player->x -= 0.2;
     else if (keycode == A_KEY &&
-        game->textures->map[(int)game->player->y - 1][(int)game->player->x] == '0')
+        game->textures->map[(int)(game->player->y - 0.2)][(int)game->player->x] == '0')
         game->player->y -= 0.2;
     else if (keycode == D_KEY &&
-        game->textures->map[(int)game->player->y + 1][(int)game->player->x] == '0')
+        game->textures->map[(int)(game->player->y + 0.2)][(int)game->player->x] == '0')
         game->player->y += 0.2;
 }
 
@@ -92,5 +92,5 @@ void	ft_player_movement(t_game *game, int keycode)
         ft_move_west(game, keycode);
 	if (game->player->yaw == YAW_EAST)
         ft_move_east(game, keycode);
-    printf("x: %f, y: %f\n", game->player->x, game->player->y);
+    // printf("x: %f, y: %f\n", game->player->x, game->player->y);
 }
