@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_floor_and_ceiling.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
+/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 19:00:21 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/03/05 19:22:19 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/07 15:01:36 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ void	ft_draw_ceiling(t_game *game)
 
 	i = 0;
 	y = 0;
-	//ft_printf("size_line %d\n", game->textures->frame->size_line);
-	end =  WIN_HEIGHT / 10 * 6;
+	end =  WIN_HEIGHT / 2;
 	while (y < end)
 	{
 		x = 0;
@@ -38,7 +37,6 @@ void	ft_draw_ceiling(t_game *game)
 		}
 		y++;
 	}
-	ft_printf("first bit : %d\n", game->textures->frame->data[0]);
 }
 
 void	ft_draw_floor(t_game *game)
@@ -47,7 +45,7 @@ void	ft_draw_floor(t_game *game)
 	int	x;
 	int	y;
 
-	y =  WIN_HEIGHT / 10 * 6;
+	y =  WIN_HEIGHT / 2;
 	i = game->textures->frame->size_line * y;
 	while (y < WIN_HEIGHT)
 	{
