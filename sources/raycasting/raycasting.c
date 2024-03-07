@@ -1,90 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycasting.c                                       :+:      :+:    :+:   */
+/*   cast_rays.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 11:41:55 by dborione          #+#    #+#             */
-/*   Updated: 2024/03/07 14:15:32 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/07 15:07:55 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 #include "../../libft/libft.h"
 #include "../../includes/cub3d_raycasting.h"
+#include "../../includes/cub3d_render.h"
 
-static
-void    ft_set_player_direction(t_game *game, t_raycaster *raycaster)
+/*
+    On caste des rays pour chaque pixel de la largeur de la fenêtre
+    Le ray commence à la position du player
+    camera_pos_x = la position x sur la plane de camera, perpendiculaire
+        au vecteur de direction du player
+    côté droit de l'écran = 1
+    centre de l'écran = 0
+    côté gauche de l'écran = -1
+    donc direction du ray: addition du direction_vector et d'une partie du camera_plane vector
+*/
+/* Ray direction + position */
+
+int ft_raycasting(t_game *game)
 {
-    if (game->player->yaw == YAW_NORTH)
-        raycaster->player_dir_y = -1;
-    else if (game->player->yaw == YAW_SOUTH)
-        raycaster->player_dir_y = 1;
-    else if (game->player->yaw == YAW_WEST || game->player->yaw == YAW_EAST)
-        raycaster->player_dir_y = 0;
-	if (game->player->yaw == YAW_WEST)
-        raycaster->player_dir_x = -1;
-    else if (game->player->yaw == YAW_EAST)
-        raycaster->player_dir_x = 1;
-    else if (game->player->yaw == YAW_NORTH || game->player->yaw == YAW_SOUTH)
-        raycaster->player_dir_x = 0;
-}
+    t_raycaster *raycaster;
+    int         i;
 
-static
-void    ft_set_camera_plane(t_game *game, t_raycaster *raycaster)
-{
-    if (game->player->yaw == YAW_NORTH)
-        raycaster->camera_plane_x = 0.66;
-    else if (game->player->yaw == YAW_SOUTH)
-        raycaster->camera_plane_x = -0.66;
-    else if (game->player->yaw == YAW_WEST || game->player->yaw == YAW_EAST)
-        raycaster->camera_plane_x = 0;
-	if (game->player->yaw == YAW_WEST)
-        raycaster->camera_plane_y = -0.66;
-    else if (game->player->yaw == YAW_EAST)
-        raycaster->camera_plane_y = 0.66;
-    else if (game->player->yaw == YAW_NORTH || game->player->yaw == YAW_SOUTH)
-        raycaster->camera_plane_y = 0;
-}
-
-// FOV = ratio between the length of the direction vector, and the length of the plane.
-t_raycaster   *ft_new_raycaster(t_game *game)
-{
-	t_raycaster	*raycaster;
-
-    raycaster = malloc(sizeof(t_raycaster));
-    if (!raycaster)
-        return (NULL);
-    raycaster->player_pos_x = game->player->x / 3 + 1;
-    raycaster->player_pos_y = game->player->y / 3 + 1;
-    ft_set_player_direction(game, raycaster);
-    ft_set_camera_plane(game, raycaster);
-    // printf("\npl_dir_x: %f, pl_dir_y: %f, camera_dir_x: %f, camera_dir_y: %f\n",
-    //     raycaster->player_dir_x, raycaster->player_dir_y, raycaster->camera_plane_x, raycaster->camera_plane_y);
-    // printf("player_x: %f, player_y: %f\n", game->player->x / 3, game->player->y / 3);
-    raycaster->ray = ft_new_ray();
-    if (!raycaster->ray)
-    {
-        free (raycaster);
-        return (NULL);
+    raycaster = ft_new_raycaster(game);
+	if (!raycaster)
+		return (0);
+    i = 0;
+    while (i < WIN_WIDTH)
+    {   
+       	ft_update_raycaster(game, raycaster, i);
+        ft_draw_vertical_line(game, raycaster, i);
+        i++;
     }
-    raycaster->line = ft_new_line();
-    if (!raycaster->line)
-    {
-        free(raycaster->ray);
-        free (raycaster);
-        return (NULL);
-    }
-    return (raycaster);
-}
-
-void	ft_update_raycaster(t_game *game, t_raycaster *raycaster)
-{
-    // raycaster->player_pos_x = game->player->x / 3; pas besoin car la position du joueur ne change pas
-    // raycaster->player_pos_y = game->player->y / 3;
-    ft_set_player_direction(game, raycaster);
-	ft_set_camera_plane(game, raycaster);
-    ft_clear_ray(raycaster->ray);
-    ft_clear_line(raycaster->line);
+	free(raycaster->ray);
+	free(raycaster->line);
+	free(raycaster);
+    return (1);
 }
