@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
+/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 11:26:18 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/02/28 17:01:41 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/07 14:12:48 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_check_elements_and_location(t_game *game, size_t x, size_t y)
 	}
 	if (ft_is_start_location(game->textures->map[y][x]))
 	{
-		if (!ft_add_player_location_pars(game, x, y))
+		if (!ft_add_player_location(game, x, y))
 			return (0);
 	}
 	return (1);
