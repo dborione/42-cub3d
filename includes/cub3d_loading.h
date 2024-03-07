@@ -22,7 +22,7 @@ void	ft_load_map_schema(t_game *game, int fd);
 int		ft_parse_map(t_game *game);
 void	ft_unload_game(t_game *game);
 int		ft_get_int_rgb(t_rgb *rgb);
-int		ft_has_west_wall(char *line);
-int		ft_has_east_wall(char *line);
-
+int     ft_add_player_location_pars(t_game *game, size_t x, size_t y);
+int     ft_is_start_location(char c);
+int     ft_check_walls(t_game *game, size_t y);
 #endif
