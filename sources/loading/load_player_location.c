@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 12:25:11 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/03/07 14:14:50 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/07 15:44:08 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ t_location	*ft_get_location(char direction, size_t x, size_t y)
 	location = malloc(sizeof(t_location));
 	if (!location)
 		return (NULL);
-	location->x = x * 3 - 1; /* *3 car on divise les sols en 9 cases */
-	location->y = y * 3 - 1; /* -1 pour etre au milieu*/
+	location->x = x;// * 3 - 1; /* *3 car on divise les sols en 9 cases */
+	location->y = y;// * 3 - 1; /* -1 pour etre au milieu*/
 	location->pitch = 0.0f;
 	if (direction == 'N')
 		location->yaw = 0.0f;

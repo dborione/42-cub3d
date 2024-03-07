@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 11:41:55 by dborione          #+#    #+#             */
-/*   Updated: 2024/03/07 15:22:08 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/07 15:46:30 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ t_raycaster   *ft_new_raycaster(t_game *game)
     raycaster = malloc(sizeof(t_raycaster));
     if (!raycaster)
         return (NULL);
-    raycaster->player_pos_x = game->player->x / 3 + 1;
-    raycaster->player_pos_y = game->player->y / 3 + 1;
+    raycaster->player_pos_x = game->player->x + 0.5;// / 3 + 1;
+    raycaster->player_pos_y = game->player->y + 0.5;// / 3 + 1;
     ft_set_player_direction(game, raycaster);
     ft_set_camera_plane(game, raycaster);
     // printf("\npl_dir_x: %f, pl_dir_y: %f, camera_dir_x: %f, camera_dir_y: %f\n",
