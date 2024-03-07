@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 11:41:55 by dborione          #+#    #+#             */
-/*   Updated: 2024/03/05 15:07:38 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/07 15:07:38 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void		ft_clear_ray(t_ray *ray);
 
 /* Update */
 
-void	ft_update_raycaster(t_game *game, t_raycaster *raycaster);
+void	ft_update_raycaster(t_game *game, t_raycaster *raycaster, int i);
 
 /*
 	Met à jour le rayson (utile quand on le décalle pixel par pixel)
