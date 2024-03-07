@@ -40,9 +40,11 @@ static
 int	ft_has_east_corridor_wall(char *line)
 {
 	size_t	i;
+	size_t	len;
 
 	i = 1;
-	while (i < ft_strlen(line))
+	len = ft_strlen(line);
+	while (i < len)
 	{
 		if (line[i] == '0' && line[i + 1] == ' ')
 			return (0);
