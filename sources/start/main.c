@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 11:30:11 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/02/23 18:22:46 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/07 14:49:36 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,8 @@ int	main(int argc, char *argv[])
 
 	ft_render_frame(game);
 
-
-	mlx_hook(game->mlx_win, 17, 1L << 2, ft_quit_window, game);
-	mlx_key_hook(game->mlx_win, ft_key_hook, game);
-	// mlx_loop_hook(game->mlx, &main_loop, 0);
+	ft_key_hook_pressed(game);
+	ft_close_button_hook(game);
 	mlx_loop(game->mlx);
 	ft_unload_game(game);
 	system("leaks cub3D");
