@@ -69,20 +69,6 @@ void	ft_player_movement(t_game *game, int keycode)
 static
 int	ft_key_pressed(int keycode, t_game *game)
 {
-	// else if (keycode == M_KEY)
-	// {
-	// 	if (game->minimap != 0) // minimap is already on screen
-	// 	{
-	// 		printf("destroying minimap\n");
-	// 		mlx_destroy_image(game->mlx, game->minimap_img_ptr);
-	// 		// a changer plus tard car reset la window
-	// 		mlx_clear_window(game->mlx, game->mlx_win);
-	// 		ft_render_frame(game);
-	// 		game->minimap = 0;
-	// 	}
-	// 	else
-	// 		ft_render_minimap(game);
-	// }
 	if (keycode == UP_ARROW_KEY)
 	{
 		game->player->yaw = YAW_NORTH;
