@@ -46,7 +46,7 @@ void ft_draw_vertical_line(t_game *game, t_raycaster *raycaster, int x) // ajout
 	int				factor;
 	int				count;
 	int				line;
-	int				rest;
+	int				remainder;
 
 	if (raycaster->ray->side == NS)
 		target = game->textures->north_texture;
@@ -59,15 +59,15 @@ void ft_draw_vertical_line(t_game *game, t_raycaster *raycaster, int x) // ajout
 		mais je la garde pour le moment pour avoir un
 	*/
 	factor = (raycaster->line->top - raycaster->line->bottom) / WALL_HEIGHT;
-	rest = (raycaster->line->top - raycaster->line->bottom) % WALL_HEIGHT;
-	ft_printf("factor : top %d - botton : %d / wall %d = %d, rest : %d\n",
-		raycaster->line->top, raycaster->line->bottom, WALL_HEIGHT, factor, rest);
+	remainder = (raycaster->line->top - raycaster->line->bottom) % WALL_HEIGHT;
+	// ft_printf("factor : top %d - botton : %d / wall %d = %d, rest : %d\n",
+	// 	raycaster->line->top, raycaster->line->bottom, WALL_HEIGHT, factor, rest);
 	line = 0;
 	while (raycaster->line->bottom < raycaster->line->top && line < WALL_HEIGHT)
 	{
 		count = 0;
 		//if (line && rest && line % rest)
-		if (line > WALL_HEIGHT - rest || line < rest)
+		if (line > WALL_HEIGHT - remainder || line < remainder)
 		{
 			//while (rest)
 			{
@@ -76,7 +76,7 @@ void ft_draw_vertical_line(t_game *game, t_raycaster *raycaster, int x) // ajout
 				game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4 + 2] = texture.data[2 + texture.size_line  * line];
 				game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4 + 3] = texture.data[3 + texture.size_line  * line];
 				raycaster->line->bottom++;
-				rest--;
+				remainder--;
 			}
 		}
 		while (count < factor)// faire attention aux facteurs negatifs
