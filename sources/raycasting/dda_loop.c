@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda_loop.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
+/*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 11:41:55 by dborione          #+#    #+#             */
-/*   Updated: 2024/03/05 13:58:19 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/08 01:47:35 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,19 @@ void    ft_do_dda(t_game *game, t_raycaster *raycaster)
         {
             raycaster->ray->tile_dist_x += raycaster->ray->delta_dist_x;
             raycaster->ray->map_pos_x += raycaster->ray->step_x;
-            raycaster->ray->side = EW;
+            if (game->player->yaw == YAW_WEST)
+            	raycaster->ray->side = WEST_WALL;
+			else
+				raycaster->ray->side = EAST_WALL;
         }
         else
         {
             raycaster->ray->tile_dist_y += raycaster->ray->delta_dist_y;
             raycaster->ray->map_pos_y += raycaster->ray->step_y;
-            raycaster->ray->side = NS;
+			if (game->player->yaw == YAW_NORTH)
+            	raycaster->ray->side = NORTH_WALL;
+			else
+				raycaster->ray->side = SOUTH_WALL;
         }
         if (game->textures->map[raycaster->ray->map_pos_y][raycaster->ray->map_pos_x] == '1')
             raycaster->ray->hit = 1;

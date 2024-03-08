@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
+/*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:39:46 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/03/07 17:27:15 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/08 01:46:18 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,14 @@ void ft_draw_vertical_line(t_game *game, t_raycaster *raycaster, int x) // ajout
 	int				line;
 	int				remainder;
 
-	if (raycaster->ray->side == NS)
+	if (raycaster->ray->side == NORTH_WALL)
 		target = game->textures->north_texture;
-	else
+	else if (raycaster->ray->side == WEST_WALL)
 		target = game->textures->west_texture;
+	else if (raycaster->ray->side == EAST_WALL)
+		target = game->textures->east_texture;
+	else
+		target = game->textures->south_texture;
 	texture.data = mlx_get_data_addr(target,
 		&texture.bits_per_pixel, &texture.size_line, &texture.endian);
 	/*
