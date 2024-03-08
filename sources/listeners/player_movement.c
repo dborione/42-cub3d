@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_movement.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
+/*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 15:14:31 by dborione          #+#    #+#             */
-/*   Updated: 2024/03/07 17:30:05 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/08 10:08:42 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@
 static
 void    ft_move_north(t_game *game, int keycode)
 {
-    if (keycode == W_KEY &&
+    if (keycode == W_KEY && (game->player->y - 0.2) >= 0 &&
         game->textures->map[(int)(game->player->y - 0.2)][(int)game->player->x] == '0')
             game->player->y -= 0.2;
-    else if (keycode == S_KEY &&
+    else if (keycode == S_KEY &&  game->textures->map[(int)(game->player->y + 0.2)] &&
         game->textures->map[(int)(game->player->y + 0.2)][(int)game->player->x] == '0')
         game->player->y += 0.2;
-    else if (keycode == A_KEY &&
+    else if (keycode == A_KEY && (game->player->x - 0.2) >= 0 &&
         game->textures->map[(int)game->player->y][(int)(game->player->x - 0.2)] == '0')
         game->player->x -= 0.2;
-    else if (keycode == D_KEY &&
+    else if (keycode == D_KEY && game->textures->map[(int)(game->player->y + 0.2)] &&
         game->textures->map[(int)game->player->y][(int)(game->player->x + 0.2)] == '0')
         game->player->x += 0.2;
 }
@@ -37,16 +37,16 @@ void    ft_move_north(t_game *game, int keycode)
 static
 void    ft_move_south(t_game *game, int keycode)
 {
-    if (keycode == W_KEY &&
+    if (keycode == W_KEY && game->textures->map[(int)(game->player->y + 0.2)] &&
         game->textures->map[(int)(game->player->y + 0.2)][(int)game->player->x] == '0')
         game->player->y += 0.2;
-    else if (keycode == S_KEY &&
+    else if (keycode == S_KEY && (game->player->y - 0.2) >= 0 &&
         game->textures->map[(int)(game->player->y - 0.2)][(int)game->player->x] == '0')
         game->player->y -= 0.2;
-    else if (keycode == A_KEY &&
+    else if (keycode == A_KEY && game->textures->map[(int)(game->player->y + 0.2)] &&
         game->textures->map[(int)game->player->y][(int)(game->player->x + 0.2)] == '0')
         game->player->x += 0.2;
-    else if (keycode == D_KEY &&
+    else if (keycode == D_KEY && (game->player->x - 0.2) >= 0 &&
         game->textures->map[(int)game->player->y][(int)(game->player->x - 0.2)] == '0')
         game->player->x -= 0.2;
 }
@@ -54,16 +54,16 @@ void    ft_move_south(t_game *game, int keycode)
 static
 void    ft_move_west(t_game *game, int keycode)
 {
-    if (keycode == W_KEY &&
+    if (keycode == W_KEY && (game->player->x - 0.2) >= 0 &&
         game->textures->map[(int)game->player->y][(int)(game->player->x - 0.2)] == '0')
         game->player->x -= 0.2;
     else if (keycode == S_KEY &&
         game->textures->map[(int)game->player->y][(int)(game->player->x + 0.2)] == '0')
         game->player->x += 0.2;
-    else if (keycode == A_KEY &&
+    else if (keycode == A_KEY && game->textures->map[(int)(game->player->y + 0.2)] &&
         game->textures->map[(int)(game->player->y + 0.2)][(int)game->player->x] == '0')
         game->player->y += 0.2;
-    else if (keycode == D_KEY &&
+    else if (keycode == D_KEY && (game->player->y - 0.2) >= 0 &&
         game->textures->map[(int)(game->player->y - 0.2)][(int)game->player->x] == '0')
         game->player->y -= 0.2;
 }
@@ -74,13 +74,13 @@ void    ft_move_east(t_game *game, int keycode)
     if (keycode == W_KEY &&
         game->textures->map[(int)game->player->y][(int)(game->player->x + 0.2)] == '0')
         game->player->x += 0.2;
-    else if (keycode == S_KEY &&
+    else if (keycode == S_KEY &&  (game->player->x - 0.2) >= 0 &&
         game->textures->map[(int)game->player->y][(int)(game->player->x - 0.2)] == '0')
         game->player->x -= 0.2;
-    else if (keycode == A_KEY &&
+    else if (keycode == A_KEY && (game->player->y - 0.2) >= 0 &&
         game->textures->map[(int)(game->player->y - 0.2)][(int)game->player->x] == '0')
         game->player->y -= 0.2;
-    else if (keycode == D_KEY &&
+    else if (keycode == D_KEY && game->textures->map[(int)(game->player->y + 0.2)] &&
         game->textures->map[(int)(game->player->y + 0.2)][(int)game->player->x] == '0')
         game->player->y += 0.2;
 }
