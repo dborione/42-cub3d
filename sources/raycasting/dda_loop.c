@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 11:41:55 by dborione          #+#    #+#             */
-/*   Updated: 2024/03/08 01:47:35 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/08 09:55:05 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void    ft_do_dda(t_game *game, t_raycaster *raycaster)
         {
             raycaster->ray->tile_dist_x += raycaster->ray->delta_dist_x;
             raycaster->ray->map_pos_x += raycaster->ray->step_x;
-            if (game->player->yaw == YAW_WEST)
+            if (raycaster->ray->map_pos_x < game->player->x)
             	raycaster->ray->side = WEST_WALL;
 			else
 				raycaster->ray->side = EAST_WALL;
@@ -64,7 +64,7 @@ void    ft_do_dda(t_game *game, t_raycaster *raycaster)
         {
             raycaster->ray->tile_dist_y += raycaster->ray->delta_dist_y;
             raycaster->ray->map_pos_y += raycaster->ray->step_y;
-			if (game->player->yaw == YAW_NORTH)
+			if (raycaster->ray->map_pos_y < game->player->y)
             	raycaster->ray->side = NORTH_WALL;
 			else
 				raycaster->ray->side = SOUTH_WALL;
