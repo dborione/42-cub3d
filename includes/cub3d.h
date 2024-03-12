@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 10:57:07 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/01/23 11:33:46 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/08 09:49:39 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,30 @@
 # include <mlx.h>
 # include <stdlib.h>
 # include "cub3d_textures.h"
+#include <stdio.h>
 
-typedef struct	s_data {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}				t_data;
+# define TILE_SIZE 32
+# ifndef WIN_WIDTH
+#  define WIN_WIDTH 1920
+# endif
+# ifndef WIN_HEIGHT
+#  define WIN_HEIGHT 1080
+# endif
+# ifndef DISTANCE_FOR_FULL_WALL
+#  define DISTANCE_FOR_FULL_WALL 6.7625
+# endif
+
+/* Directionts */
+
+# define YAW_NORTH 0.0f
+# define YAW_SOUTH 180.0f
+# define YAW_WEST -90.0f
+# define YAW_EAST 90.0f
+
+# define NORTH_WALL 0
+# define SOUTH_WALL 1
+# define WEST_WALL 2
+# define EAST_WALL 3
 
 typedef struct s_location
 {
@@ -43,7 +59,9 @@ typedef struct	s_game {
 	void				*mlx;
 	void				*mlx_win;
 	t_cub3d_textures	*textures;
-	t_location			*start;
+	t_location			*player;
+	float				distance;
+	int					buf[WIN_HEIGHT][WIN_WIDTH];
 }						t_game;
 
 /*
@@ -59,6 +77,7 @@ typedef struct	s_game {
 
 // Init
 int	ft_quit_window(t_game *game);
-int	ft_init_game(t_game **game, t_data *img);
+int	ft_init_game(t_game **game);
+int ft_raycasting(t_game *game);
 
 #endif
