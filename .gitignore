@@ -1,5 +1,4 @@
 objects
 cub3D
 libft/libft.a
-libft/*/*.o
-libft/*/*/*.o
+libft/objects

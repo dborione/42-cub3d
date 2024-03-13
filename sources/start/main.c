@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
+/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 11:30:11 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/01/23 12:22:58 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/07 14:49:36 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 #include "../../includes/cub3d_loading.h"
+#include "../../includes/cub3d_listeners.h"
+#include "../../includes/cub3d_render.h"
 
 static
 void	ft_printf_map(char **map)
@@ -35,7 +37,6 @@ void	ft_checking_game(t_game *game)
 		ft_printf("[!] Textures has not been loaded\n");
 		return;
 	}
-
 	if (game->textures->ceiling)
 		ft_printf("\x1b[32m[ok]\x1b[0m Ceiling color loaded\n");
 	else
@@ -72,38 +73,37 @@ void	ft_checking_game(t_game *game)
 int	main(int argc, char *argv[])
 {
 	t_game	*game;
-	t_data	img;
 
 	if (argc != 2)
 	{
 		ft_putendl_fd("Error.", 2);
 		return (1);
 	}
-	// init raycasting
-	if (!ft_init_game(&game, &img))
+	if (!ft_init_game(&game))
 	{
 		ft_putendl_fd("Error.", 2);
+		system("leaks cub3D");
 		return (127);
 	}
-	if (!ft_load_game(game, argv[1]))
+	if (!ft_load_game(game, argv[1])) //leak
 	{
-		ft_unload_game(game);
 		ft_putendl_fd("Error.", 2);
+		system("leaks cub3D");
 		return (2);
 	}
-
 	ft_checking_game(game);
 	ft_printf("Game started !\n");
-	//my_mlx_pixel_put(&img, 5, 5, 0x00FF0000);
+	ft_printf("Height: %d\nWidth: %d\n", game->textures->map_height, game->textures->map_width);
+	printf("Player location : x %f, y %f, pitch %f, yaw %f",
+		game->player->x, game->player->y, game->player->pitch, game->player->yaw);
 
-	mlx_put_image_to_window(game->mlx, game->mlx_win, img.img, 0, 0);
-	mlx_hook(game->mlx_win, 17, 0, ft_quit_window, &game);
+	ft_render_frame(game);
+
+	ft_key_hook_pressed(game);
+	ft_close_button_hook(game);
 	mlx_loop(game->mlx);
-
-	//ft_unload_game(game);
-	//mlx_destroy_window(game->mlx, game->mlx_win);
-	//free(game);
-	//system("leaks cub3D");
+	ft_unload_game(game);
+	system("leaks cub3D");
 	return (0);
 }
 

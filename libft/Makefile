@@ -26,6 +26,7 @@ FTS		= ./utils/src/ft_isalpha.c \
 		./utils/src/ft_substr.c \
 		./utils/src/ft_strjoin.c \
 		./utils/src/ft_strtrim.c \
+		./utils/src/ft_strtrim_end.c \
 		./utils/src/ft_split.c \
 		./utils/src/ft_itoa.c \
 		./utils/src/ft_strmapi.c \
@@ -50,6 +51,7 @@ FTS		= ./utils/src/ft_isalpha.c \
 		./utils/src/ft_endswith.c \
 		./utils/src/ft_isequal.c \
 		./utils/src/ft_isspace.c \
+		./utils/src/ft_int_to_hex.c \
 		./printf/ft_printf.c \
 		./printf/src/ft_args_infos.c \
 		./printf/src/ft_hexadecimal.c \
@@ -64,18 +66,22 @@ FTS		= ./utils/src/ft_isalpha.c \
 		./get_next_line/get_next_line_bonus.c \
 		./get_next_line/get_next_line_utils_bonus.c
 
-
 LIB		= ./utils/libft_utils.h \
 		./printf/ft_printf.h \
 		libft.h
 
-OBJS	= ${FTS:.c=.o}
+OBJ_DIR	= objects/
+OBJS	= $(patsubst %.c, ${OBJ_DIR}%.o, ${FTS})
 
 OBJSBONUS	= ${FTSBONUS:.c=.o}
 
 CFLAGS	= -Wall -Wextra -Werror
 
 RM		= rm -f
+
+${OBJ_DIR}%.o:	%.c
+		@mkdir -p ${@D}
+		@${CC} ${CFLAGS} -c $< -o $@
 
 ${NAME}:	${OBJS}
 		@ar rc ${NAME} ${OBJS}

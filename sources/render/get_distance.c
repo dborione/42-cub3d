@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quit.c                                             :+:      :+:    :+:   */
+/*   get_distance.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
+/*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/20 11:30:16 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/02/23 18:22:55 by rbarbiot         ###   ########.fr       */
+/*   Created: 2024/02/28 14:45:34 by rbarbiot          #+#    #+#             */
+/*   Updated: 2024/02/28 14:47:27 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
-#include "../includes/cub3d_loading.h"
+#include <math.h>
 
-int	ft_quit_window(t_game *game)
+float	get_distance(float x1, float y1, float x2, float y2)
 {
-	ft_unload_game(game);
-	system("leaks cub3D");
-	exit (0);
-	return (0);
+	return (sqrt(pow(x1 - x2, 2)
+		+ pow(y1 - y2, 2)));
 }

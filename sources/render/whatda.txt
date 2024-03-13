@@ -1,0 +1,74 @@
+
+1. Problème de l'effet "d'éloignement" des murs
+
+joueur : x, y -> position du joueur
+mur : x, y -> position du milieu de l'arrête du bas du mur
+
+le mur a un nombre h de pixels en hauteur et w de bloques en longueur
+
+distance d mur <-> joueur : sqrt((x^2-x^2)+(y^2-y^2))
+
+diviser h et w par d
+
+chaque mur fait 720px de long, par conséquent chaque "sol" (0, 1, etc) mesure 1 720x720
+en case mur "encadre" son sol
+
+FOV (field of view) par défaut 70˚
+
+2. Utilisation de la mlx
+
+Chaque ligne dans une image de la MLX fait 4 x nombre_de_pixels, par exemple
+pour une image de 720px de longueur notre ligne fera 4x720 = 2880
+
+Le nombre de lignes c'est la hauteur de l'image, si l'image fait 480px de hauteur
+alors il y aura 480 lignes !
+
+3. L'environement par rapport au joueur
+
+Le joueur fait 320 px de haut (car la hauter 480 = 1,5joueur)
+
+Pour gerer plus facilement la position du joueur, on ne va pas calculer en PX sinon on atteindrait trop vite le intmax
+
+On va utiliser des float, un "sol" fait 720 x 720 en général un pas fait plus ou moins 1/4 de notre taille
+on fait donc : 320 / 4 (1/4) = 80px on peut ainsi convenir que : 1 case (de position) = 720 / 80 = 1/9 sol
+
+De cette maniere on a 1 case = 1,0 (float)
+
+4. Affichage
+
+On doit d'abord calculer la distance avec le mur ce qui donnait : distance mur <-> joueur = sqrt((x^2-x^2)+(y^2-y^2))
+on a un angle de 70˚
+
+La trigo va ENFIN ME SERVIR À QUELQUE CHOSE
+
+Le mur fait 720px sauf qu'on va créer un triangle avec angle droit en découpant la vue du joueur 
+on sait que le champ de vision est de 70˚ donc on a :
+720 / 2 = 360 
+70˚ / 2 = 35˚
+
+pour faciliter les calcules on dira que le coté adjançant AB vaut 36,
+l'hypotènus AC a une taille inconnue et le coté opposé BC a une taille inconnue
+
+On cherche BC pour connaitre la distance exacte qui permettrait d'afficher la totalité du mur sur l'ecran
+
+SOH CAH TOA
+
+on utilise TOA : 
+
+tan(35) = 36 / BC
+
+BC = 36 / tan(35)
+
+BC = 51,4
+
+soit 514px donc 6,7625 pas (514 / 80)
+
+le problème est que l'écran fait 2,7 fois la taille de l'image
+on doit afficher
+
+transformer cette valeur en forme fractionnaire 
+
+Enregistrer la distance des 2 cotés du mur 
+faire un facteur pour chacun puis un pour passer d'un coté à l'autre 
+
+On calcule l'angle en fonction de la direction

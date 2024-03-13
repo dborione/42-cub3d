@@ -6,7 +6,18 @@ CC 		= clang
 CFLAGS	= -Wall -Wextra -Werror -I${LIB_DIR}
 RM		= rm -f
 
+# Screen Resolution
+
+ifeq ("$(wildcard .mini)","")
+    WIN_WIDTH = 1920
+	WIN_HEIGHT = 1080
+else
+	WIN_WIDTH = 1408
+	WIN_HEIGHT = 792
+endif
+
 # Colors
+
 YELLOW	= \033[1;33m
 GREEN	= \033[1;32m
 BLUE	= \033[0;36m
@@ -23,7 +34,7 @@ DEPENDS	:= $(OBJS:.o=.d)
 
 ${OBJ_DIR}%.o:	${FTS_DIR}%.c
 		@mkdir -p ${@D}
-		@${CC} ${CFLAGS} -MMD -MP -c $< -o $@
+		@${CC} ${CFLAGS} -D WIN_WIDTH=${WIN_WIDTH} -D WIN_HEIGHT=${WIN_HEIGHT} -MMD -MP -c $< -o $@
 
 # Rules
 
@@ -54,3 +65,9 @@ re: fclean all
 -include $(DEPENDS)
 
 .PHONY: all clean fclean re
+
+# ifneq ${RESOLUTION}, "${LITTLE_WIDTH}x${LITTLE_HEIGHT}"
+# 	@echo RES: ${RESOLUTION}
+# 	@echo ${LITTLE_WIDTH}x${LITTLE_HEIGHT} > .resolution
+# 	@make fclean
+# endif 

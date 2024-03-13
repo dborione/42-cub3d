@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_elements.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
+/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 10:11:14 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/01/23 11:10:09 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/02/23 18:28:23 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int		ft_load_texture(
 		ft_printf("Texture %s already loaded\n", target);
 		return (0);
 	}
-
 	if (!line[2])
 		return (0);
 	i = 2;
@@ -66,8 +65,6 @@ int		ft_load_texture(
 	tmp = NULL;
 	width = WALL_WIDTH;
 	height = WALL_HEIGHT;
-	/* if (ft_endswith(&line[i], "png"))
-	tmp = mlx_png_file_to_image(game->mlx, &line[i], &width, &height) else */
 	file = ft_strtrim(&line[i], "\n");
 	if (!file)
 		return (0);
@@ -76,13 +73,13 @@ int		ft_load_texture(
 		ft_printf("%s loading file : '%s'\n", target, file);
 		tmp = mlx_xpm_file_to_image(game->mlx, file, &width, &height);
 	}
+	free(file);
 	if (!tmp)
 	{
 		ft_printf("%s xpm to image failed\n", target);
 		return (0);
 	}
 	ft_set_texture(game, target, tmp);
-	ft_printf("%s added\n", target);
 	return (1);
 }
 

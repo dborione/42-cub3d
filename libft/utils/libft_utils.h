@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft_utils.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
+/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:03:55 by rbarbiot          #+#    #+#             */
-/*   Updated: 2023/10/04 23:37:37 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/02/19 14:51:36 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int		ft_atoi(const char *nptr);
 void	*ft_calloc(size_t nmemb, size_t size);
 char	*ft_strdup(const char *s);
 char	*ft_strtrim(char const *s1, char const *set);
+char	*ft_strtrim_end(char const *s1, char const *set);
 char	**ft_split(char const *str, char c);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
@@ -72,4 +73,5 @@ int		ft_startswith(const char *str, const char *start);
 int		ft_endswith(const char *str, const char *end);
 int		ft_isspace(char c);
 int		ft_isequal(const char *s1, const char *s2);
+char	*ft_int_to_hex(unsigned int number);
 #endif
