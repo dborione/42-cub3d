@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
+/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:39:46 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/03/13 11:57:21 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:55:12 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 #include "../../includes/cub3d_raycasting.h"
+#include "../../includes/cub3d_render.h"
 
 static
 void	*ft_get_target(t_game *game, t_raycaster *raycaster)
@@ -25,18 +26,21 @@ void	*ft_get_target(t_game *game, t_raycaster *raycaster)
 	return (game->textures->south_texture);
 }
 
-void ft_draw_vertical_line(t_game *game, t_raycaster *raycaster, int x) // ajouter le target ici
+void	ft_draw_vertical_line(t_game *game, t_raycaster *raycaster, int x, t_wall_measures *wall_measures)
 {
 	t_cub3d_images	texture;
-	int				factor;
 	int				count;
 	int				line;
-	int				remainder;
+
+
+	if (x - wall_measures->start == wall_measures->width_factor * (wall_measures->column + 1)
+	&& wall_measures->column + 1 < WALL_WIDTH)
+		wall_measures->column++;
 
 	texture.data = mlx_get_data_addr(ft_get_target(game, raycaster),
 		&texture.bits_per_pixel, &texture.size_line, &texture.endian);
-	factor = raycaster->line->height / WALL_HEIGHT;
-	remainder = raycaster->line->height % WALL_HEIGHT;
+	wall_measures->height_factor = raycaster->line->height / WALL_HEIGHT;
+	wall_measures->height_remainder = raycaster->line->height % WALL_HEIGHT;
 	// ft_printf("factor : top %d - bottom : %d / wall %d = %d, rest : %d, Height : %d\n",
 	// 	raycaster->line->top, raycaster->line->bottom, WALL_HEIGHT, factor, remainder, raycaster->line->height);
 	line = 0;
@@ -45,32 +49,32 @@ void ft_draw_vertical_line(t_game *game, t_raycaster *raycaster, int x) // ajout
 		count++;
 	if (count)
 		count /= 2;
-	while (count && count - factor > 0)
+	while (count && count - wall_measures->height_factor > 0)
 	{
 		line++;
-		count -= factor;
+		count -= wall_measures->height_factor;
 	}
 	while (raycaster->line->bottom < raycaster->line->top && line < WALL_HEIGHT)
 	{
 		//if (line && rest && line % rest)
-		if (line > WALL_HEIGHT - remainder || line < remainder)
+		if (line > WALL_HEIGHT - wall_measures->height_remainder || line < wall_measures->height_remainder)
 		{
 			//while (rest)
 			{
-				game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4] = texture.data[0 + texture.size_line  * line];
-				game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4 + 1] = texture.data[1 + texture.size_line  * line];
-				game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4 + 2] = texture.data[2 + texture.size_line  * line];
-				game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4 + 3] = texture.data[3 + texture.size_line  * line];
+				game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4] = texture.data[wall_measures->column * 4 + texture.size_line  * line];
+				game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4 + 1] = texture.data[wall_measures->column * 4 + 1 + texture.size_line  * line];
+				game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4 + 2] = texture.data[wall_measures->column * 4 + 2 + texture.size_line  * line];
+				game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4 + 3] = texture.data[wall_measures->column * 4 + 3 + texture.size_line  * line];
 				raycaster->line->bottom++;
-				remainder--;
+				wall_measures->height_remainder--;
 			}
 		}
-		while (count < factor && raycaster->line->bottom < raycaster->line->top)// faire attention aux facteurs negatifs
+		while (count < wall_measures->height_factor && raycaster->line->bottom < raycaster->line->top)// faire attention aux facteurs negatifs
 		{
-			game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4] = texture.data[0 + texture.size_line  * line];
-			game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4 + 1] = texture.data[1 + texture.size_line  * line];
-			game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4 + 2] = texture.data[2 + texture.size_line  * line];
-			game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4 + 3] = texture.data[3 + texture.size_line  * line];
+			game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4] = texture.data[wall_measures->column * 4 + 0 + texture.size_line  * line];
+			game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4 + 1] = texture.data[wall_measures->column * 4 + 1 + texture.size_line  * line];
+			game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4 + 2] = texture.data[wall_measures->column * 4 + 2 + texture.size_line  * line];
+			game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4 + 3] = texture.data[wall_measures->column * 4 + 3 + texture.size_line  * line];
 			raycaster->line->bottom++;
 			count++;
 		}

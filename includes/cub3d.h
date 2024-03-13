@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
+/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 10:57:07 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/03/08 09:49:39 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/13 14:49:55 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct	s_game {
 	void				*mlx_win;
 	t_cub3d_textures	*textures;
 	t_location			*player;
+	t_cub3d_images		target;
 	float				distance;
 	int					buf[WIN_HEIGHT][WIN_WIDTH];
 }						t_game;
