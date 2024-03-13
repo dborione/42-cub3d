@@ -48,6 +48,8 @@ int			ft_parse_map(t_game *game)
 		x = 0;
 		if (!ft_check_walls(game, y))
 			return (0);
+		if (!ft_check_corridor_walls(game, y))
+			return (0);
 		while (game->textures->map[y][x])
 		{
 			if	(!ft_check_elements_and_location(game, x, y))

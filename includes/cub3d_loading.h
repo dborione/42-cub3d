@@ -25,4 +25,5 @@ int		ft_get_int_rgb(t_rgb *rgb);
 int     ft_add_player_location(t_game *game, size_t x, size_t y);
 int     ft_is_start_location(char c);
 int     ft_check_walls(t_game *game, size_t y);
+int     ft_check_corridor_walls(t_game *game, size_t y);
 #endif
