@@ -87,34 +87,50 @@ int	ft_has_north_corridor_wall(char *previous_line, char *line)
 	return (1);
 }
 
-// static
-// int	ft_has_south_corridor_wall(char *next_line, char *line)
-// {
-// 	size_t	i;
+static
+int	ft_has_south_corridor_wall(char *previous_line, char *line)
+{
+	size_t	i;
+	size_t	len;
 
-// 	i = 0;
-// 	size_t len_a = ft_strlen(line);
-// 	size_t len_b = ft_strlen(next_line);
-// 	// ft_printf("test\n");
-// 	// printf("len_a: %s, len_b: %s\n", len_a, len_b);
-// 	// if (len_a > len_b)
-// 	// 	return (1);
-// 	// while (line[i])
-// 	// {
-// 	// 	if (line[i] == ' ')
-// 	// 		ft_printf("c: %c ,c+: %c\n", line[i], next_line[i]);
-// 	// 	if (len_a >= len_b && line[i] == ' ' && next_line[i] == '0')
-// 	// 		return (0);
-// 	// 	i++;
-// 	// }
-// 	return (1);
-// }
+	i = 0;
+	len = ft_strlen(previous_line);
+	while (line[i])
+	{
+		if (line[i] == '0' && i >= len)
+			return (0);
+		if (line[i] == '0' && previous_line[i] == ' ')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+static
+int	ft_has_north_wall(char *line)
+{
+	size_t	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == '0')
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 int	ft_check_walls(t_game *game, size_t y)
 {
+	if (y == 0 && !ft_has_north_wall(game->textures->map[y]))
+	{
+		ft_printf("Crack in the north wall : '%s'\n", game->textures->map[y]);
+		return (0);
+	}
 	if (!ft_has_west_wall(game->textures->map[y]) || !ft_has_east_wall(game->textures->map[y]))
 	{
-		ft_printf("Crack in the walls : '%s'\n", game->textures->map[y]);
+		ft_printf("Crack in the east/west walls : '%s'\n", game->textures->map[y]);
 		return (0);
 	}
 	if (!ft_has_east_corridor_wall(game->textures->map[y]) || !ft_has_west_corridor_wall(game->textures->map[y]))
@@ -122,17 +138,11 @@ int	ft_check_walls(t_game *game, size_t y)
 		ft_printf("Crack in the east/west corridor walls : '%s'\n", game->textures->map[y]);
 		return (0);
 	}
-	if (y > 1 && !ft_has_north_corridor_wall(game->textures->map[y - 1], game->textures->map[y]))
+	if (y >= 1 && (!ft_has_north_corridor_wall(game->textures->map[y - 1], game->textures->map[y])
+		|| !ft_has_south_corridor_wall(game->textures->map[y - 1], game->textures->map[y])))
 	{
-		ft_printf("Crack in the north corridor walls : '%s'\n", game->textures->map[y]);
+		ft_printf("Crack in the north/south corridor walls : '%s'\n", game->textures->map[y]);
 		return (0);
 	}
-	// ft_printf("y: %d\n", y);
-	// ft_printf("map_height: %d\n", game->textures->map_height);
-	// if (y < game->textures->map_height && !ft_has_south_corridor_wall(game->textures->map[y + 1], game->textures->map[y]))
-	// {
-	// 	ft_printf("Crack in the south corridor walls : '%s'\n", game->textures->map[y]);
-	// 	return (0);
-	// }
 	return (1);
 }
