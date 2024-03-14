@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:39:46 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/03/14 13:26:29 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/14 13:52:16 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_draw_vertical_line(t_game *game, t_raycaster *raycaster, int x, t_wall_m
 		}
 	
 	double			step = 1.0 * WALL_HEIGHT / raycaster->line->height;
-	double			texture_position = (raycaster->line->bottom - WALL_HEIGHT / 2 + raycaster->line->height / 2) * step;
+	double			texture_position = (raycaster->line->bottom - WIN_HEIGHT / 2 + raycaster->line->height / 2) * step;
 	//printf("texture position %f, %f\n", step, texture_position);
 	texture.data = mlx_get_data_addr(ft_get_target(game, raycaster),
 		&texture.bits_per_pixel, &texture.size_line, &texture.endian);
