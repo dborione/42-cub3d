@@ -18,82 +18,59 @@
 // Pour eviter qu'on parte en negatif dans la verif
 
 static
-void    ft_move_north(t_game *game, int keycode)
+void    ft_move_forward(t_game *game, float move_speed)
 {
-    if (keycode == W_KEY && (game->player->y - 0.2 + 0.5) >= 0 &&
-        game->textures->map[(int)(game->player->y - 0.2 + 0.5)][(int)(game->player->x + 0.5)] == '0')
-            game->player->y -= 0.2;
-    else if (keycode == S_KEY &&  game->textures->map[(int)(game->player->y + 0.2 + 0.5)] &&
-        game->textures->map[(int)(game->player->y + 0.2 + 0.5)][(int)(game->player->x + 0.5)] == '0')
-        game->player->y = (game->player->y + 0.2);
-    else if (keycode == A_KEY && (game->player->x - 0.2 + 0.5) >= 0 &&
-        game->textures->map[(int)(game->player->y + 0.5)][(int)(game->player->x - 0.2 + 0.5)] == '0')
-        game->player->x -= 0.2;
-    else if (keycode == D_KEY && game->textures->map[(int)(game->player->y + 0.2 + 0.5)] &&
-        game->textures->map[(int)(game->player->y + 0.5)][(int)(game->player->x + 0.2 + 0.5)] == '0')
-        game->player->x += 0.2;
+    if (game->textures->map[(int)(game->player->y + 0.5)][(int)((game->player->x + 0.5)
+        + game->player_dir_x * move_speed)] == '0')
+    {
+        game->player->x += game->player_dir_x * move_speed;
+    }
+    if (game->textures->map[(int)((game->player->y + 0.5)
+        + game->player_dir_y * move_speed)][(int)(game->player->x + 0.5)] == '0')
+    {
+        game->player->y += game->player_dir_y * move_speed;
+    }
 }
 
 static
-void    ft_move_south(t_game *game, int keycode)
+void    ft_move_back(t_game *game, float move_speed)
 {
-    if (keycode == W_KEY && game->textures->map[(int)(game->player->y + 0.2 + 0.5)] &&
-        game->textures->map[(int)(game->player->y + 0.2 + 0.5)][(int)(game->player->x + 0.5)] == '0')
-        game->player->y += 0.2;
-    else if (keycode == S_KEY && (game->player->y - 0.2 + 0.5) >= 0 &&
-        game->textures->map[(int)(game->player->y - 0.2 + 0.5)][(int)(game->player->x + 0.5)] == '0')
-        game->player->y -= 0.2;
-    else if (keycode == A_KEY && game->textures->map[(int)(game->player->y + 0.2 + 0.5)] &&
-        game->textures->map[(int)(game->player->y + 0.5)][(int)(game->player->x + 0.2 + 0.5)] == '0')
-        game->player->x += 0.2;
-    else if (keycode == D_KEY && (game->player->x - 0.2 + 0.5) >= 0 &&
-        game->textures->map[(int)(game->player->y + 0.5)][(int)(game->player->x - 0.2 + 0.5)] == '0')
-        game->player->x -= 0.2;
+    if (game->textures->map[(int)(game->player->y + 0.5)][(int)((game->player->x + 0.5)
+        - game->player_dir_x * move_speed)] == '0')
+    {
+        game->player->x -= game->player_dir_x * move_speed;
+    }
+    if (game->textures->map[(int)((game->player->y + 0.5)
+        - game->player_dir_y * move_speed)][(int)(game->player->x + 0.5)] == '0')
+    {
+        game->player->y -= game->player_dir_y * move_speed;
+    }
 }
 
-static
-void    ft_move_west(t_game *game, int keycode)
-{
-    if (keycode == W_KEY && (game->player->x - 0.2 + 0.5) >= 0 &&
-        game->textures->map[(int)(game->player->y + 0.5)][(int)(game->player->x - 0.2 + 0.5)] == '0')
-        game->player->x -= 0.2;
-    else if (keycode == S_KEY &&
-        game->textures->map[(int)(game->player->y + 0.5)][(int)(game->player->x + 0.2 + 0.5)] == '0')
-        game->player->x += 0.2;
-    else if (keycode == A_KEY && game->textures->map[(int)(game->player->y + 0.2 + 0.5)] &&
-        game->textures->map[(int)(game->player->y + 0.2 + 0.5)][(int)(game->player->x + 0.5)] == '0')
-        game->player->y += 0.2;
-    else if (keycode == D_KEY && (game->player->y - 0.2 + 0.5) >= 0 &&
-        game->textures->map[(int)(game->player->y - 0.2 + 0.5)][(int)(game->player->x + 0.5)] == '0')
-        game->player->y -= 0.2;
-}
-
-static
-void    ft_move_east(t_game *game, int keycode)
-{
-    if (keycode == W_KEY &&
-        game->textures->map[(int)(game->player->y + 0.5)][(int)(game->player->x + 0.2 + 0.5)] == '0')
-        game->player->x += 0.2;
-    else if (keycode == S_KEY &&  (game->player->x - 0.2 + 0.5) >= 0 &&
-        game->textures->map[(int)(game->player->y + 0.5)][(int)(game->player->x - 0.2 + 0.5)] == '0')
-        game->player->x -= 0.2;
-    else if (keycode == A_KEY && (game->player->y - 0.2 + 0.5) >= 0 &&
-        game->textures->map[(int)(game->player->y - 0.2 + 0.5)][(int)(game->player->x + 0.5)] == '0')
-        game->player->y -= 0.2;
-    else if (keycode == D_KEY && game->textures->map[(int)(game->player->y + 0.2 + 0.5)] &&
-        game->textures->map[(int)(game->player->y + 0.2 + 0.5)][(int)(game->player->x + 0.5)] == '0')
-        game->player->y += 0.2;
-}
+// static
+// void    ft_move_sides(t_game *game, float move_speed)
+// {
+//     if (game->textures->map[(int)(game->player->y + 0.5)][(int)((game->player->x + 0.5)
+//         - game->player_dir_x * move_speed)] == '0')
+//     {
+//         game->player->x -= game->player_dir_x * move_speed;
+//     }
+//     // if (game->textures->map[(int)((game->player->y + 0.5)
+//     //     + game->player_dir_y * move_speed)][(int)(game->player->x + 0.5)] == '0')
+//     // {
+//     //     game->player->y += game->player_dir_y * move_speed;
+//     // }
+// }
 
 void	ft_player_movement(t_game *game, int keycode)
 {
-	if (game->player->yaw == YAW_NORTH)
-        ft_move_north(game, keycode);
-	if (game->player->yaw == YAW_SOUTH)
-        ft_move_south(game, keycode);
-	if (game->player->yaw == YAW_WEST)
-        ft_move_west(game, keycode);
-	if (game->player->yaw == YAW_EAST)
-        ft_move_east(game, keycode);
+    float   move_speed = 0.15;
+
+    if (keycode == W_KEY)
+        ft_move_forward(game, move_speed);
+    if (keycode == S_KEY)
+        ft_move_back(game, move_speed);
+    // if (keycode == A_KEY)
+    //     ft_move_sides(game, move_speed);
 	ft_render_frame(game);
 }

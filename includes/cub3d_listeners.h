@@ -31,6 +31,11 @@
 # define LEFT_ARROW_KEY 123
 # define RIGHT_ARROW_KEY 124
 
+# define ON_KEY_DOWN 2
+# define ON_KEY_UP 3
+# define ON_KEY_PRESS 1L<<0
+# define ON_KEY_RELEASE 1L<<1
+
 // typedef struct s_keys_locks {
 // 	char	key_w;
 // 	char	key_a;

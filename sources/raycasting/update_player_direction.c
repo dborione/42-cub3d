@@ -16,7 +16,7 @@
 static
 void	ft_rotate(t_game *game, int factor)
 {
-	float rot_speed = 0.04;
+	float rot_speed = 0.15;
 	float old_player_dir_x;
 	float old_camera_plane_x;
 
