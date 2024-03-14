@@ -16,40 +16,6 @@
 #include "../../includes/cub3d_render.h"
 
 static
-void    ft_set_player_direction(t_game *game)
-{
-    if (game->player->yaw == YAW_NORTH)
-        game->player_dir_y = -1;
-    else if (game->player->yaw == YAW_SOUTH)
-        game->player_dir_y = 1;
-    else if (game->player->yaw == YAW_WEST || game->player->yaw == YAW_EAST)
-        game->player_dir_y = 0;
-	if (game->player->yaw == YAW_WEST)
-        game->player_dir_x = -1;
-    else if (game->player->yaw == YAW_EAST)
-        game->player_dir_x = 1;
-    else if (game->player->yaw == YAW_NORTH || game->player->yaw == YAW_SOUTH)
-        game->player_dir_x = 0;
-}
-
-static
-void    ft_set_camera_plane(t_game *game)
-{
-    if (game->player->yaw == YAW_NORTH)
-        game->camera_plane_x = 0.66;
-    else if (game->player->yaw == YAW_SOUTH)
-        game->camera_plane_x = -0.66;
-    else if (game->player->yaw == YAW_WEST || game->player->yaw == YAW_EAST)
-        game->camera_plane_x = 0;
-	if (game->player->yaw == YAW_WEST)
-        game->camera_plane_y = -0.66;
-    else if (game->player->yaw == YAW_EAST)
-        game->camera_plane_y = 0.66;
-    else if (game->player->yaw == YAW_NORTH || game->player->yaw == YAW_SOUTH)
-        game->camera_plane_y = 0;
-}
-
-static
 void	ft_printf_map(char **map)
 {
 	int	i;
@@ -126,9 +92,7 @@ int	main(int argc, char *argv[])
 		return (2);
 	}
 
-	ft_set_player_direction(game);
-	ft_set_camera_plane(game);
-
+	ft_set_direction_and_camera(game);
 	ft_checking_game(game);
 	// ft_printf("Game started !\n");
 	// ft_printf("Height: %d\nWidth: %d\n", game->textures->map_height, game->textures->map_width);
@@ -136,12 +100,7 @@ int	main(int argc, char *argv[])
 	// 	game->player->x, game->player->y, game->player->pitch, game->player->yaw);
 	ft_key_hook_pressed(game);
 	ft_render_frame(game);
-
-	// mlx_loop_hook(game->mlx, ft_render_frame, game);
-	// mlx_hook(game->mlx_win, 3, ON_KEY_RELEASE, ft_key_released, game);
-
 	ft_close_button_hook(game);
-
 	mlx_loop(game->mlx);
 	ft_unload_game(game);
 	system("leaks cub3D");

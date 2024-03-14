@@ -82,8 +82,9 @@ typedef struct	s_game {
 // }
 
 // Init
-int	ft_quit_window(t_game *game);
-int	ft_init_game(t_game **game);
-int ft_raycasting(t_game *game);
+int		ft_quit_window(t_game *game);
+int		ft_init_game(t_game **game);
+int		ft_raycasting(t_game *game);
+void	ft_set_direction_and_camera(t_game *game);
 
 #endif
