@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 11:41:55 by dborione          #+#    #+#             */
-/*   Updated: 2024/03/13 15:46:44 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/14 12:26:09 by dborione         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include "../../libft/libft.h"
 #include "../../includes/cub3d_raycasting.h"
 #include "../../includes/cub3d_render.h"
+
+
 
 /*
     On caste des rays pour chaque pixel de la largeur de la fenêtre
@@ -92,6 +94,7 @@ int ft_raycasting(t_game *game)
 	t_wall_measures	wall_measures;
     int         i;
 
+	ft_update_player_direction(game);
 	if (!ft_init_raycasting(game, &raycaster, &last_ray))
 		return (0);
     i = 0;

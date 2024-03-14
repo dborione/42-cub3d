@@ -1,20 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dborione <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/14 12:26:43 by dborione          #+#    #+#             */
+/*   Updated: 2024/03/14 12:26:45 by dborione         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
-
-/* TEST */
-static
-void    ft_init_buffer(t_game *game)
-{
-    int	i;
-	int	j;
-
-	i = -1;
-	while (++i < WIN_HEIGHT)
-	{
-		j = -1;
-		while (++j < WIN_WIDTH)
-			game->buf[i][j] = 0;
-	}
-}
 
 int ft_init_game(t_game **game)
 {
@@ -30,6 +26,11 @@ int ft_init_game(t_game **game)
 	(*game)->mlx_win = mlx_new_window((*game)->mlx, WIN_WIDTH, WIN_HEIGHT, "Cub3d");
 	(*game)->textures = NULL;
 	(*game)->player = NULL;
-	ft_init_buffer(*game);
+	(*game)->rotate_left = 0;
+	(*game)->rotate_right = 0;
+    (*game)->player_dir_y = 0;
+    (*game)->player_dir_x = 0;
+    (*game)->camera_plane_x = 0;
+    (*game)->camera_plane_y = 0;
     return (1);
 }

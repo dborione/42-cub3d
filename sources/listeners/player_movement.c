@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_movement.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
+/*   By: dborione <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/07 15:14:31 by dborione          #+#    #+#             */
-/*   Updated: 2024/03/08 10:08:42 by rbarbiot         ###   ########.fr       */
+/*   Created: 2024/03/14 12:28:03 by dborione          #+#    #+#             */
+/*   Updated: 2024/03/14 12:28:07 by dborione         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void    ft_move_north(t_game *game, int keycode)
             game->player->y -= 0.2;
     else if (keycode == S_KEY &&  game->textures->map[(int)(game->player->y + 0.2 + 0.5)] &&
         game->textures->map[(int)(game->player->y + 0.2 + 0.5)][(int)(game->player->x + 0.5)] == '0')
-        game->player->y += 0.2;
+        game->player->y = (game->player->y + 0.2);
     else if (keycode == A_KEY && (game->player->x - 0.2 + 0.5) >= 0 &&
         game->textures->map[(int)(game->player->y + 0.5)][(int)(game->player->x - 0.2 + 0.5)] == '0')
         game->player->x -= 0.2;

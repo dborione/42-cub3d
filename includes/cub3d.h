@@ -62,7 +62,12 @@ typedef struct	s_game {
 	t_location			*player;
 	t_cub3d_images		target;
 	float				distance;
-	int					buf[WIN_HEIGHT][WIN_WIDTH];
+	int					rotate_left;
+	int					rotate_right;
+	float	player_dir_x;
+	float	player_dir_y;
+	float	camera_plane_x;
+	float	camera_plane_y;
 }						t_game;
 
 /*

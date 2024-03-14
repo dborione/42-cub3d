@@ -40,7 +40,7 @@ void	ft_draw_floor(t_game *game);
 float	get_distance(float x1, float y1, float x2, float y2);
 void	ft_draw_wall(t_game *game, void *target);
 void 	ft_draw_vertical_line(t_game *game, t_raycaster *raycaster, int x, t_wall_measures *wall_mesures);
-void	ft_render_frame(t_game *game);
+int	ft_render_frame(t_game *game);
 //int     ft_render_minimap(t_game *game);
 
 #endif

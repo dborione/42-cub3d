@@ -99,4 +99,6 @@ void	ft_update_raycaster(t_game *game, t_raycaster *raycaster, int i);
 	Met à jour le rayson (utile quand on le décalle pixel par pixel)
 */
 
+void	ft_update_player_direction(t_game *game);
+
 #endif
