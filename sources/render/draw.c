@@ -42,20 +42,21 @@ void	ft_get_wall_hit_point(t_raycaster *raycaster)
 void	ft_draw_vertical_line(t_game *game, t_raycaster *raycaster, int x)
 {
 	t_cub3d_images		texture;
-	double			step;
-	double			texture_position;
+	float			step;
+	float			texture_position;
 
 	texture.data = mlx_get_data_addr(ft_get_target(game, raycaster),
 		&texture.bits_per_pixel, &texture.size_line, &texture.endian);
+
+	// printf("texture position %f, %f\n", step, texture_position);
+	ft_get_wall_hit_point(raycaster);
+	int texX = (int)(raycaster->line->wall_hit_x * (float)WALL_WIDTH);
+	if ((raycaster->ray->side == WEST_WALL || raycaster->ray->side == EAST_WALL) && raycaster->ray->dir_x < 0)
+		texX = WALL_WIDTH - texX - 1;
+	if ((raycaster->ray->side == NORTH_WALL || raycaster->ray->side == SOUTH_WALL) && raycaster->ray->dir_y > 0)
+		texX = WALL_WIDTH - texX - 1;
 	step = 1.0 * WALL_HEIGHT / raycaster->line->height;
 	texture_position = (raycaster->line->bottom - WIN_HEIGHT / 2 + raycaster->line->height / 2) * step;
-	printf("texture position %f, %f\n", step, texture_position);
-	ft_get_wall_hit_point(raycaster);
-	int texX = (int)(raycaster->line->wall_hit_x * (double)WALL_WIDTH);
-	if ((raycaster->ray->side == WEST_WALL || raycaster->ray->side == EAST_WALL) && raycaster->ray->dir_x > 0)
-		texX = WALL_WIDTH - texX - 1;
-	if ((raycaster->ray->side == NORTH_WALL || raycaster->ray->side == SOUTH_WALL) && raycaster->ray->dir_y < 0)
-		texX = WALL_WIDTH - texX - 1;
 	while (raycaster->line->bottom < raycaster->line->top)
 	{
 		int texY = (int)texture_position & (WALL_HEIGHT - 1);
