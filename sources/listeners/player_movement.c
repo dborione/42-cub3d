@@ -14,9 +14,6 @@
 #include "../includes/cub3d_render.h"
 #include "../includes/cub3d_listeners.h"
 
-// Ajouter la protection quand on est en 0 0 ou x 0 ou 0 y
-// Pour eviter qu'on parte en negatif dans la verif
-
 static
 void    ft_move_back(t_game *game, float move_speed, float factor)
 {
@@ -49,8 +46,9 @@ void    ft_move_sides(t_game *game, float move_speed, float factor)
 
 void	ft_player_movement(t_game *game, int keycode)
 {
-    float   move_speed = 0.15; // mettre la meme que la vitesse de rotation sinon ca bug
-
+    float   move_speed;
+    
+    move_speed = ROTATION_SPEED;
     if (keycode == W_KEY)
         ft_move_back(game, move_speed, 1);
     if (keycode == S_KEY)

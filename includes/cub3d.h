@@ -41,6 +41,8 @@
 # define WEST_WALL 2
 # define EAST_WALL 3
 
+# define ROTATION_SPEED 0.15
+
 typedef struct s_location
 {
 	float	x;
