@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 10:26:19 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/02/28 16:14:23 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/15 12:06:04 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 
 /* Taille des murs */
 
-# define WALL_HEIGHT 11
-# define WALL_WIDTH 16
+# define WALL_HEIGHT 64
+# define WALL_WIDTH 64
 
 /* Type RGB pour définir les couleurs */
 
