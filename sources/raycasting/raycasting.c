@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 11:41:55 by dborione          #+#    #+#             */
-/*   Updated: 2024/03/14 14:32:35 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/15 16:30:26 by dborione         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	ft_init_raycasting(
 int	ft_raycasting(t_game *game)
 {
 	t_raycaster	*raycaster;
-	int		i;
+	int			i;
 
 	ft_update_player_direction(game);
 	if (!ft_init_raycasting(game, &raycaster))
