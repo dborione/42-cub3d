@@ -1,7 +1,7 @@
-NO ./maps/textures/big_size/north.xpm
-SO ./maps/textures/big_size/south.xpm
-WE ./maps/textures/big_size/west.xpm
-EA ./maps/textures/big_size/east.xpm
+NO ./maps/textures/64x64/north.xpm
+SO ./maps/textures/64x64/south.xpm
+WE ./maps/textures/64x64/west.xpm
+EA ./maps/textures/64x64/east.xpm
 
 F 154, 117, 91
 C 73, 138, 245
