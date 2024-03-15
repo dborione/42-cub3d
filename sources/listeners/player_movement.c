@@ -18,59 +18,46 @@
 // Pour eviter qu'on parte en negatif dans la verif
 
 static
-void    ft_move_forward(t_game *game, float move_speed)
+void    ft_move_back(t_game *game, float move_speed, float factor)
 {
     if (game->textures->map[(int)(game->player->y + 0.5)][(int)((game->player->x + 0.5)
-        + game->player_dir_x * move_speed)] == '0')
+        + game->player_dir_x * move_speed * factor)] == '0')
     {
-        game->player->x += game->player_dir_x * move_speed;
+        game->player->x += game->player_dir_x * move_speed * factor;
     }
     if (game->textures->map[(int)((game->player->y + 0.5)
-        + game->player_dir_y * move_speed)][(int)(game->player->x + 0.5)] == '0')
+        + game->player_dir_y * move_speed * factor)][(int)(game->player->x + 0.5)] == '0')
     {
-        game->player->y += game->player_dir_y * move_speed;
+        game->player->y += game->player_dir_y * move_speed * factor;
     }
 }
 
 static
-void    ft_move_back(t_game *game, float move_speed)
+void    ft_move_sides(t_game *game, float move_speed, float factor)
 {
     if (game->textures->map[(int)(game->player->y + 0.5)][(int)((game->player->x + 0.5)
-        - game->player_dir_x * move_speed)] == '0')
+        + game->camera_plane_x * move_speed * factor)] == '0')
     {
-        game->player->x -= game->player_dir_x * move_speed;
+        game->player->x += game->camera_plane_x * move_speed * factor;
     }
     if (game->textures->map[(int)((game->player->y + 0.5)
-        - game->player_dir_y * move_speed)][(int)(game->player->x + 0.5)] == '0')
+        + game->camera_plane_y * move_speed * factor)][(int)(game->player->x + 0.5)] == '0')
     {
-        game->player->y -= game->player_dir_y * move_speed;
+        game->player->y += game->camera_plane_y * move_speed * factor;
     }
 }
 
-// static
-// void    ft_move_sides(t_game *game, float move_speed)
-// {
-//     if (game->textures->map[(int)(game->player->y + 0.5)][(int)((game->player->x + 0.5)
-//         - game->player_dir_x * move_speed)] == '0')
-//     {
-//         game->player->x -= game->player_dir_x * move_speed;
-//     }
-//     // if (game->textures->map[(int)((game->player->y + 0.5)
-//     //     + game->player_dir_y * move_speed)][(int)(game->player->x + 0.5)] == '0')
-//     // {
-//     //     game->player->y += game->player_dir_y * move_speed;
-//     // }
-// }
-
 void	ft_player_movement(t_game *game, int keycode)
 {
-    float   move_speed = 0.15;
+    float   move_speed = 0.15; // mettre la meme que la vitesse de rotation sinon ca bug
 
     if (keycode == W_KEY)
-        ft_move_forward(game, move_speed);
+        ft_move_back(game, move_speed, 1);
     if (keycode == S_KEY)
-        ft_move_back(game, move_speed);
-    // if (keycode == A_KEY)
-    //     ft_move_sides(game, move_speed);
+        ft_move_back(game, move_speed, -1);
+    if (keycode == D_KEY)
+        ft_move_sides(game, move_speed, 1);
+    if (keycode == A_KEY)
+        ft_move_sides(game, move_speed, -1);
 	ft_render_frame(game);
 }
