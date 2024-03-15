@@ -23,7 +23,8 @@
     côté droit de l'écran = 1
     centre de l'écran = 0
     côté gauche de l'écran = -1
-    donc direction du ray: addition du direction_vector et d'une partie du camera_plane vector
+    donc direction du ray: addition du direction_vector et
+	d'une partie du camera_plane vector
 */
 /* Ray direction + position */
 

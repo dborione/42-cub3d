@@ -22,7 +22,7 @@ void	ft_draw_ceiling(t_game *game)
 
 	i = 0;
 	y = 0;
-	end =  WIN_HEIGHT / 2;
+	end = WIN_HEIGHT / 2;
 	while (y < end)
 	{
 		x = 0;
@@ -32,8 +32,8 @@ void	ft_draw_ceiling(t_game *game)
 			game->textures->frame->data[i + 1] = game->textures->ceiling->green;
 			game->textures->frame->data[i + 2] = game->textures->ceiling->red;
 			game->textures->frame->data[i + 3] = game->textures->ceiling->alpha;
-			i+=4;
-			x+=4;
+			i += 4;
+			x += 4;
 		}
 		y++;
 	}
@@ -45,7 +45,7 @@ void	ft_draw_floor(t_game *game)
 	int	x;
 	int	y;
 
-	y =  WIN_HEIGHT / 2;
+	y = WIN_HEIGHT / 2;
 	i = game->textures->frame->size_line * y;
 	while (y < WIN_HEIGHT)
 	{
@@ -56,8 +56,8 @@ void	ft_draw_floor(t_game *game)
 			game->textures->frame->data[i + 1] = game->textures->floor->green;
 			game->textures->frame->data[i + 2] = game->textures->floor->red;
 			game->textures->frame->data[i + 3] = game->textures->floor->alpha;
-			i+=4;
-			x+=4;
+			i += 4;
+			x += 4;
 		}
 		y++;
 	}

@@ -15,7 +15,7 @@
 
 /* Verifie si la texture n'a pas déjà été chargée */
 static
-int		ft_texture_loaded(t_game *game, char target[3])
+int	ft_texture_loaded(t_game *game, char target[3])
 {
 	if (ft_isequal(target, "NO"))
 		return (game->textures->north_texture != NULL);
@@ -40,15 +40,16 @@ void	ft_set_texture(t_game *game, char target[3], void *texture)
 	else if (ft_isequal(target, "EA"))
 		game->textures->east_texture = texture;
 }
+
 static
-int		ft_load_texture(
+int	ft_load_texture(
 	t_game *game, char *line, char target[3])
 {
-	int		i;
-	void		*tmp;
-	char		*file;
-	int		width;
-	int		height;
+	int	i;
+	void	*tmp;
+	char	*file;
+	int	width;
+	int	height;
 
 	if (ft_texture_loaded(game, target))
 	{
@@ -83,24 +84,35 @@ int		ft_load_texture(
 	return (1);
 }
 
-int ft_load_element(t_game *game, char *line)
+int	ft_load_element(t_game *game, char *line)
 {
-	if (ft_startswith(line, "NO")) {
+	if (ft_startswith(line, "NO"))
+	{
 		if (!ft_load_texture(game, line, "NO"))
 			return (0);
-	} else if (ft_startswith(line, "SO")) {
+	}
+	else if (ft_startswith(line, "SO"))
+	{
 		if (!ft_load_texture(game, line, "SO"))
 			return (0);
-	} else if (ft_startswith(line, "WE")) {
+	}
+	else if (ft_startswith(line, "WE"))
+	{
 		if (!ft_load_texture(game, line, "WE"))
 			return (0);
-	} else if (ft_startswith(line, "EA")) {
+	}
+	else if (ft_startswith(line, "EA"))
+	{
 		if (!ft_load_texture(game, line, "EA"))
 			return (0);
-	} else if (ft_startswith(line, "F")) {
+	}
+	else if (ft_startswith(line, "F"))
+	{
 		if (!ft_load_color(game, line, 'F'))
 			return (0);
-	} else if (ft_startswith(line, "C")) {
+	}
+	else if (ft_startswith(line, "C"))
+	{
 		if (!ft_load_color(game, line, 'C'))
 			return (0);
 	}

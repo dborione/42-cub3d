@@ -19,7 +19,7 @@ void	ft_rotate(t_game *game, int factor)
 	float	rot_speed;
 	float	old_player_dir_x;
 	float	old_camera_plane_x;
-	
+
 	rot_speed = ROTATION_SPEED;
 	old_player_dir_x = game->player_dir_x;
 	old_camera_plane_x = game->camera_plane_x;

@@ -15,7 +15,8 @@
 #include "../../includes/cub3d_raycasting.h"
 
 /* 
-    raycaster->ray->tile_dist_x = length of ray from current position to next x or y-side
+    raycaster->ray->tile_dist_x = length of ray
+	from current position to next x or y-side
 */
 static
 void	ft_get_tile_dist(t_raycaster *raycaster)
@@ -23,26 +24,26 @@ void	ft_get_tile_dist(t_raycaster *raycaster)
 	if (raycaster->ray->dir_x < 0)
 	{
 		raycaster->ray->step_x = -1;
-		raycaster->ray->tile_dist_x = (raycaster->player_pos_x - raycaster->ray->map_pos_x)
-			* raycaster->ray->delta_dist_x;
+		raycaster->ray->tile_dist_x = (raycaster->player_pos_x
+				- raycaster->ray->map_pos_x) * raycaster->ray->delta_dist_x;
 	}
 	else
 	{
 		raycaster->ray->step_x = 1;
-		raycaster->ray->tile_dist_x = (raycaster->ray->map_pos_x + 1.0 - raycaster->player_pos_x)
-			* raycaster->ray->delta_dist_x;
+		raycaster->ray->tile_dist_x = (raycaster->ray->map_pos_x + 1.0
+				- raycaster->player_pos_x) * raycaster->ray->delta_dist_x;
 	}
 	if (raycaster->ray->dir_y < 0)
 	{
 		raycaster->ray->step_y = -1;
-		raycaster->ray->tile_dist_y = (raycaster->player_pos_y - raycaster->ray->map_pos_y)
-			* raycaster->ray->delta_dist_y;
+		raycaster->ray->tile_dist_y = (raycaster->player_pos_y
+				- raycaster->ray->map_pos_y) * raycaster->ray->delta_dist_y;
 	}
 	else
 	{
 		raycaster->ray->step_y = 1;
-		raycaster->ray->tile_dist_y = (raycaster->ray->map_pos_y + 1.0 - raycaster->player_pos_y)
-			* raycaster->ray->delta_dist_y;
+		raycaster->ray->tile_dist_y = (raycaster->ray->map_pos_y
+				+ 1.0 - raycaster->player_pos_y) * raycaster->ray->delta_dist_y;
 	}
 }
 
@@ -69,9 +70,10 @@ void	ft_do_dda(t_game *game, t_raycaster *raycaster)
 			else
 				raycaster->ray->side = SOUTH_WALL;
 		}
-		if (game->textures->map[raycaster->ray->map_pos_y][raycaster->ray->map_pos_x] == '1')
+		if (game->textures->map[raycaster->ray->map_pos_y]
+			[raycaster->ray->map_pos_x] == '1')
 			raycaster->ray->hit = 1;
-		}
+	}
 }
 
 static

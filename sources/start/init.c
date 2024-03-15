@@ -12,7 +12,7 @@
 
 #include "../includes/cub3d.h"
 
-int ft_init_game(t_game **game)
+int	ft_init_game(t_game **game)
 {
 	*game = malloc(sizeof(t_game));
 	if (!*game)
@@ -23,7 +23,8 @@ int ft_init_game(t_game **game)
 		free(*game);
 		return (0);
 	}
-	(*game)->mlx_win = mlx_new_window((*game)->mlx, WIN_WIDTH, WIN_HEIGHT, "Cub3d");
+	(*game)->mlx_win = mlx_new_window((*game)->mlx,
+			WIN_WIDTH, WIN_HEIGHT, "Cub3d");
 	(*game)->textures = NULL;
 	(*game)->player = NULL;
 	(*game)->rotate_left = 0;

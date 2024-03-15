@@ -16,7 +16,8 @@
 static
 int	ft_valid_map_element(char c)
 {
-	return (c == '0' || c == '0' || c == '1' || c == ' ' || ft_is_start_location(c));
+	return (c == '0' || c == '0' || c == '1'
+		|| c == ' ' || ft_is_start_location(c));
 }
 
 static
@@ -52,7 +53,7 @@ int	ft_parse_map(t_game *game)
 			return (0);
 		while (game->textures->map[y][x])
 		{
-			if	(!ft_check_elements_and_location(game, x, y))
+			if (!ft_check_elements_and_location(game, x, y))
 				return (0);
 			x++;
 		}

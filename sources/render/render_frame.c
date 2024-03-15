@@ -24,12 +24,12 @@ int	ft_render_frame(t_game *game)
 {
 	ft_draw_ceiling(game);
 	ft_draw_floor(game);
-	// ft_draw_wall(game, game->textures->north_texture);
 	if (!ft_raycasting(game))
 	{
 		system("leaks cub3D");
 		exit (2); // a fixer plus tard
 	}
-	mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->frame->pointer, 0, 0);
+	mlx_put_image_to_window(game->mlx, game->mlx_win,
+		game->textures->frame->pointer, 0, 0);
 	return (1);
 }

@@ -37,11 +37,11 @@ void	ft_draw_line(
 			game->textures->frame->data[frame_i + 1] = texture.data[wall_i + 1];
 			game->textures->frame->data[frame_i + 2] = texture.data[wall_i + 2];
 			game->textures->frame->data[frame_i + 3] = texture.data[wall_i + 3];
-			frame_i+=4;
+			frame_i += 4;
 			count++;
 		}
 		count = 0;
-		wall_i+=4;
+		wall_i += 4;
 	}
 }
 
@@ -55,7 +55,8 @@ void	ft_draw_lines(t_game *game, t_cub3d_images texture)
 
 	line = 0;
 	frame_i = 0;
-	factor = DISTANCE_FOR_FULL_WALL / game->distance * (WIN_HEIGHT / WALL_HEIGHT);
+	factor = DISTANCE_FOR_FULL_WALL / game->distance
+		* (WIN_HEIGHT / WALL_HEIGHT);
 	while (line < WALL_HEIGHT && line < WIN_HEIGHT)
 	{
 		count = 0;
@@ -74,7 +75,7 @@ void	ft_draw_wall(t_game *game, void *target)
 	t_cub3d_images	texture;
 
 	texture.data = mlx_get_data_addr(target,
-		&texture.bits_per_pixel, &texture.size_line, &texture.endian);
+			&texture.bits_per_pixel, &texture.size_line, &texture.endian);
 	game->distance = 6.7625;
 	ft_draw_lines(game, texture);
 }

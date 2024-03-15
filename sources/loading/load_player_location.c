@@ -40,7 +40,7 @@ int	ft_is_start_location(char c)
 static
 t_location	*ft_get_location(char direction, size_t x, size_t y)
 {
-	t_location *location;
+	t_location	*location;
 
 	location = malloc(sizeof(t_location));
 	if (!location)
@@ -59,7 +59,7 @@ t_location	*ft_get_location(char direction, size_t x, size_t y)
 	return (location);
 }
 
-int	ft_add_player_location(t_game *game, size_t x, size_t y) // a checker, doublon?
+int	ft_add_player_location(t_game *game, size_t x, size_t y)
 {
 	if (game->player)
 		return (0);

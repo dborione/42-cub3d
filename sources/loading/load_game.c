@@ -103,9 +103,13 @@ int	ft_load_game(t_game *game, char *map_path)
 		return (0);
 	width = WIN_WIDTH;
 	height = WIN_HEIGHT;
-	game->textures->frame->pointer = mlx_new_image(game->mlx, width, height); // ajouter une protection
-	game->textures->frame->data = mlx_get_data_addr(game->textures->frame->pointer,
-		&(game->textures->frame)->bits_per_pixel, &(game->textures->frame)->size_line, &(game->textures->frame)->endian);
+	game->textures->frame->pointer = mlx_new_image(game->mlx,
+			width, height); // ajouter une protection
+	game->textures->frame->data
+		= mlx_get_data_addr(game->textures->frame->pointer,
+			&(game->textures->frame)->bits_per_pixel,
+			&(game->textures->frame)->size_line,
+			&(game->textures->frame)->endian);
 	ft_printf("Textures initialized\n");
 	if (!ft_load_textures(game, map_path)) //leak
 	{
