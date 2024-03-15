@@ -27,21 +27,21 @@ void	*ft_get_target(t_game *game, t_raycaster *raycaster)
 }
 
 static
-void    ft_get_wall_hit_point(t_raycaster *raycaster)
+void	ft_get_wall_hit_point(t_raycaster *raycaster)
 {
-    raycaster->line->wall_hit_x = 0;
-    if (raycaster->ray->side == EAST_WALL || raycaster->ray->side == WEST_WALL)
-        raycaster->line->wall_hit_x = raycaster->player_pos_y +
-            raycaster->ray->ray_to_wall_dist * raycaster->ray->dir_y;
-    else
-        raycaster->line->wall_hit_x = raycaster->player_pos_x +
-            raycaster->ray->ray_to_wall_dist * raycaster->ray->dir_x;
-    raycaster->line->wall_hit_x -= floor(raycaster->line->wall_hit_x); // double floor(double x) = returns the largest integer value less than or equal to x
+	raycaster->line->wall_hit_x = 0;
+	if (raycaster->ray->side == EAST_WALL || raycaster->ray->side == WEST_WALL)
+		raycaster->line->wall_hit_x = raycaster->player_pos_y +
+			raycaster->ray->ray_to_wall_dist * raycaster->ray->dir_y;
+	else
+		raycaster->line->wall_hit_x = raycaster->player_pos_x +
+			raycaster->ray->ray_to_wall_dist * raycaster->ray->dir_x;
+	raycaster->line->wall_hit_x -= floor(raycaster->line->wall_hit_x); // double floor(double x) = returns the largest integer value less than or equal to x
 }
 
 void	ft_draw_vertical_line(t_game *game, t_raycaster *raycaster, int x)
 {
-	t_cub3d_images	texture;
+	t_cub3d_images		texture;
 	double			step;
 	double			texture_position;
 

@@ -17,7 +17,7 @@ static
 void	ft_draw_line(
 	t_game *game, t_cub3d_images texture, int frame_i, int line)
 {
-	int wall_i;
+	int	wall_i;
 	int	count;
 	int	factor;
 	int	end;
@@ -50,7 +50,7 @@ void	ft_draw_lines(t_game *game, t_cub3d_images texture)
 {
 	int	line;
 	int	count;
-	int frame_i;
+	int	frame_i;
 	int	factor;
 
 	line = 0;

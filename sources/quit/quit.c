@@ -16,7 +16,7 @@
 int	ft_quit_window(t_game *game)
 {
 	ft_unload_game(game);
-	system("leaks cub3D");
+	system("leaks cub3D"); //a enlever
 	exit (0);
 	return (0);
 }

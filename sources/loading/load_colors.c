@@ -78,7 +78,7 @@ int		ft_set_color(t_game *game, char **brut_rgb, char target)
 
 int		ft_load_color(t_game *game, char *line, char target)
 {
-	int		i;
+	int	i;
 	char	**brut_rgb;
 
 	if (ft_color_loaded(game, target) || !line[1])

@@ -15,8 +15,6 @@
 #include "../../includes/cub3d_raycasting.h"
 #include "../../includes/cub3d_render.h"
 
-
-
 /*
     On caste des rays pour chaque pixel de la largeur de la fenêtre
     Le ray commence à la position du player
@@ -39,23 +37,23 @@ int	ft_init_raycasting(
 	return (1);
 }
 
-int ft_raycasting(t_game *game)
+int	ft_raycasting(t_game *game)
 {
-    t_raycaster		*raycaster;
-    int         i;
+	t_raycaster	*raycaster;
+	int		i;
 
 	ft_update_player_direction(game);
 	if (!ft_init_raycasting(game, &raycaster))
 		return (0);
-    i = 0;
-    while (i < WIN_WIDTH)
-    {
+	i = 0;
+	while (i < WIN_WIDTH)
+	{
 		ft_update_raycaster(game, raycaster, i);
 		ft_draw_vertical_line(game, raycaster, i);
 		i++;
-    }
+	}
 	free(raycaster->ray);
 	free(raycaster->line);
 	free(raycaster);
-    return (1);
+	return (1);
 }

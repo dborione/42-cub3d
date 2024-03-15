@@ -14,7 +14,7 @@
 #include "../../includes/cub3d_loading.h"
 
 static
-int			ft_valid_map_element(char c)
+int	ft_valid_map_element(char c)
 {
 	return (c == '0' || c == '0' || c == '1' || c == ' ' || ft_is_start_location(c));
 }
@@ -35,7 +35,7 @@ int	ft_check_elements_and_location(t_game *game, size_t x, size_t y)
 	return (1);
 }
 
-int			ft_parse_map(t_game *game)
+int	ft_parse_map(t_game *game)
 {
 	size_t	x;
 	size_t	y;

@@ -22,7 +22,7 @@
 		passant par 0 (direction nord)
 	*/
 
-int			ft_is_start_location(char c)
+int	ft_is_start_location(char c)
 {
 	return (c == 'N' || c == 'S' || c == 'W' || c == 'E');
 }
@@ -59,7 +59,7 @@ t_location	*ft_get_location(char direction, size_t x, size_t y)
 	return (location);
 }
 
-int			ft_add_player_location(t_game *game, size_t x, size_t y) // a checker, doublon?
+int	ft_add_player_location(t_game *game, size_t x, size_t y) // a checker, doublon?
 {
 	if (game->player)
 		return (0);

@@ -14,7 +14,7 @@
 #include "../../includes/cub3d.h"
 
 static
-int		ft_empty_line(char *line)
+int	ft_empty_line(char *line)
 {
 	size_t	i;
 
@@ -56,7 +56,7 @@ size_t	ft_line_size(char *line)
 }
 
 static
-int		ft_add_line(t_game *game, char **lines, char *line)
+int	ft_add_line(t_game *game, char **lines, char *line)
 {
 	char	*trimed_line;
 	size_t	line_size;

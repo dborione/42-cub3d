@@ -12,8 +12,8 @@
 
 #include "../../includes/cub3d_loading.h"
 #include "../../includes/cub3d_textures.h"
-#include <stdlib.h>
-#include <fcntl.h>
+#include <stdlib.h> //check
+#include <fcntl.h> //check
 
 static
 t_cub3d_textures	*ft_new_textures(void)
@@ -42,7 +42,7 @@ t_cub3d_textures	*ft_new_textures(void)
 }
 
 static
-int					ft_elements_loaded(t_game *game)
+int	ft_elements_loaded(t_game *game)
 {
 	if (!game->textures)
 		return (0);
@@ -62,9 +62,9 @@ int					ft_elements_loaded(t_game *game)
 }
 
 static
-int					ft_load_textures(t_game *game, char *map_path)
+int	ft_load_textures(t_game *game, char *map_path)
 {
-	int		fd;
+	int	fd;
 	char	*line;
 
 	fd = open(map_path, O_RDONLY);
@@ -91,15 +91,18 @@ int					ft_load_textures(t_game *game, char *map_path)
 	return (1);
 }
 
-int					ft_load_game(t_game *game, char *map_path)
+int	ft_load_game(t_game *game, char *map_path)
 {
+	int	width;
+	int	height;
+
 	if (!ft_endswith(map_path, ".cub"))
 		return (0);
 	game->textures = ft_new_textures();
 	if (!game->textures)
 		return (0);
-	int width = WIN_WIDTH;
-	int	height = WIN_HEIGHT;
+	width = WIN_WIDTH;
+	height = WIN_HEIGHT;
 	game->textures->frame->pointer = mlx_new_image(game->mlx, width, height); // ajouter une protection
 	game->textures->frame->data = mlx_get_data_addr(game->textures->frame->pointer,
 		&(game->textures->frame)->bits_per_pixel, &(game->textures->frame)->size_line, &(game->textures->frame)->endian);

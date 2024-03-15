@@ -45,8 +45,8 @@ int		ft_load_texture(
 	t_game *game, char *line, char target[3])
 {
 	int		i;
-	void	*tmp;
-	char	*file;
+	void		*tmp;
+	char		*file;
 	int		width;
 	int		height;
 

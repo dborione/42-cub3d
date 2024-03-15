@@ -28,9 +28,9 @@ int ft_init_game(t_game **game)
 	(*game)->player = NULL;
 	(*game)->rotate_left = 0;
 	(*game)->rotate_right = 0;
-    (*game)->player_dir_y = 0;
-    (*game)->player_dir_x = 0;
-    (*game)->camera_plane_x = 0;
-    (*game)->camera_plane_y = 0;
-    return (1);
+	(*game)->player_dir_y = 0;
+	(*game)->player_dir_x = 0;
+	(*game)->camera_plane_x = 0;
+	(*game)->camera_plane_y = 0;
+	return (1);
 }
