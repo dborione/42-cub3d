@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 10:33:07 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/02/21 15:09:32 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/15 18:35:54 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ void	ft_load_map_schema(t_game *game, int fd)
 		{
 			free(line);
 			free(lines);
-			ft_printf("Error empty line in map\n");
 			return ;
 		}
 		if (!ft_add_line(game, &lines, line))
