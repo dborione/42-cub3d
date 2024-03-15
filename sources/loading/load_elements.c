@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 10:11:14 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/02/23 18:28:23 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/15 14:33:05 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,35 +86,21 @@ int	ft_load_texture(
 
 int	ft_load_element(t_game *game, char *line)
 {
+	int	result;
+
 	if (ft_startswith(line, "NO"))
-	{
-		if (!ft_load_texture(game, line, "NO"))
-			return (0);
-	}
+		result = ft_load_texture(game, line, "NO");
 	else if (ft_startswith(line, "SO"))
-	{
-		if (!ft_load_texture(game, line, "SO"))
-			return (0);
-	}
+		result = ft_load_texture(game, line, "SO");
 	else if (ft_startswith(line, "WE"))
-	{
-		if (!ft_load_texture(game, line, "WE"))
-			return (0);
-	}
+		result = ft_load_texture(game, line, "WE");
 	else if (ft_startswith(line, "EA"))
-	{
-		if (!ft_load_texture(game, line, "EA"))
-			return (0);
-	}
+		result = ft_load_texture(game, line, "EA");
 	else if (ft_startswith(line, "F"))
-	{
-		if (!ft_load_color(game, line, 'F'))
-			return (0);
-	}
+		result = ft_load_color(game, line, 'F');
 	else if (ft_startswith(line, "C"))
-	{
-		if (!ft_load_color(game, line, 'C'))
-			return (0);
-	}
-	return (1);
+		result = ft_load_color(game, line, 'C');
+	else
+		result = 1;
+	return (result);
 }

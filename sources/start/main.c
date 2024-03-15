@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 11:30:11 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/03/14 12:26:54 by dborione         ###   ########.fr       */
+/*   Updated: 2024/03/15 14:43:17 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,8 @@ int	main(int argc, char *argv[])
 		system("leaks cub3D");
 		return (2);
 	}
-
 	ft_set_direction_and_camera(game);
 	ft_checking_game(game);
-	// ft_printf("Game started !\n");
-	// ft_printf("Height: %d\nWidth: %d\n", game->textures->map_height, game->textures->map_width);
-	// printf("Player location : x %f, y %f, pitch %f, yaw %f",
-	// 	game->player->x, game->player->y, game->player->pitch, game->player->yaw);
 	ft_key_hook_pressed(game);
 	ft_render_frame(game);
 	ft_close_button_hook(game);

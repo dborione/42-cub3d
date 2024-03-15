@@ -46,7 +46,7 @@ void	ft_get_wall_hit_point(t_game *game, t_raycaster *raycaster)
 	[(int)raycaster->player_pos_x] - 1;
 	raycaster->line->wall_hit_x = 0;
 	if (raycaster->ray->side == EAST_WALL
-		|| raycaster->ray->side == WEST_WALL) // if side == EAST ou WEST
+		|| raycaster->ray->side == WEST_WALL)
 		raycaster->line->wall_hit_x = raycaster->player_pos_y
 			+ raycaster->ray->ray_to_wall_dist * raycaster->ray->dir_y;
 	else

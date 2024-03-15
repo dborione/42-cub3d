@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 11:41:55 by dborione          #+#    #+#             */
-/*   Updated: 2024/03/14 12:26:01 by dborione         ###   ########.fr       */
+/*   Updated: 2024/03/15 14:41:39 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #include "../../libft/libft.h"
 #include "../../includes/cub3d_raycasting.h"
 
-// FOV = ratio between the length of the direction vector,
-//	and the length of the plane.
 t_raycaster	*ft_new_raycaster(t_game *game)
 {
 	t_raycaster	*raycaster;

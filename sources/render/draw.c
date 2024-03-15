@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:39:46 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/03/14 17:56:59 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/15 14:42:21 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_get_wall_hit_point(t_raycaster *raycaster)
 	else
 		raycaster->line->wall_hit_x = raycaster->player_pos_x +
 			raycaster->ray->ray_to_wall_dist * raycaster->ray->dir_x;
-	raycaster->line->wall_hit_x -= floor(raycaster->line->wall_hit_x); // double floor(double x) = returns the largest integer value less than or equal to x
+	raycaster->line->wall_hit_x -= floor(raycaster->line->wall_hit_x);
 }
 
 void	ft_draw_vertical_line(t_game *game, t_raycaster *raycaster, int x)
@@ -47,8 +47,6 @@ void	ft_draw_vertical_line(t_game *game, t_raycaster *raycaster, int x)
 
 	texture.data = mlx_get_data_addr(ft_get_target(game, raycaster),
 		&texture.bits_per_pixel, &texture.size_line, &texture.endian);
-
-	// printf("texture position %f, %f\n", step, texture_position);
 	ft_get_wall_hit_point(raycaster);
 	int texX = (int)(raycaster->line->wall_hit_x * (float)WALL_WIDTH);
 	if ((raycaster->ray->side == WEST_WALL || raycaster->ray->side == EAST_WALL) && raycaster->ray->dir_x < 0)
@@ -61,7 +59,6 @@ void	ft_draw_vertical_line(t_game *game, t_raycaster *raycaster, int x)
 	{
 		int texY = (int)texture_position & (WALL_HEIGHT - 1);
         texture_position += step;
-		 //where exactly the wall was hit
 		game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x * 4] = texture.data[texX * 4 + texture.size_line * texY];
 		game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x * 4 + 1] = texture.data[texX * 4 + 1 + texture.size_line * texY];
 		game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x * 4 + 2] = texture.data[texX * 4 + 2 + texture.size_line * texY];

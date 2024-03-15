@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda_loop.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
+/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 11:41:55 by dborione          #+#    #+#             */
-/*   Updated: 2024/03/08 09:55:05 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/15 14:40:59 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 #include "../../libft/libft.h"
 #include "../../includes/cub3d_raycasting.h"
 
-/* 
-    raycaster->ray->tile_dist_x = length of ray
-	from current position to next x or y-side
-*/
 static
 void	ft_get_tile_dist(t_raycaster *raycaster)
 {
