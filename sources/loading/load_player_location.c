@@ -6,13 +6,14 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 12:25:11 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/03/15 14:40:13 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/15 15:17:12 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-ft_is_start_location(char c)
+
+int	ft_is_start_location(char c)
 {
 	return (c == 'N' || c == 'S' || c == 'W' || c == 'E');
 }
