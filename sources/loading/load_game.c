@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 10:51:20 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/03/15 17:47:32 by dborione         ###   ########.fr       */
+/*   Updated: 2024/03/15 18:17:03 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	ft_elements_loaded(t_game *game)
 static
 int	ft_load_textures(t_game *game, char *map_path)
 {
-	int	fd;
+	int		fd;
 	char	*line;
 
 	fd = open(map_path, O_RDONLY);
@@ -98,13 +98,11 @@ int	ft_load_game(t_game *game, char *map_path)
 		return (0);
 	if (!ft_new_textures(game))
 		return (0);
-	ft_printf("Textures initialized\n");
-	if (!ft_load_textures(game, map_path)) //leak
+	if (!ft_load_textures(game, map_path))
 	{
-		ft_unload_game(game); //leak
+		ft_unload_game(game);
 		return (0);
 	}
-	ft_printf("Textures loaded\n");
 	if (!ft_parse_map(game))
 	{
 		ft_unload_game(game);

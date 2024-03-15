@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 12:05:25 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/03/15 17:02:00 by dborione         ###   ########.fr       */
+/*   Updated: 2024/03/15 18:05:36 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@
 void	ft_draw_ceiling(t_game *game);
 void	ft_draw_floor(t_game *game);
 void	ft_draw_vertical_line(t_game *game, t_raycaster *raycaster, int x);
-int		ft_render_frame(t_game *game);
+void	ft_render_frame(t_game *game);
 
 #endif
