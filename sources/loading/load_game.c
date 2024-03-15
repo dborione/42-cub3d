@@ -6,14 +6,13 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 10:51:20 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/03/15 16:13:30 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/15 17:47:32 by dborione         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d_loading.h"
 #include "../../includes/cub3d_textures.h"
-#include <stdlib.h> //check
-#include <fcntl.h> //check
+#include <fcntl.h>
 
 static
 int	ft_new_textures(t_game *game)
