@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_raycasting.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
+/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 11:41:55 by dborione          #+#    #+#             */
-/*   Updated: 2024/03/08 09:49:19 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/15 14:29:09 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ typedef struct s_raycaster
 void        ft_dda_loop(t_game *game, t_raycaster *raycaster);
 void        ft_get_wall_infos(t_game *game, t_raycaster *raycaster);
 void        ft_get_texture_pos(t_raycaster *raycaster);
-void        ft_draw_imgs(t_game *game, t_raycaster *raycaster, int x);
 
 /* News */
 

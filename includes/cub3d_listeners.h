@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:20:36 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/03/07 14:49:23 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/15 14:28:40 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,6 @@
 # define ON_KEY_UP 3
 # define ON_KEY_PRESS 1L<<0
 # define ON_KEY_RELEASE 1L<<1
-
-// typedef struct s_keys_locks {
-// 	char	key_w;
-// 	char	key_a;
-// 	char	key_s;
-// 	char	key_d;
-// 	char	key_up;
-// 	char	key_left;
-// 	char	key_down;
-// 	char	key_right;
-// }	t_keys_locks;
 
 void	ft_key_hook_pressed(t_game *game);
 void	ft_close_button_hook(t_game *game);
