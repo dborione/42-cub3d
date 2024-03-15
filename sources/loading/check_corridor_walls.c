@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+#include "../../includes/cub3d_loading.h"
 #include "../libft/libft.h"
 
 static
@@ -74,9 +75,11 @@ int	ft_has_south_corridor_wall(char *previous_line, char *line)
 	len = ft_strlen(previous_line);
 	while (line[i])
 	{
-		if (line[i] == '0' && i >= len)
+		if ((line[i] == '0' || ft_is_start_location(line[i]))
+			&& i >= len)
 			return (0);
-		if (line[i] == '0' && previous_line[i] == ' ')
+		if ((line[i] == '0' || ft_is_start_location(line[i]))
+			&& previous_line[i] == ' ')
 			return (0);
 		i++;
 	}
@@ -88,7 +91,7 @@ int	ft_check_corridor_walls(t_game *game, size_t y)
 	if (!ft_has_east_corridor_wall(game->textures->map[y])
 		|| !ft_has_west_corridor_wall(game->textures->map[y]))
 	{
-		ft_printf("Crack in the west/east corridor walls : '%s'",
+		ft_printf("Crack in the west/east corridor walls : '%s'\n",
 			game->textures->map[y]);
 		return (0);
 	}
@@ -97,7 +100,7 @@ int	ft_check_corridor_walls(t_game *game, size_t y)
 			|| !ft_has_south_corridor_wall(game->textures->map[y - 1],
 				game->textures->map[y])))
 	{
-		ft_printf("Crack in the north/south corridor walls : '%s'",
+		ft_printf("Crack in the north/south corridor walls : '%s'\n",
 			game->textures->map[y]);
 		return (0);
 	}

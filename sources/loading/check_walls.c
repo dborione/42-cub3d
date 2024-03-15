@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+#include "../../includes/cub3d_loading.h"
 #include "../libft/libft.h"
 
 static
@@ -44,7 +45,7 @@ int	ft_has_north_wall(char *line)
 	i = 0;
 	while (line[i])
 	{
-		if (line[i] == '0')
+		if (line[i] == '0' || ft_is_start_location(line[i]))
 			return (0);
 		i++;
 	}
@@ -59,7 +60,7 @@ int	ft_has_south_wall(char *line)
 	i = 0;
 	while (line[i])
 	{
-		if (line[i] == '0')
+		if (line[i] == '0' || ft_is_start_location(line[i]))
 			return (0);
 		i++;
 	}
@@ -70,19 +71,19 @@ int	ft_check_walls(t_game *game, size_t y)
 {
 	if (y == 0 && !ft_has_north_wall(game->textures->map[y]))
 	{
-		ft_printf("Crack in the north wall : '%s'", game->textures->map[y]);
+		ft_printf("Crack in the north wall : '%s'\n", game->textures->map[y]);
 		return (0);
 	}
 	if ((y == (game->textures->map_height - 1))
 		&& !ft_has_south_wall(game->textures->map[y]))
 	{
-		ft_printf("Crack in the south wall : '%s'", game->textures->map[y]);
+		ft_printf("Crack in the south wall : '%s'\n", game->textures->map[y]);
 		return (0);
 	}
 	if (!ft_has_west_wall(game->textures->map[y])
 		|| !ft_has_east_wall(game->textures->map[y]))
 	{
-		ft_printf("Crack in the east/west walls : '%s'",
+		ft_printf("Crack in the east/west walls : '%s'\n",
 			game->textures->map[y]);
 		return (0);
 	}
