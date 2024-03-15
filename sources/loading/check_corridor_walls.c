@@ -24,7 +24,8 @@ int	ft_has_east_corridor_wall(char *line)
 	len = ft_strlen(line);
 	while (i < len)
 	{
-		if (line[i] == '0' && line[i + 1] == ' ')
+		if ((line[i] == '0' || ft_is_start_location(line[i]))
+			&& line[i + 1] == ' ')
 			return (0);
 		i++;
 	}
@@ -45,7 +46,7 @@ int	ft_has_west_corridor_wall(char *line)
 	}
 	while (line[i] == ' ')
 		i++;
-	if (line[i] == '0')
+	if (line[i] == '0' || ft_is_start_location(line[i]))
 		return (0);
 	return (1);
 }
