@@ -55,6 +55,6 @@ int	ft_key_released(int keycode, t_game *game)
 
 void	ft_key_hook_pressed(t_game *game)
 {
-	mlx_hook(game->mlx_win, ON_KEY_DOWN, ON_KEY_PRESS, ft_key_pressed, game);
-	mlx_hook(game->mlx_win, ON_KEY_UP, ON_KEY_RELEASE, ft_key_released, game);
+	mlx_hook(game->mlx_win, ON_KEY_DOWN, 1L<<0, ft_key_pressed, game);
+	mlx_hook(game->mlx_win, ON_KEY_UP, 1L<<1, ft_key_released, game);
 }
