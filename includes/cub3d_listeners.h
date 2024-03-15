@@ -6,12 +6,12 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:20:36 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/03/15 14:28:40 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/15 16:53:42 by dborione         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_LISTENERS
-# define CUB3D_LISTENERS
+#ifndef CUB3D_LISTENERS_H
+# define CUB3D_LISTENERS_H
 # include "cub3d.h"
 # include "../libft/libft.h"
 
@@ -33,8 +33,6 @@
 
 # define ON_KEY_DOWN 2
 # define ON_KEY_UP 3
-# define ON_KEY_PRESS 1L<<0
-# define ON_KEY_RELEASE 1L<<1
 
 void	ft_key_hook_pressed(t_game *game);
 void	ft_close_button_hook(t_game *game);

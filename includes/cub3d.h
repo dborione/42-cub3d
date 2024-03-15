@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 10:57:07 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/03/13 14:49:55 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/15 16:51:57 by dborione         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <mlx.h>
 # include <stdlib.h>
 # include "cub3d_textures.h"
-#include <stdio.h>
 
 # define TILE_SIZE 32
 # ifndef WIN_WIDTH
@@ -57,7 +56,7 @@ typedef struct s_location
 	les pointeurs pour la MLX, les textures et code 
 	de la map
 */
-typedef struct	s_game {
+typedef struct s_game {
 	void				*mlx;
 	void				*mlx_win;
 	t_cub3d_textures	*textures;
@@ -66,10 +65,10 @@ typedef struct	s_game {
 	float				distance;
 	int					rotate_left;
 	int					rotate_right;
-	float	player_dir_x;
-	float	player_dir_y;
-	float	camera_plane_x;
-	float	camera_plane_y;
+	float				player_dir_x;
+	float				player_dir_y;
+	float				camera_plane_x;
+	float				camera_plane_y;
 }						t_game;
 
 /*
