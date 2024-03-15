@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_wall_infos.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dborione <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/15 16:29:27 by dborione          #+#    #+#             */
+/*   Updated: 2024/03/15 16:30:02 by dborione         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 #include "../../libft/libft.h"
 #include "../../includes/cub3d_raycasting.h"
@@ -26,11 +38,11 @@ void	ft_set_wall_height(t_raycaster *raycaster)
 	raycaster->line->height = (int)(WIN_HEIGHT
 			/ raycaster->ray->ray_to_wall_dist);
 	raycaster->line->bottom = -raycaster->line->height
-		/ 2 + WIN_HEIGHT / 2; //start
+		/ 2 + WIN_HEIGHT / 2;
 	if (raycaster->line->bottom < 0)
 		raycaster->line->bottom = 0;
 	raycaster->line->top = raycaster->line->height
-		/ 2 + WIN_HEIGHT / 2; //end
+		/ 2 + WIN_HEIGHT / 2;
 	if (raycaster->line->top >= WIN_HEIGHT)
 		raycaster->line->top = WIN_HEIGHT - 1;
 }

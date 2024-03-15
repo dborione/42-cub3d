@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 10:11:14 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/03/15 14:33:05 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/15 16:36:40 by dborione         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ static
 int	ft_load_texture(
 	t_game *game, char *line, char target[3])
 {
-	int	i;
+	int		i;
 	void	*tmp;
 	char	*file;
-	int	width;
-	int	height;
+	int		width;
+	int		height;
 
 	if (ft_texture_loaded(game, target))
 	{

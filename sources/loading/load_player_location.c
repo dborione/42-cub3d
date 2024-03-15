@@ -6,12 +6,11 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 12:25:11 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/03/15 15:17:12 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/15 16:27:52 by dborione         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
 
 int	ft_is_start_location(char c)
 {
