@@ -14,9 +14,10 @@
 #include "../../includes/cub3d_loading.h"
 
 static
-int			ft_valid_map_element(char c)
+int	ft_valid_map_element(char c)
 {
-	return (c == '0' || c == '0' || c == '1' || c == ' ' || ft_is_start_location(c));
+	return (c == '0' || c == '0' || c == '1'
+		|| c == ' ' || ft_is_start_location(c));
 }
 
 static
@@ -35,7 +36,7 @@ int	ft_check_elements_and_location(t_game *game, size_t x, size_t y)
 	return (1);
 }
 
-int			ft_parse_map(t_game *game)
+int	ft_parse_map(t_game *game)
 {
 	size_t	x;
 	size_t	y;
@@ -48,9 +49,11 @@ int			ft_parse_map(t_game *game)
 		x = 0;
 		if (!ft_check_walls(game, y))
 			return (0);
+		if (!ft_check_corridor_walls(game, y))
+			return (0);
 		while (game->textures->map[y][x])
 		{
-			if	(!ft_check_elements_and_location(game, x, y))
+			if (!ft_check_elements_and_location(game, x, y))
 				return (0);
 			x++;
 		}

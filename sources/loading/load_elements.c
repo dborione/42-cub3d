@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 10:11:14 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/02/23 18:28:23 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/15 18:16:29 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 /* Verifie si la texture n'a pas déjà été chargée */
 static
-int		ft_texture_loaded(t_game *game, char target[3])
+int	ft_texture_loaded(t_game *game, char target[3])
 {
 	if (ft_isequal(target, "NO"))
 		return (game->textures->north_texture != NULL);
@@ -40,21 +40,37 @@ void	ft_set_texture(t_game *game, char target[3], void *texture)
 	else if (ft_isequal(target, "EA"))
 		game->textures->east_texture = texture;
 }
+
 static
-int		ft_load_texture(
+void	*ft_import_image(t_game *game, char *file)
+{
+	int		width;
+	int		height;
+	void	*tmp;
+
+	width = WALL_WIDTH;
+	height = WALL_HEIGHT;
+	tmp = NULL;
+	if (!file)
+		return (0);
+	if (ft_endswith(file, ".xpm"))
+		tmp = mlx_xpm_file_to_image(game->mlx, file, &width, &height);
+	free(file);
+	if (tmp)
+		return (tmp);
+	return (NULL);
+}
+
+static
+int	ft_load_texture(
 	t_game *game, char *line, char target[3])
 {
 	int		i;
 	void	*tmp;
 	char	*file;
-	int		width;
-	int		height;
 
 	if (ft_texture_loaded(game, target))
-	{
-		ft_printf("Texture %s already loaded\n", target);
 		return (0);
-	}
 	if (!line[2])
 		return (0);
 	i = 2;
@@ -62,47 +78,31 @@ int		ft_load_texture(
 		i++;
 	if (!line[i])
 		return (0);
-	tmp = NULL;
-	width = WALL_WIDTH;
-	height = WALL_HEIGHT;
 	file = ft_strtrim(&line[i], "\n");
-	if (!file)
-		return (0);
-	if (ft_endswith(file, ".xpm"))
-	{
-		ft_printf("%s loading file : '%s'\n", target, file);
-		tmp = mlx_xpm_file_to_image(game->mlx, file, &width, &height);
-	}
-	free(file);
+	tmp = ft_import_image(game, file);
 	if (!tmp)
-	{
-		ft_printf("%s xpm to image failed\n", target);
 		return (0);
-	}
 	ft_set_texture(game, target, tmp);
 	return (1);
 }
 
-int ft_load_element(t_game *game, char *line)
+int	ft_load_element(t_game *game, char *line)
 {
-	if (ft_startswith(line, "NO")) {
-		if (!ft_load_texture(game, line, "NO"))
-			return (0);
-	} else if (ft_startswith(line, "SO")) {
-		if (!ft_load_texture(game, line, "SO"))
-			return (0);
-	} else if (ft_startswith(line, "WE")) {
-		if (!ft_load_texture(game, line, "WE"))
-			return (0);
-	} else if (ft_startswith(line, "EA")) {
-		if (!ft_load_texture(game, line, "EA"))
-			return (0);
-	} else if (ft_startswith(line, "F")) {
-		if (!ft_load_color(game, line, 'F'))
-			return (0);
-	} else if (ft_startswith(line, "C")) {
-		if (!ft_load_color(game, line, 'C'))
-			return (0);
-	}
-	return (1);
+	int	result;
+
+	if (ft_startswith(line, "NO"))
+		result = ft_load_texture(game, line, "NO");
+	else if (ft_startswith(line, "SO"))
+		result = ft_load_texture(game, line, "SO");
+	else if (ft_startswith(line, "WE"))
+		result = ft_load_texture(game, line, "WE");
+	else if (ft_startswith(line, "EA"))
+		result = ft_load_texture(game, line, "EA");
+	else if (ft_startswith(line, "F"))
+		result = ft_load_color(game, line, 'F');
+	else if (ft_startswith(line, "C"))
+		result = ft_load_color(game, line, 'C');
+	else
+		result = 1;
+	return (result);
 }

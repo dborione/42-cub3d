@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
+/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 10:57:07 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/03/08 09:49:39 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/15 16:51:57 by dborione         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <mlx.h>
 # include <stdlib.h>
 # include "cub3d_textures.h"
-#include <stdio.h>
 
 # define TILE_SIZE 32
 # ifndef WIN_WIDTH
@@ -41,6 +40,8 @@
 # define WEST_WALL 2
 # define EAST_WALL 3
 
+# define ROTATION_SPEED 0.15
+
 typedef struct s_location
 {
 	float	x;
@@ -55,13 +56,19 @@ typedef struct s_location
 	les pointeurs pour la MLX, les textures et code 
 	de la map
 */
-typedef struct	s_game {
+typedef struct s_game {
 	void				*mlx;
 	void				*mlx_win;
 	t_cub3d_textures	*textures;
 	t_location			*player;
+	t_cub3d_images		target;
 	float				distance;
-	int					buf[WIN_HEIGHT][WIN_WIDTH];
+	int					rotate_left;
+	int					rotate_right;
+	float				player_dir_x;
+	float				player_dir_y;
+	float				camera_plane_x;
+	float				camera_plane_y;
 }						t_game;
 
 /*
@@ -76,8 +83,9 @@ typedef struct	s_game {
 // }
 
 // Init
-int	ft_quit_window(t_game *game);
-int	ft_init_game(t_game **game);
-int ft_raycasting(t_game *game);
+int		ft_quit_window(t_game *game);
+int		ft_init_game(t_game **game);
+int		ft_raycasting(t_game *game);
+void	ft_set_direction_and_camera(t_game *game);
 
 #endif

@@ -43,7 +43,7 @@ ${NAME}:	${OBJS}
 		@make -C ./libft/
 		@echo "${BLUE} [Make] ${GREEN} Done. ${DEFAULT}"
 		@echo "${BLUE} [Make] ${YELLOW} Building ${DEFAULT}CUB3D${YELLOW} !${DEFAULT}"
-		$(CC) ${CFLAGS} -lmlx -framework OpenGL -framework AppKit -o $@ $^ -Llibft -lft -lreadline -L ~/homebrew/opt/readline/lib
+		$(CC) ${CFLAGS} -lmlx -framework OpenGL -framework AppKit -o $@ $^ -Llibft -lft
 		@echo "${BLUE} [Make] ${GREEN} Done. ${DEFAULT}"
 
 all:	${NAME}

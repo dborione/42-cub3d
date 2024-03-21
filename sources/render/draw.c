@@ -3,105 +3,102 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbarbiot <rbarbiot@student.s19.be>         +#+  +:+       +#+        */
+/*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:39:46 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/03/08 01:46:18 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/15 16:57:54 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 #include "../../includes/cub3d_raycasting.h"
+#include "../../includes/cub3d_render.h"
 
-// void ft_draw_frame(t_game *game)
-// {
-// 	t_cub3d_images	frame;
-// 	t_location		pen_location;
-// 	int				i;
+static
+void	*ft_get_target(t_game *game, t_raycaster *raycaster)
+{
+	if (raycaster->ray->side == NORTH_WALL)
+		return (game->textures->north_texture);
+	else if (raycaster->ray->side == WEST_WALL)
+		return (game->textures->west_texture);
+	else if (raycaster->ray->side == EAST_WALL)
+		return (game->textures->east_texture);
+	return (game->textures->south_texture);
+}
 
-// 	frame.data = mlx_get_data_addr(game->textures->test,
-// 		&frame.bits_per_pixel, &frame.size_line, &frame.endian);
+static
+void	ft_get_wall_hit_point(t_raycaster *raycaster)
+{
+	raycaster->line->wall_hit_x = 0;
+	if (raycaster->ray->side == EAST_WALL
+		|| raycaster->ray->side == WEST_WALL)
+	{
+		raycaster->line->wall_hit_x = raycaster->player_pos_y
+			+ raycaster->ray->ray_to_wall_dist * raycaster->ray->dir_y;
+	}
+	else
+	{
+		raycaster->line->wall_hit_x = raycaster->player_pos_x
+			+ raycaster->ray->ray_to_wall_dist * raycaster->ray->dir_x;
+	}
+	raycaster->line->wall_hit_x -= floor(raycaster->line->wall_hit_x);
+}
 
-// 	pen_location.y = 0;
-// 	i = 0;
-// 	while (frame.data[i] && pen_location.y < WIN_HEIGHT)
-// 	{
-// 		pen_location.x = 0;
-// 		while (pen_location.x < frame.size_line)
-// 		{
-// 			int rgb_color = 0;
-// 			frame.data[i] = rgb_color;
-// 			pen_location.x++;
-// 			i++;
-// 		}
-// 		pen_location.y++;
-// 	}
-// 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->textures->test, 0, 0);
-// }
+static
+void	ft_draw_pixel(
+	t_game *game, t_cub3d_images texture, int frame_pixel, int texture_pixel)
+{
+	game->textures->frame->data[frame_pixel]
+		= texture.data[texture_pixel];
+	game->textures->frame->data[frame_pixel + 1]
+		= texture.data[texture_pixel + 1];
+	game->textures->frame->data[frame_pixel + 2]
+		= texture.data[texture_pixel + 2];
+	game->textures->frame->data[frame_pixel + 3]
+		= texture.data[texture_pixel + 3];
+}
 
-void ft_draw_vertical_line(t_game *game, t_raycaster *raycaster, int x) // ajouter le target ici
+static
+int	ft_get_pixel_x(t_raycaster *raycaster)
+{
+	int	pixel_x;
+
+	pixel_x = (int)(raycaster->line->wall_hit_x * (float)WALL_WIDTH);
+	if ((raycaster->ray->side == WEST_WALL
+			|| raycaster->ray->side == EAST_WALL) && raycaster->ray->dir_x < 0)
+	{
+		pixel_x = WALL_WIDTH - pixel_x - 1;
+	}
+	if ((raycaster->ray->side == NORTH_WALL
+			|| raycaster->ray->side == SOUTH_WALL) && raycaster->ray->dir_y > 0)
+	{
+		pixel_x = WALL_WIDTH - pixel_x - 1;
+	}
+	return (pixel_x);
+}
+
+void	ft_draw_vertical_line(t_game *game, t_raycaster *raycaster, int x)
 {
 	t_cub3d_images	texture;
-	void			*target;
-	int				factor;
-	int				count;
-	int				line;
-	int				remainder;
+	float			step;
+	float			texture_position;
+	int				pixel_x;
+	int				pixel_y;
 
-	if (raycaster->ray->side == NORTH_WALL)
-		target = game->textures->north_texture;
-	else if (raycaster->ray->side == WEST_WALL)
-		target = game->textures->west_texture;
-	else if (raycaster->ray->side == EAST_WALL)
-		target = game->textures->east_texture;
-	else
-		target = game->textures->south_texture;
-	texture.data = mlx_get_data_addr(target,
-		&texture.bits_per_pixel, &texture.size_line, &texture.endian);
-	/*
-		colomn_size pourra etre retiré car on ne l'utilise qu'une seule fois
-		mais je la garde pour le moment pour avoir un
-	*/
-	factor = raycaster->line->height / WALL_HEIGHT;
-	remainder = raycaster->line->height % WALL_HEIGHT;
-	// ft_printf("factor : top %d - bottom : %d / wall %d = %d, rest : %d, Height : %d\n",
-	// 	raycaster->line->top, raycaster->line->bottom, WALL_HEIGHT, factor, remainder, raycaster->line->height);
-	line = 0;
-	count = 0;
-	while (count < raycaster->line->height - (raycaster->line->top - raycaster->line->bottom))
-		count++;
-	if (count)
-		count /= 2;
-	while (count && count - factor > 0)
+	texture.data = mlx_get_data_addr(ft_get_target(game, raycaster),
+			&texture.bits_per_pixel, &texture.size_line, &texture.endian);
+	ft_get_wall_hit_point(raycaster);
+	pixel_x = ft_get_pixel_x(raycaster);
+	step = 1.0 * WALL_HEIGHT / raycaster->line->height;
+	texture_position = (raycaster->line->bottom - WIN_HEIGHT
+			/ 2 + raycaster->line->height / 2) * step;
+	while (raycaster->line->bottom < raycaster->line->top)
 	{
-		line++;
-		count -= factor;
+		pixel_y = (int)texture_position & (WALL_HEIGHT - 1);
+		texture_position += step;
+		ft_draw_pixel(game, texture,
+			raycaster->line->bottom * game->textures->frame->size_line + x * 4,
+			pixel_x * 4 + texture.size_line * pixel_y);
+		raycaster->line->bottom++;
 	}
-	while (raycaster->line->bottom < raycaster->line->top && line < WALL_HEIGHT)
-	{
-		//if (line && rest && line % rest)
-		if (line > WALL_HEIGHT - remainder || line < remainder)
-		{
-			//while (rest)
-			{
-				game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4] = texture.data[0 + texture.size_line  * line];
-				game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4 + 1] = texture.data[1 + texture.size_line  * line];
-				game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4 + 2] = texture.data[2 + texture.size_line  * line];
-				game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4 + 3] = texture.data[3 + texture.size_line  * line];
-				raycaster->line->bottom++;
-				remainder--;
-			}
-		}
-		while (count < factor && raycaster->line->bottom < raycaster->line->top)// faire attention aux facteurs negatifs
-		{
-			game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4] = texture.data[0 + texture.size_line  * line];
-			game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4 + 1] = texture.data[1 + texture.size_line  * line];
-			game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4 + 2] = texture.data[2 + texture.size_line  * line];
-			game->textures->frame->data[raycaster->line->bottom * game->textures->frame->size_line + x*4 + 3] = texture.data[3 + texture.size_line  * line];
-			raycaster->line->bottom++;
-			count++;
-		}
-		line++;
-		count = 0;
- 	}
 }

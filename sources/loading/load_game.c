@@ -6,43 +6,44 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 10:51:20 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/03/05 14:23:41 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/15 18:17:03 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d_loading.h"
 #include "../../includes/cub3d_textures.h"
-#include <stdlib.h>
 #include <fcntl.h>
 
 static
-t_cub3d_textures	*ft_new_textures(void)
+int	ft_new_textures(t_game *game)
 {
-	t_cub3d_textures	*textures;
-
-	textures = malloc(sizeof(t_cub3d_textures));
-	if (!textures)
-		return (NULL);
-	textures->ceiling = NULL;
-	textures->floor = NULL;
-	textures->north_texture = NULL;
-	textures->south_texture = NULL;
-	textures->west_texture = NULL;
-	textures->east_texture = NULL;
-	textures->map = NULL;
-	textures->map_width = 0;
-	textures->map_height = 0;
-	textures->frame = malloc(sizeof(t_cub3d_images));
-	if (!textures->frame)
-	{
-		free(textures);
-		return (NULL);
-	}
-	return (textures);
+	game->textures = malloc(sizeof(t_cub3d_textures));
+	if (!game->textures)
+		return (0);
+	game->textures->ceiling = NULL;
+	game->textures->floor = NULL;
+	game->textures->north_texture = NULL;
+	game->textures->south_texture = NULL;
+	game->textures->west_texture = NULL;
+	game->textures->east_texture = NULL;
+	game->textures->map = NULL;
+	game->textures->map_width = 0;
+	game->textures->map_height = 0;
+	game->textures->frame = malloc(sizeof(t_cub3d_images));
+	if (!game->textures->frame)
+		return (0);
+	game->textures->frame->pointer = mlx_new_image(game->mlx,
+			WIN_WIDTH, WIN_WIDTH);
+	game->textures->frame->data
+		= mlx_get_data_addr(game->textures->frame->pointer,
+			&(game->textures->frame)->bits_per_pixel,
+			&(game->textures->frame)->size_line,
+			&(game->textures->frame)->endian);
+	return (1);
 }
 
 static
-int					ft_elements_loaded(t_game *game)
+int	ft_elements_loaded(t_game *game)
 {
 	if (!game->textures)
 		return (0);
@@ -62,7 +63,7 @@ int					ft_elements_loaded(t_game *game)
 }
 
 static
-int					ft_load_textures(t_game *game, char *map_path)
+int	ft_load_textures(t_game *game, char *map_path)
 {
 	int		fd;
 	char	*line;
@@ -91,25 +92,17 @@ int					ft_load_textures(t_game *game, char *map_path)
 	return (1);
 }
 
-int					ft_load_game(t_game *game, char *map_path)
+int	ft_load_game(t_game *game, char *map_path)
 {
 	if (!ft_endswith(map_path, ".cub"))
 		return (0);
-	game->textures = ft_new_textures();
-	if (!game->textures)
+	if (!ft_new_textures(game))
 		return (0);
-	int width = WIN_WIDTH;
-	int	height = WIN_HEIGHT;
-	game->textures->frame->pointer = mlx_new_image(game->mlx, width, height); // ajouter une protection
-	game->textures->frame->data = mlx_get_data_addr(game->textures->frame->pointer,
-		&(game->textures->frame)->bits_per_pixel, &(game->textures->frame)->size_line, &(game->textures->frame)->endian);
-	ft_printf("Textures initialized\n");
-	if (!ft_load_textures(game, map_path)) //leak
+	if (!ft_load_textures(game, map_path))
 	{
-		ft_unload_game(game); //leak
+		ft_unload_game(game);
 		return (0);
 	}
-	ft_printf("Textures loaded\n");
 	if (!ft_parse_map(game))
 	{
 		ft_unload_game(game);

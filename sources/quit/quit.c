@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 11:30:16 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/02/23 18:22:55 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/15 18:19:51 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 int	ft_quit_window(t_game *game)
 {
 	ft_unload_game(game);
-	system("leaks cub3D");
-	exit (0);
+	exit(0);
 	return (0);
 }

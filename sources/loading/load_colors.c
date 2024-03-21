@@ -47,7 +47,7 @@ t_rgb	*ft_get_rgb(char **brut_rgb)
 }
 
 static
-int		ft_color_loaded(t_game *game, char target)
+int	ft_color_loaded(t_game *game, char target)
 {
 	if (target == 'F')
 		return (game->textures->floor != NULL);
@@ -57,7 +57,7 @@ int		ft_color_loaded(t_game *game, char target)
 }
 
 static
-int		ft_set_color(t_game *game, char **brut_rgb, char target)
+int	ft_set_color(t_game *game, char **brut_rgb, char target)
 {
 	if (target == 'F')
 	{
@@ -76,7 +76,7 @@ int		ft_set_color(t_game *game, char **brut_rgb, char target)
 	return (0);
 }
 
-int		ft_load_color(t_game *game, char *line, char target)
+int	ft_load_color(t_game *game, char *line, char target)
 {
 	int		i;
 	char	**brut_rgb;

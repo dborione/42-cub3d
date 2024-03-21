@@ -12,7 +12,7 @@
 
 #include "../../includes/cub3d.h"
 #include "../../libft/libft.h"
-#include <stdlib.h>
+#include <stdlib.h> //check
 
 void	ft_unload_game(t_game *game)
 {

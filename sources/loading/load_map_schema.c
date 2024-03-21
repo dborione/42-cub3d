@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 10:33:07 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/02/21 15:09:32 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/15 18:35:54 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../../includes/cub3d.h"
 
 static
-int		ft_empty_line(char *line)
+int	ft_empty_line(char *line)
 {
 	size_t	i;
 
@@ -56,7 +56,7 @@ size_t	ft_line_size(char *line)
 }
 
 static
-int		ft_add_line(t_game *game, char **lines, char *line)
+int	ft_add_line(t_game *game, char **lines, char *line)
 {
 	char	*trimed_line;
 	size_t	line_size;
@@ -87,7 +87,6 @@ void	ft_load_map_schema(t_game *game, int fd)
 		{
 			free(line);
 			free(lines);
-			ft_printf("Error empty line in map\n");
 			return ;
 		}
 		if (!ft_add_line(game, &lines, line))

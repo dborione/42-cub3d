@@ -6,12 +6,12 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 15:20:36 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/03/07 14:49:23 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/15 16:53:42 by dborione         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_LISTENERS
-# define CUB3D_LISTENERS
+#ifndef CUB3D_LISTENERS_H
+# define CUB3D_LISTENERS_H
 # include "cub3d.h"
 # include "../libft/libft.h"
 
@@ -31,16 +31,8 @@
 # define LEFT_ARROW_KEY 123
 # define RIGHT_ARROW_KEY 124
 
-// typedef struct s_keys_locks {
-// 	char	key_w;
-// 	char	key_a;
-// 	char	key_s;
-// 	char	key_d;
-// 	char	key_up;
-// 	char	key_left;
-// 	char	key_down;
-// 	char	key_right;
-// }	t_keys_locks;
+# define ON_KEY_DOWN 2
+# define ON_KEY_UP 3
 
 void	ft_key_hook_pressed(t_game *game);
 void	ft_close_button_hook(t_game *game);
