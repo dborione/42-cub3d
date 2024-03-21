@@ -6,23 +6,12 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 10:43:54 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/02/06 15:22:01 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/19 15:29:59 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d_loading.h"
 #include <stdlib.h>
-
-int	ft_get_int_rgb(t_rgb *rgb)
-{
-	int	int_rgb;
-
-	int_rgb = rgb->alpha << 24;
-	int_rgb = rgb->red << 16;
-	int_rgb += rgb->green << 8;
-	int_rgb += rgb->blue;
-	return (int_rgb);
-}
 
 static
 t_rgb	*ft_get_rgb(char **brut_rgb)

@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 10:57:07 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/03/15 16:51:57 by dborione         ###   ########.fr       */
+/*   Updated: 2024/03/19 15:20:22 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,6 @@ typedef struct s_game {
 	void				*mlx_win;
 	t_cub3d_textures	*textures;
 	t_location			*player;
-	t_cub3d_images		target;
-	float				distance;
 	int					rotate_left;
 	int					rotate_right;
 	float				player_dir_x;
@@ -70,17 +68,6 @@ typedef struct s_game {
 	float				camera_plane_x;
 	float				camera_plane_y;
 }						t_game;
-
-/*
-	Pour bien enregistrer la position du joueur il faudrait : 
-	x + y (coordonées en float) et pitch + yaw (direction en float)
-*/
-
-// typedef struct s_player {
-	// start pos(x, y)
-	// direction (x, y)
-	// field of view : plane perpendiculaire au player (x = 0, y)
-// }
 
 // Init
 int		ft_quit_window(t_game *game);

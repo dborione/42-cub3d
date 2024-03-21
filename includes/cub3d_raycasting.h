@@ -6,7 +6,7 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 11:41:55 by dborione          #+#    #+#             */
-/*   Updated: 2024/03/15 17:01:26 by dborione         ###   ########.fr       */
+/*   Updated: 2024/03/19 15:23:45 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,6 @@ t_line		*ft_new_line(void);
 
 void		ft_clear_line(t_line *line);
 void		ft_clear_ray(t_ray *ray);
-
-/*
-	Ils permettent d'éviter de devoir free puis init à
-	chaque boucle, ils remettent toutes les valeurs
-	tel qu'à l'initialisation
-*/
 
 /* Update */
 

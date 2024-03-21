@@ -65,9 +65,3 @@ re: fclean all
 -include $(DEPENDS)
 
 .PHONY: all clean fclean re
-
-# ifneq ${RESOLUTION}, "${LITTLE_WIDTH}x${LITTLE_HEIGHT}"
-# 	@echo RES: ${RESOLUTION}
-# 	@echo ${LITTLE_WIDTH}x${LITTLE_HEIGHT} > .resolution
-# 	@make fclean
-# endif 

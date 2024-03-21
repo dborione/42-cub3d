@@ -6,19 +6,16 @@
 /*   By: rbarbiot <rbarbiot@student.19.be>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 14:38:48 by rbarbiot          #+#    #+#             */
-/*   Updated: 2024/03/05 14:28:33 by rbarbiot         ###   ########.fr       */
+/*   Updated: 2024/03/19 15:16:37 by rbarbiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 #include "../../libft/libft.h"
-#include <stdlib.h> //check
 
-void	ft_unload_game(t_game *game)
+static
+void	ft_unload_textures(t_game *game)
 {
-	mlx_destroy_window(game->mlx, game->mlx_win);
-	if (!game->textures)
-		return ;
 	if (game->textures->map)
 		ft_free_split(game->textures->map);
 	if (game->textures->north_texture)
@@ -34,10 +31,17 @@ void	ft_unload_game(t_game *game)
 		mlx_destroy_image(game->mlx, game->textures->frame->pointer);
 		free(game->textures->frame);
 	}
-	if (game->player)
-		free(game->player);
 	free(game->textures->floor);
 	free(game->textures->ceiling);
 	free(game->textures);
+}
+
+void	ft_unload_game(t_game *game)
+{
+	mlx_destroy_window(game->mlx, game->mlx_win);
+	if (game->textures)
+		ft_unload_textures(game);
+	if (game->player)
+		free(game->player);
 	free(game);
 }
